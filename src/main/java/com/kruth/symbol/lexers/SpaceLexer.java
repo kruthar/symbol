@@ -8,6 +8,7 @@ import java.util.*;
  * Created by kruthar on 2/24/16.
  */
 public class SpaceLexer implements Iterator<String> {
+    private String original;
     private List<String> words;
     private int nextIndex;
 
@@ -16,6 +17,7 @@ public class SpaceLexer implements Iterator<String> {
      * @param line
      */
     public SpaceLexer(String line) {
+        original = line;
         nextIndex = 0;
         words = Arrays.asList(line.split(" "));
     }

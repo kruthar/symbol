@@ -1,1 +1,2 @@
 print one two three
+print stringstart hello world stringend

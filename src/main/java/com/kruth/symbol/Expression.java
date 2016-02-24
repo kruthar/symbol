@@ -3,6 +3,7 @@ package com.kruth.symbol;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolNumber;
+import com.kruth.symbol.literals.SymbolString;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +33,8 @@ public class Expression {
 
         if (SymbolNumber.hasKeyword(lexer.peek())) {
             return new Expression(new SymbolNumber(lexer));
+        } else if (SymbolString.hasKeyword(lexer.peek())) {
+            return new Expression(new SymbolString(lexer));
         }
 
         try {
