@@ -1,6 +1,6 @@
 package com.kruth.symbol.instructions;
 
-import com.kruth.symbol.Expression;
+import com.kruth.symbol.expression.Expression;
 
 /**
  * Created by kruthar on 2/23/16.
