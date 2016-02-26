@@ -59,7 +59,7 @@ public class Expression {
         if (!components.isEmpty() && (
             (components.get(components.size() - 1) instanceof Literal && component instanceof Literal) ||
             (components.get(components.size() -1) instanceof Operation && component instanceof Operation))) {
-            System.out.println("bad expression - do something bad here");
+            System.out.println("bad expression - two literals or two operations");
             System.exit(1);
         }
         components.add(component);
