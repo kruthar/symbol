@@ -9,7 +9,7 @@ public class Print implements Instruction {
     private Expression expression;
 
     public Print (String expression) {
-        this.expression = Expression.parse(expression);
+        this.expression = new Expression(expression);
     }
 
     public void runInstruction() {

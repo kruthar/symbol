@@ -1,3 +1,4 @@
+print open one close plus open two close
 comment print one two three
 print one plus two
 print stringstart hello world stringend plus stringstart another string stringend
