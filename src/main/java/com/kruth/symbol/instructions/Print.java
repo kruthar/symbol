@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.expression.Expression;
+import com.kruth.symbol.literals.Literal;
 
 /**
  * Created by kruthar on 2/23/16.
@@ -13,6 +14,7 @@ public class Print implements Instruction {
     }
 
     public void runInstruction() {
-        System.out.println(expression.toString());
+        Literal literal = expression.evaluate();
+        System.out.println(literal.toString());
     }
 }

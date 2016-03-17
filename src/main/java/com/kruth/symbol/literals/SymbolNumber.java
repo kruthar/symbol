@@ -46,6 +46,22 @@ public class SymbolNumber implements Literal {
         return String.valueOf(value);
     }
 
+    public int getValue() {
+        return this.value;
+    }
+
+    @Override
+    public Literal plus(Literal other) {
+        if (other instanceof SymbolString) {
+            return new SymbolString(this.toString() + other.toString());
+        } else if (other instanceof SymbolNumber) {
+            return new SymbolNumber(this.value + ((SymbolNumber) other).getValue());
+        }
+
+        System.out.println("ERROR: Unknown type for Plus operation with SymbolNumber: " + other.getClass());
+        return new SymbolNumber(-1);
+    }
+
     public static boolean hasKeyword(String keyword) {
         return KEYWORDS.containsKey(keyword);
     }

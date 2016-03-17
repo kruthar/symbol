@@ -6,6 +6,7 @@ import com.kruth.symbol.literals.SymbolNumber;
 import com.kruth.symbol.literals.SymbolString;
 import com.kruth.symbol.operations.Operation;
 import com.kruth.symbol.operations.OperationParser;
+import com.kruth.symbol.operations.Plus;
 
 import java.util.*;
 
@@ -79,13 +80,40 @@ public class Expression implements ExpressionComponent {
     }
 
     public String toString() {
-        String result = "";
+        String result = "(";
 
         for (ExpressionComponent component: components) {
             result += component.toString();
         }
 
+        result += ")";
+
         return result;
+    }
+
+    public Literal evaluate() {
+        List<ExpressionComponent> reducedComponents = new ArrayList<>();
+        // Run through the component list and evaluate any sub expressions first
+        for (ExpressionComponent component: components) {
+            if (component instanceof Expression) {
+                reducedComponents.add(((Expression) component).evaluate());
+            } else {
+                reducedComponents.add(component);
+            }
+        }
+
+        // After all sub expressions have been reduced, perform typical order of operations
+        while (reducedComponents.size() > 1) {
+            for (int i = 1; i < reducedComponents.size(); i += 2) {
+                if (reducedComponents.get(i) instanceof Plus) {
+                    Literal newLiteral = ((Literal) reducedComponents.get(i - 1)).plus((Literal) reducedComponents.get(i + 1));
+                    reducedComponents = reducedComponents.subList(3, reducedComponents.size());
+                    reducedComponents.add(0, newLiteral);
+                }
+            }
+        }
+
+        return (Literal) reducedComponents.get(0);
     }
 
     public static boolean hasKeyword(String keyword) {

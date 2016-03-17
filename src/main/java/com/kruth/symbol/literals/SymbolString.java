@@ -55,6 +55,11 @@ public class SymbolString implements Literal {
         return value;
     }
 
+    @Override
+    public Literal plus(Literal other) {
+        return new SymbolString(this.value + other.toString());
+    }
+
     public static boolean hasKeyword(String keyword) {
         return KEYWORDS.containsKey(keyword);
     }

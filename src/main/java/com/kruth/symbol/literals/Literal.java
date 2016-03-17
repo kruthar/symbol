@@ -7,4 +7,5 @@ import com.kruth.symbol.expression.ExpressionComponent;
  */
 public interface Literal extends ExpressionComponent {
     String toString();
+    Literal plus(Literal other);
 }
