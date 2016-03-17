@@ -60,6 +60,12 @@ public class SymbolString implements Literal {
         return new SymbolString(this.value + other.toString());
     }
 
+    @Override
+    public Literal minus(Literal other) {
+        System.out.println("ERROR: SymbolString does not support minus operation");
+        return new SymbolString("ERROR: SymbolString does not support minus operation");
+    }
+
     public static boolean hasKeyword(String keyword) {
         return KEYWORDS.containsKey(keyword);
     }

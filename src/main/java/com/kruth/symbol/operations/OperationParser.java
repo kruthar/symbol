@@ -15,6 +15,7 @@ public class OperationParser {
     static {
         Map<String, Class> aMap = new HashMap<>();
         aMap.put("plus", Plus.class);
+        aMap.put("minus", Minus.class);
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 

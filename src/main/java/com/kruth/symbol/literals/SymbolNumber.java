@@ -62,6 +62,19 @@ public class SymbolNumber implements Literal {
         return new SymbolNumber(-1);
     }
 
+    @Override
+    public Literal minus(Literal other) {
+        if (other instanceof SymbolString) {
+            System.out.println("ERROR SymbolNumber cannot minus a SymbolString");
+            return new SymbolNumber(-1);
+        } else if (other instanceof SymbolNumber) {
+            return new SymbolNumber(this.value - ((SymbolNumber) other).getValue());
+        }
+
+        System.out.println("ERROR: Unknown type for Plus operation with SymbolNumber: " + other.getClass());
+        return new SymbolNumber(-1);
+    }
+
     public static boolean hasKeyword(String keyword) {
         return KEYWORDS.containsKey(keyword);
     }
