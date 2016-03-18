@@ -56,6 +56,18 @@ public class SymbolString implements Literal {
     }
 
     @Override
+    public Literal times(Literal other) {
+        System.out.println("ERROR: SymbolString does not support times operation");
+        return new SymbolString("ERROR: SymbolString does not support times operation");
+    }
+
+    @Override
+    public Literal dividedby(Literal other) {
+        System.out.println("ERROR: SymbolString does not support dividedby operation");
+        return new SymbolString("ERROR: SymbolString does not support dividedby operation");
+    }
+
+    @Override
     public Literal plus(Literal other) {
         return new SymbolString(this.value + other.toString());
     }

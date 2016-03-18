@@ -4,10 +4,7 @@ import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolNumber;
 import com.kruth.symbol.literals.SymbolString;
-import com.kruth.symbol.operations.Minus;
-import com.kruth.symbol.operations.Operation;
-import com.kruth.symbol.operations.OperationParser;
-import com.kruth.symbol.operations.Plus;
+import com.kruth.symbol.operations.*;
 
 import java.util.*;
 
@@ -104,23 +101,58 @@ public class Expression implements ExpressionComponent {
         }
 
         // After all sub expressions have been reduced, perform typical order of operations
+        // Times & DividedBy
         while (reducedComponents.size() > 1) {
+            boolean foundOperation = false;
+
+            for (int i = 1; i < reducedComponents.size(); i += 2) {
+                Literal newLiteral = null;
+                if (reducedComponents.get(i) instanceof Times) {
+                    newLiteral = ((Literal) reducedComponents.get(i - 1)).times((Literal) reducedComponents.get(i + 1));
+                } else if (reducedComponents.get(i) instanceof DividedBy) {
+                    newLiteral = ((Literal) reducedComponents.get(i - 1)).dividedby((Literal) reducedComponents.get(i + 1));
+                }
+
+                if (newLiteral != null) {
+                    reducedComponents = reducedComponents.subList(3, reducedComponents.size());
+                    reducedComponents.add(0, newLiteral);
+                    foundOperation = true;
+                }
+            }
+
+            if (!foundOperation) {
+                break;
+            }
+        }
+
+        // Plus & Minus
+        while (reducedComponents.size() > 1) {
+            boolean foundOperation = false;
+
             for (int i = 1; i < reducedComponents.size(); i += 2) {
                 Literal newLiteral = null;
                 if (reducedComponents.get(i) instanceof Plus) {
                     newLiteral = ((Literal) reducedComponents.get(i - 1)).plus((Literal) reducedComponents.get(i + 1));
                 } else if (reducedComponents.get(i) instanceof Minus) {
                     newLiteral = ((Literal) reducedComponents.get(i - 1)).minus((Literal) reducedComponents.get(i + 1));
-                } else {
-                    System.out.println("ERROR: Unknown implemented operation: " + reducedComponents.get(i));
-                    System.exit(1);
                 }
 
-                reducedComponents = reducedComponents.subList(3, reducedComponents.size());
-                reducedComponents.add(0, newLiteral);
+                if (newLiteral != null) {
+                    reducedComponents = reducedComponents.subList(3, reducedComponents.size());
+                    reducedComponents.add(0, newLiteral);
+                    foundOperation = true;
+                }
+            }
+
+            if (!foundOperation) {
+                break;
             }
         }
 
+        if (reducedComponents.size() > 1) {
+            System.out.println("ERROR: Did not fully reduce operation");
+            System.out.println();
+        }
         return (Literal) reducedComponents.get(0);
     }
 

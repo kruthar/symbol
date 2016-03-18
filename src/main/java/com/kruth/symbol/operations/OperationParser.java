@@ -14,6 +14,8 @@ public class OperationParser {
     private static final Map<String, Class> KEYWORDS;
     static {
         Map<String, Class> aMap = new HashMap<>();
+        aMap.put("times", Times.class);
+        aMap.put("dividedby", DividedBy.class);
         aMap.put("plus", Plus.class);
         aMap.put("minus", Minus.class);
         KEYWORDS = Collections.unmodifiableMap(aMap);

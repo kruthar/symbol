@@ -1,3 +1,6 @@
+print two times three
+print four dividedby two
+print stringstart one stringend plus two
 print open one close minus open two close
 print open one close plus open two close
 comment print one two three
