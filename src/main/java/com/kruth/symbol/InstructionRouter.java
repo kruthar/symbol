@@ -9,7 +9,7 @@ import com.kruth.symbol.lexers.LineLexer;
  * Created by kruthar on 2/24/16.
  */
 public class InstructionRouter {
-    public static Instruction getInstruction(LineLexer lexer, String instruction) {
+    public static Instruction getInstruction(String instruction) {
         InstructionState instructionState = InstructionState.getInstance();
         String[] instructionSplit = sanitizeInstruction(instruction).split(" ", 2);
 
