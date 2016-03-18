@@ -1,11 +1,12 @@
-print two times three
-print four dividedby two
-print stringstart one stringend plus two
-print open one close minus open two close
-print open one close plus open two close
+print stringstart 2 * 3 =  stringend plus open two times three close
+print stringstart 4 / 2 =  stringend plus open four dividedby two close
+print stringstart "one" + 2 =  stringend plus stringstart one stringend plus two
+print stringstart 3 + "six" =  stringend plus three plus stringstart six stringend
+print stringstart (1) - (2) =  stringend plus open open one close minus open two close close
+print stringstart (1) + (2) =  stringend plus open open one close plus open two close close
 comment print one two three
-print one plus two
-print one minus two
+print stringstart 1 + 2 =  stringend plus open one plus two close
+print stringstart 1 - 2 =  stringend plus open one minus two close
 print stringstart hello world stringend plus stringstart another string stringend
 blockcomment starting here
 with somemore stuff
