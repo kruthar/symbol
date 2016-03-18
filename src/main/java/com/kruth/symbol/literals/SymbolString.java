@@ -29,7 +29,7 @@ public class SymbolString implements Literal {
     }
 
     public SymbolString(SpaceLexer lexer) {
-        if (!lexer.hasNext() || lexer.next() != "stringstart") {
+        if (!lexer.hasNext() || lexer.next().toLowerCase() != "stringstart") {
             // TODO: Do something bad here
         }
 
@@ -38,7 +38,7 @@ public class SymbolString implements Literal {
         } else {
             String result = lexer.next();
 
-            while (lexer.hasNext() && !lexer.peek().equals("stringend")) {
+            while (lexer.hasNext() && !lexer.peek().toLowerCase().equals("stringend")) {
                 result += " " + lexer.next();
             }
             lexer.next();

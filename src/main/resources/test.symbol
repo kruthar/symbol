@@ -7,7 +7,7 @@ print stringstart (1) + (2) =  stringend plus open open one close plus open two 
 comment print one two three
 print stringstart 1 + 2 =  stringend plus open one plus two close
 print stringstart 1 - 2 =  stringend plus open one minus two close
-print stringstart hello world stringend plus stringstart another string stringend
+print stringstart hello World stringend plus stringstart another string stringend
 blockcomment starting here
 with somemore stuff
 last line of block

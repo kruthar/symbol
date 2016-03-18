@@ -11,7 +11,7 @@ import com.kruth.symbol.lexers.LineLexer;
 public class InstructionRouter {
     public static Instruction getInstruction(String instruction) {
         InstructionState instructionState = InstructionState.getInstance();
-        String[] instructionSplit = sanitizeInstruction(instruction).split(" ", 2);
+        String[] instructionSplit = instruction.split(" ", 2);
 
         if (instructionState.getComment()) {
             if (instructionSplit[0] == "blockcomment") {
@@ -20,7 +20,7 @@ public class InstructionRouter {
             return new Comment(instruction);
         }
 
-        switch (instructionSplit[0]) {
+        switch (instructionSplit[0].toLowerCase()) {
             case "blockcomment":
                 instructionState.setComment(true);
             case "comment":
@@ -31,9 +31,5 @@ public class InstructionRouter {
                 System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
                 return null;
         }
-    }
-
-    public static String sanitizeInstruction(String instruction) {
-        return instruction.toLowerCase();
     }
 }

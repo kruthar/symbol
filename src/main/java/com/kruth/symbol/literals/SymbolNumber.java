@@ -36,7 +36,7 @@ public class SymbolNumber implements Literal {
 
     public SymbolNumber(SpaceLexer lexer) {
         String string_num = "";
-        while (lexer.hasNext() && KEYWORDS.containsKey(lexer.peek())) {
+        while (lexer.hasNext() && KEYWORDS.containsKey(lexer.peek().toLowerCase())) {
             string_num += KEYWORDS.get(lexer.next());
         }
         value = Integer.valueOf(string_num);

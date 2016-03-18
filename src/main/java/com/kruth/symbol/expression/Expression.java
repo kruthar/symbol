@@ -40,7 +40,7 @@ public class Expression implements ExpressionComponent {
         components = new ArrayList<>();
 
         while (lexer.hasNext()) {
-            if (Expression.hasKeyword(lexer.peek())) {
+            if (Expression.hasKeyword(lexer.peek().toLowerCase())) {
                 String keyword = lexer.next();
                 // If we are opening an expression then close the current expression,
                 // then pass the lexer to in inner expression
@@ -54,11 +54,11 @@ public class Expression implements ExpressionComponent {
                     System.out.println("Unrecognized Expression keyword: " + keyword);
                     System.exit(1);
                 }
-            } else if (SymbolNumber.hasKeyword(lexer.peek())) {
+            } else if (SymbolNumber.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(new SymbolNumber(lexer));
-            } else if (SymbolString.hasKeyword(lexer.peek())) {
+            } else if (SymbolString.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(new SymbolString(lexer));
-            } else if (OperationParser.hasKeyword(lexer.peek())) {
+            } else if (OperationParser.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(OperationParser.parse(lexer));
             } else {
                 System.out.println("Unrecognized Expression start");
