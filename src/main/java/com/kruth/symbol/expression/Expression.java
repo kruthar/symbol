@@ -3,6 +3,7 @@ package com.kruth.symbol.expression;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
+import com.kruth.symbol.literals.SymbolBoolean;
 import com.kruth.symbol.literals.SymbolNumber;
 import com.kruth.symbol.literals.SymbolString;
 import com.kruth.symbol.operations.*;
@@ -58,6 +59,8 @@ public class Expression implements ExpressionComponent {
                 addComponent(new SymbolNumber(lexer));
             } else if (SymbolString.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(new SymbolString(lexer));
+            } else if (SymbolBoolean.hasKeyword(lexer.peek().toLowerCase())) {
+                addComponent(new SymbolBoolean(lexer.next()));
             } else if (OperationParser.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(OperationParser.parse(lexer));
             } else if (instructionState.hasVariable(lexer.peek().toLowerCase())) {

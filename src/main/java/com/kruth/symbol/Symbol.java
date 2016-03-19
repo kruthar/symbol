@@ -9,7 +9,7 @@ import com.kruth.symbol.lexers.LineLexer;
 public class Symbol {
     public static void main(String args[]) {
         Symbol.executeFile("variables.symb");
-        //Symbol.execute("set hello stringstart Hello World! stringend");
+        //Symbol.execute("print stringstart true =  stringend plus true");
     }
 
     public static void executeFile(String filename) {
