@@ -1,5 +1,6 @@
 package com.kruth.symbol.expression;
 
+import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolNumber;
@@ -21,11 +22,10 @@ public class Expression implements ExpressionComponent {
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 
-    private List<ExpressionComponent> components;
+    private List<ExpressionComponent> components = new ArrayList<>();
+    private InstructionState instructionState = InstructionState.getInstance();
 
-    public Expression() {
-        components = new ArrayList<>();
-    }
+    public Expression() {}
 
     public Expression(ExpressionComponent component) {
         components = Arrays.asList(component);
@@ -60,6 +60,8 @@ public class Expression implements ExpressionComponent {
                 addComponent(new SymbolString(lexer));
             } else if (OperationParser.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(OperationParser.parse(lexer));
+            } else if (instructionState.hasVariable(lexer.peek().toLowerCase())) {
+                addComponent(instructionState.getVariable(lexer.next()));
             } else {
                 System.out.println("Unrecognized Expression start");
                 System.exit(1);
