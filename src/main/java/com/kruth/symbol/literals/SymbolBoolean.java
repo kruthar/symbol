@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by kruthar on 3/18/16.
  */
-public class SymbolBoolean implements Literal {
+public class SymbolBoolean extends Literal {
     private static final Map<String, Boolean> KEYWORDS;
     static {
         Map<String, Boolean> aMap = new HashMap<>();
@@ -73,6 +73,16 @@ public class SymbolBoolean implements Literal {
     public Literal minus(Literal other) {
         System.out.println("ERROR: SymbolBoolean does not support minus operation");
         return new SymbolBoolean(false);
+    }
+
+    @Override
+    public int comparedTo(Literal other) {
+        if (!(other instanceof SymbolBoolean)) {
+            System.out.println("ERROR: Cannot compare SymbolBoolean to " + other.getClass());
+            System.exit(1);
+        }
+
+        return Boolean.compare(value, ((SymbolBoolean) other).getValue());
     }
 
     public static boolean hasKeyword(String keyword) {

@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by kruthar on 2/24/16.
  */
-public class SymbolNumber implements Literal {
+public class SymbolNumber extends Literal {
     private static final Map<String, Integer> KEYWORDS;
     static {
         Map<String, Integer> aMap = new HashMap<>();
@@ -99,6 +99,16 @@ public class SymbolNumber implements Literal {
 
         System.out.println("ERROR: Unknown type for Plus operation with SymbolNumber: " + other.getClass());
         return new SymbolNumber(-1);
+    }
+
+    @Override
+    public int comparedTo(Literal other) {
+        if (!(other instanceof SymbolNumber)) {
+            System.out.println("ERROR: Cannot compare SymbolNumber to " + other.getClass());
+            System.exit(1);
+        }
+
+        return Integer.compare(value, ((SymbolNumber) other).getValue());
     }
 
     public static boolean hasKeyword(String keyword) {

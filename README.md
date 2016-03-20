@@ -68,4 +68,15 @@ Values are considered Literals, here are the types of Literals available so far:
     ```
     > print true
     true
+    > print not true
+    false
+    ```
+
+### Comparisons
+Comparative expressions are implmented, but unfortunately not anywhere you can use them except to print.
+* equalto - tests equality
+
+    ```
+    > print true equalto false
+    false
     ```

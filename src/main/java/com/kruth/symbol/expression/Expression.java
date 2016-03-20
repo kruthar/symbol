@@ -1,6 +1,8 @@
 package com.kruth.symbol.expression;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.comparators.ComparatorParser;
+import com.kruth.symbol.comparators.Equals;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolBoolean;
@@ -63,6 +65,8 @@ public class Expression implements ExpressionComponent {
                 addComponent(new SymbolBoolean(lexer));
             } else if (OperationParser.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(OperationParser.parse(lexer));
+            } else if (ComparatorParser.hasKeyword(lexer.peek().toLowerCase())){
+                addComponent(ComparatorParser.parse(lexer));
             } else if (instructionState.hasVariable(lexer.peek().toLowerCase())) {
                 addComponent(instructionState.getVariable(lexer.next()));
             } else {
@@ -102,6 +106,28 @@ public class Expression implements ExpressionComponent {
                 reducedComponents.add(((Expression) component).evaluate());
             } else {
                 reducedComponents.add(component);
+            }
+        }
+
+        // Reduce Comparative expressions
+        while (reducedComponents.size() > 1) {
+            boolean foundOperation = false;
+
+            for (int i = 1; i < reducedComponents.size(); i += 2) {
+                Literal newLiteral = null;
+                if (reducedComponents.get(i) instanceof Equals) {
+                    newLiteral = ((Literal) reducedComponents.get(i - 1)).equalTo((Literal) reducedComponents.get(i + 1));
+                }
+
+                if (newLiteral != null) {
+                    reducedComponents = reducedComponents.subList(3, reducedComponents.size());
+                    reducedComponents.add(0, newLiteral);
+                    foundOperation = true;
+                }
+            }
+
+            if (!foundOperation) {
+                break;
             }
         }
 

@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Created by kruthar on 2/24/16.
  */
-public class SymbolString implements Literal {
+public class SymbolString extends Literal {
     private static final Map<String, Integer> KEYWORDS;
     static {
         Map<String, Integer> aMap = new HashMap<>();
@@ -55,6 +55,10 @@ public class SymbolString implements Literal {
         return value;
     }
 
+    public String getValue() {
+        return value;
+    }
+
     @Override
     public Literal times(Literal other) {
         System.out.println("ERROR: SymbolString does not support times operation");
@@ -76,6 +80,19 @@ public class SymbolString implements Literal {
     public Literal minus(Literal other) {
         System.out.println("ERROR: SymbolString does not support minus operation");
         return new SymbolString("ERROR: SymbolString does not support minus operation");
+    }
+
+    @Override
+    public int comparedTo(Literal other) {
+        if (!(other instanceof SymbolString)) {
+            System.out.println("ERROR: Cannot compare SymbolBoolean to " + other.getClass());
+            System.exit(1);
+        }
+
+        // TODO: implement comparing Strings
+        // This is not possible -> return String.compare(value, ((SymbolString) other).getValue());
+        System.out.println("WARN: Comparing Strings not implemented yet.");
+        return 1;
     }
 
     public static boolean hasKeyword(String keyword) {
