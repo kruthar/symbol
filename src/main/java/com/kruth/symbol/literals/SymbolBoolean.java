@@ -1,5 +1,7 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.lexers.SpaceLexer;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,6 +13,7 @@ public class SymbolBoolean implements Literal {
     private static final Map<String, Boolean> KEYWORDS;
     static {
         Map<String, Boolean> aMap = new HashMap<>();
+        aMap.put("not", false);
         aMap.put("true", true);
         aMap.put("false", false);
         KEYWORDS = Collections.unmodifiableMap(aMap);
@@ -22,12 +25,18 @@ public class SymbolBoolean implements Literal {
         this(false);
     }
 
-    public SymbolBoolean(String val) {
-        this(Boolean.valueOf(val));
-    }
-
     public SymbolBoolean(boolean val) {
         value = val;
+    }
+
+    public SymbolBoolean(SpaceLexer lexer) {
+        boolean modifier = true;
+        while (lexer.peek().equals("not")) {
+            modifier = !modifier;
+            lexer.next();
+        }
+
+        value = Boolean.valueOf(lexer.next()) == modifier;
     }
 
     public boolean getValue() {

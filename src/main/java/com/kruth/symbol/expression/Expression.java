@@ -60,7 +60,7 @@ public class Expression implements ExpressionComponent {
             } else if (SymbolString.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(new SymbolString(lexer));
             } else if (SymbolBoolean.hasKeyword(lexer.peek().toLowerCase())) {
-                addComponent(new SymbolBoolean(lexer.next()));
+                addComponent(new SymbolBoolean(lexer));
             } else if (OperationParser.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(OperationParser.parse(lexer));
             } else if (instructionState.hasVariable(lexer.peek().toLowerCase())) {
