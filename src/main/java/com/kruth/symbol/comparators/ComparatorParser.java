@@ -15,6 +15,7 @@ public class ComparatorParser {
     static {
         Map<String, Class> aMap = new HashMap<>();
         aMap.put("equals", Equals.class);
+        aMap.put("notequals", NotEquals.class);
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 

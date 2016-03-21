@@ -11,7 +11,6 @@ import java.util.Map;
  */
 public class InstructionState {
     private boolean inComment = false;
-    private boolean negation = false;
     private static InstructionState instructionState = null;
 
     private Map<String, Literal> variableMap = new HashMap<>();
@@ -31,14 +30,6 @@ public class InstructionState {
 
     public boolean getComment() {
         return inComment;
-    }
-
-    public void setNegation(boolean negate) {
-        negation = negate;
-    }
-
-    public boolean getNegation() {
-        return negation;
     }
 
     public void setVariable(String name, Literal value) {

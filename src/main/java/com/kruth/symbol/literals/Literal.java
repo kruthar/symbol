@@ -15,4 +15,7 @@ public abstract class Literal implements ExpressionComponent {
     public Literal equalTo(Literal other) {
         return new SymbolBoolean(this.comparedTo(other) == 0);
     };
+    public Literal notEqualTo(Literal other) {
+        return new SymbolBoolean(!((SymbolBoolean) this.equalTo(other)).getValue());
+    }
 }

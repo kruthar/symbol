@@ -15,6 +15,7 @@ public class SymbolBoolean extends Literal {
     private static final Map<String, Boolean> KEYWORDS;
     static {
         Map<String, Boolean> aMap = new HashMap<>();
+        aMap.put("not", false);
         aMap.put("true", true);
         aMap.put("false", false);
         KEYWORDS = Collections.unmodifiableMap(aMap);
@@ -27,16 +28,16 @@ public class SymbolBoolean extends Literal {
     }
 
     public SymbolBoolean(SpaceLexer lexer) {
-        this(Boolean.valueOf(lexer.next()));
+        Boolean modifier = true;
+        while (lexer.peek().toLowerCase().equals("not")) {
+            modifier = !modifier;
+            lexer.next();
+        }
+        value = Boolean.valueOf(lexer.next()) == modifier;
     }
 
     public SymbolBoolean(boolean val) {
-        if (instructionState.getNegation()) {
-            value = !val;
-            instructionState.setNegation(false);
-        } else {
-            value = val;
-        }
+        value = val;
     }
 
     public boolean getValue() {

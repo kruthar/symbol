@@ -3,6 +3,7 @@ package com.kruth.symbol.expression;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.comparators.ComparatorParser;
 import com.kruth.symbol.comparators.Equals;
+import com.kruth.symbol.comparators.NotEquals;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolBoolean;
@@ -21,7 +22,6 @@ public class Expression implements ExpressionComponent {
         Map<String, Integer> aMap = new HashMap<>();
         aMap.put("open", 0);
         aMap.put("close", 1);
-        aMap.put("not", 2);
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 
@@ -53,8 +53,6 @@ public class Expression implements ExpressionComponent {
                     // If we are closing an expression, then end the loop here and allow the Expression to finish
                     // and the lexer to continue in the upper level of the stack
                     break;
-                } else if (keyword.equals("not")) {
-                    instructionState.setNegation(!instructionState.getNegation());
                 } else {
                     System.out.println("Unrecognized Expression keyword: " + keyword);
                     System.exit(1);
@@ -119,6 +117,8 @@ public class Expression implements ExpressionComponent {
                 Literal newLiteral = null;
                 if (reducedComponents.get(i) instanceof Equals) {
                     newLiteral = ((Literal) reducedComponents.get(i - 1)).equalTo((Literal) reducedComponents.get(i + 1));
+                } else if (reducedComponents.get(i) instanceof NotEquals) {
+                    newLiteral = ((Literal) reducedComponents.get(i - 1)).notEqualTo((Literal) reducedComponents.get(i + 1));
                 }
 
                 if (newLiteral != null) {
