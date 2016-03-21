@@ -3,9 +3,3 @@ set twotwo two
 set three one plus two
 set one5 stringstart one stringend plus five
 print stringstart twotwo =  stringend plus twotwo
-print stringstart true =  stringend plus true
-print stringstart !true =  stringend plus false
-print stringstart !false =  stringend plus not false
-print stringstart !!false =  stringend plus not not false
-print stringstart true == false =  stringend plus open true equals false close
-print stringstart true == !false =  stringend plus open true equals not false close

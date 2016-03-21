@@ -8,7 +8,7 @@ import com.kruth.symbol.lexers.LineLexer;
  */
 public class Symbol {
     public static void main(String args[]) {
-        Symbol.executeFile("variables.symb");
+        Symbol.executeFile("booleans.symb");
         //Symbol.execute("print stringstart true =  stringend plus true");
     }
 

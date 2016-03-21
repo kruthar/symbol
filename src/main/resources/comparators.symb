@@ -1,0 +1,5 @@
+print stringstart true == false =  stringend plus open true equals false close
+print stringstart true == !false =  stringend plus open true equals not false close
+print stringstart 1 == 1 =  stringend plus open one equals one close
+print stringstart 1 == 2 =  stringend plus open one equals two close
+comment print stringstart 1 == 2 =  stringend plus open one not equals two close
