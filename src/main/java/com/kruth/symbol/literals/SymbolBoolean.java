@@ -1,6 +1,5 @@
 package com.kruth.symbol.literals;
 
-import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.lexers.SpaceLexer;
 
 import java.util.Collections;
@@ -11,7 +10,6 @@ import java.util.Map;
  * Created by kruthar on 3/18/16.
  */
 public class SymbolBoolean extends Literal {
-    private InstructionState instructionState = InstructionState.getInstance();
     private static final Map<String, Boolean> KEYWORDS;
     static {
         Map<String, Boolean> aMap = new HashMap<>();
@@ -22,10 +20,6 @@ public class SymbolBoolean extends Literal {
     }
 
     private boolean value;
-
-    public SymbolBoolean() {
-        this(false);
-    }
 
     public SymbolBoolean(SpaceLexer lexer) {
         Boolean modifier = true;
