@@ -3,6 +3,9 @@ package com.kruth.symbol.literals;
 import com.kruth.symbol.Symbol;
 import com.kruth.symbol.lexers.SpaceLexer;
 import org.junit.Test;
+
+import javax.naming.OperationNotSupportedException;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -41,6 +44,14 @@ public class TestSymbolBoolean {
         assertEquals("true + true = false", true, ((SymbolBoolean) boolTrue.plus(boolTrue)).getValue());
     }
 
+    @Test(expected = OperationNotSupportedException.class)
+    public void testMinus() throws OperationNotSupportedException {
+        SymbolBoolean boolTrue = new SymbolBoolean(true);
+        SymbolBoolean boolFalse = new SymbolBoolean(false);
+
+        boolTrue.minus(boolFalse);
+    }
+
     @Test
     public void testTimes() {
         SymbolBoolean boolTrue = new SymbolBoolean(true);
@@ -50,5 +61,13 @@ public class TestSymbolBoolean {
         assertEquals("false * true = false", false, ((SymbolBoolean) boolFalse.times(boolTrue)).getValue());
         assertEquals("true * false = false", false, ((SymbolBoolean) boolTrue.times(boolFalse)).getValue());
         assertEquals("true * true = true", true, ((SymbolBoolean) boolTrue.times(boolTrue)).getValue());
+    }
+
+    @Test(expected = OperationNotSupportedException.class)
+    public void testDividedBy() throws OperationNotSupportedException {
+        SymbolBoolean boolTrue = new SymbolBoolean(true);
+        SymbolBoolean boolFalse = new SymbolBoolean(false);
+
+        boolTrue.dividedby(boolFalse);
     }
 }
