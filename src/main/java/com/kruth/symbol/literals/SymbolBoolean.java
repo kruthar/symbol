@@ -2,6 +2,7 @@ package com.kruth.symbol.literals;
 
 import com.kruth.symbol.lexers.SpaceLexer;
 
+import javax.naming.OperationNotSupportedException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -48,26 +49,22 @@ public class SymbolBoolean extends Literal {
 
     @Override
     public Literal times(Literal other) {
-        System.out.println("ERROR: SymbolBoolean does not support times operation");
-        return new SymbolBoolean(false);
+        return new SymbolBoolean(this.value && ((SymbolBoolean) other).getValue());
     }
 
     @Override
-    public Literal dividedby(Literal other) {
-        System.out.println("ERROR: SymbolBoolean does not support dividedby operation");
-        return new SymbolBoolean(false);
+    public Literal dividedby(Literal other) throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("SymbolBoolean does not support the dividecby operation.");
     }
 
     @Override
     public Literal plus(Literal other) {
-        System.out.println("ERROR: SymbolBoolean does not support plus operation");
-        return new SymbolBoolean(false);
+        return new SymbolBoolean(this.value || ((SymbolBoolean) other).getValue());
     }
 
     @Override
-    public Literal minus(Literal other) {
-        System.out.println("ERROR: SymbolBoolean does not support minus operation");
-        return new SymbolBoolean(false);
+    public Literal minus(Literal other) throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("SymbolBoolean does not support the minus operation.");
     }
 
     @Override

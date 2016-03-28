@@ -11,6 +11,7 @@ import com.kruth.symbol.literals.SymbolNumber;
 import com.kruth.symbol.literals.SymbolString;
 import com.kruth.symbol.operations.*;
 
+import javax.naming.OperationNotSupportedException;
 import java.util.*;
 
 /**
@@ -143,7 +144,13 @@ public class Expression implements ExpressionComponent {
                 if (reducedComponents.get(i) instanceof Times) {
                     newLiteral = ((Literal) reducedComponents.get(i - 1)).times((Literal) reducedComponents.get(i + 1));
                 } else if (reducedComponents.get(i) instanceof DividedBy) {
-                    newLiteral = ((Literal) reducedComponents.get(i - 1)).dividedby((Literal) reducedComponents.get(i + 1));
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).dividedby((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("DividedBy operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
                 }
 
                 if (newLiteral != null) {
@@ -167,7 +174,13 @@ public class Expression implements ExpressionComponent {
                 if (reducedComponents.get(i) instanceof Plus) {
                     newLiteral = ((Literal) reducedComponents.get(i - 1)).plus((Literal) reducedComponents.get(i + 1));
                 } else if (reducedComponents.get(i) instanceof Minus) {
-                    newLiteral = ((Literal) reducedComponents.get(i - 1)).minus((Literal) reducedComponents.get(i + 1));
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).minus((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("Minus operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
                 }
 
                 if (newLiteral != null) {
