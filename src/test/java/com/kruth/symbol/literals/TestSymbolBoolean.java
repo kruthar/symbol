@@ -1,11 +1,11 @@
 package com.kruth.symbol.literals;
 
-import com.kruth.symbol.Symbol;
 import com.kruth.symbol.lexers.SpaceLexer;
 import org.junit.Test;
 
 import javax.naming.OperationNotSupportedException;
 
+import static junit.framework.TestCase.fail;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -69,5 +69,20 @@ public class TestSymbolBoolean {
         SymbolBoolean boolFalse = new SymbolBoolean(false);
 
         boolTrue.dividedby(boolFalse);
+    }
+
+    @Test
+    public void testCompareTo() {
+        SymbolBoolean boolTrue = new SymbolBoolean(true);
+        SymbolBoolean boolFalse = new SymbolBoolean(false);
+
+        try {
+            assertEquals("true == true", 0, boolTrue.comparedTo(boolTrue));
+            assertEquals("true != false", 1, boolTrue.comparedTo(boolFalse));
+            assertEquals("false != true", -1, boolFalse.comparedTo(boolTrue));
+            assertEquals("false == false", 0, boolFalse.comparedTo(boolFalse));
+        } catch (OperationNotSupportedException e) {
+            fail("Failed to compare SymbolBooleans.");
+        }
     }
 }

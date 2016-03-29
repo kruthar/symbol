@@ -117,9 +117,21 @@ public class Expression implements ExpressionComponent {
             for (int i = 1; i < reducedComponents.size(); i += 2) {
                 Literal newLiteral = null;
                 if (reducedComponents.get(i) instanceof Equals) {
-                    newLiteral = ((Literal) reducedComponents.get(i - 1)).equalTo((Literal) reducedComponents.get(i + 1));
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).equalTo((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("EqualTo operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
                 } else if (reducedComponents.get(i) instanceof NotEquals) {
-                    newLiteral = ((Literal) reducedComponents.get(i - 1)).notEqualTo((Literal) reducedComponents.get(i + 1));
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).notEqualTo((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("NotEqualTo operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
                 }
 
                 if (newLiteral != null) {

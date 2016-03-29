@@ -68,10 +68,9 @@ public class SymbolBoolean extends Literal {
     }
 
     @Override
-    public int comparedTo(Literal other) {
+    public int comparedTo(Literal other) throws OperationNotSupportedException {
         if (!(other instanceof SymbolBoolean)) {
-            System.out.println("ERROR: Cannot compare SymbolBoolean to " + other.getClass());
-            System.exit(1);
+            throw new OperationNotSupportedException("SymbolBoolean does not support the minus operation.");
         }
 
         return Boolean.compare(value, ((SymbolBoolean) other).getValue());
