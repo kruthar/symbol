@@ -26,10 +26,6 @@ public class SymbolNumber extends Literal {
 
     private int value;
 
-    public SymbolNumber() {
-        this(0);
-    }
-
     public SymbolNumber(int num) {
         value = num;
     }
