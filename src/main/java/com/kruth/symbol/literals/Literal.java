@@ -8,7 +8,7 @@ import javax.naming.OperationNotSupportedException;
  * Created by kruthar on 2/24/16.
  */
 public abstract class Literal implements ExpressionComponent {
-    public abstract Literal times(Literal other);
+    public abstract Literal times(Literal other) throws OperationNotSupportedException;
     public abstract Literal dividedby(Literal other) throws OperationNotSupportedException;
     public abstract Literal plus(Literal other);
     public abstract Literal minus(Literal other) throws OperationNotSupportedException;

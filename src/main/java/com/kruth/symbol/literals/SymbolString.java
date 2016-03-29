@@ -2,6 +2,7 @@ package com.kruth.symbol.literals;
 
 import com.kruth.symbol.lexers.SpaceLexer;
 
+import javax.naming.OperationNotSupportedException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,10 +20,6 @@ public class SymbolString extends Literal {
     }
 
     private String value;
-
-    public SymbolString() {
-        this("");
-    }
 
     public SymbolString(String s) {
         value = s;
@@ -60,15 +57,13 @@ public class SymbolString extends Literal {
     }
 
     @Override
-    public Literal times(Literal other) {
-        System.out.println("ERROR: SymbolString does not support times operation");
-        return new SymbolString("ERROR: SymbolString does not support times operation");
+    public Literal times(Literal other) throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("SymbolString does not support the times operation.");
     }
 
     @Override
-    public Literal dividedby(Literal other) {
-        System.out.println("ERROR: SymbolString does not support dividedby operation");
-        return new SymbolString("ERROR: SymbolString does not support dividedby operation");
+    public Literal dividedby(Literal other) throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("SymbolString does not support the dividedby operation.");
     }
 
     @Override
@@ -77,9 +72,8 @@ public class SymbolString extends Literal {
     }
 
     @Override
-    public Literal minus(Literal other) {
-        System.out.println("ERROR: SymbolString does not support minus operation");
-        return new SymbolString("ERROR: SymbolString does not support minus operation");
+    public Literal minus(Literal other) throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("SymbolString does not support the minus operation.");
     }
 
     @Override

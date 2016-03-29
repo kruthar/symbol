@@ -154,7 +154,13 @@ public class Expression implements ExpressionComponent {
             for (int i = 1; i < reducedComponents.size(); i += 2) {
                 Literal newLiteral = null;
                 if (reducedComponents.get(i) instanceof Times) {
-                    newLiteral = ((Literal) reducedComponents.get(i - 1)).times((Literal) reducedComponents.get(i + 1));
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).times((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("Times operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
                 } else if (reducedComponents.get(i) instanceof DividedBy) {
                     try {
                         newLiteral = ((Literal) reducedComponents.get(i - 1)).dividedby((Literal) reducedComponents.get(i + 1));
