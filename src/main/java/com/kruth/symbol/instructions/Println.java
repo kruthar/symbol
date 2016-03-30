@@ -6,15 +6,15 @@ import com.kruth.symbol.literals.Literal;
 /**
  * Created by kruthar on 2/23/16.
  */
-public class Print implements Instruction {
+public class Println implements Instruction {
     private Expression expression;
 
-    public Print (String expression) {
+    public Println(String expression) {
         this.expression = new Expression(expression);
     }
 
     public void runInstruction() {
         Literal literal = expression.evaluate();
-        System.out.print(literal.toString());
+        System.out.println(literal.toString());
     }
 }

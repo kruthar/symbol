@@ -1,4 +1,4 @@
-package com.kruth.symbol.expression;
+package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.Symbol;
 import org.junit.After;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by kruthar on 3/29/16.
  */
-public class TestBasicExpressions {
+public class TestPrint {
     private final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
     @Before
@@ -27,14 +27,8 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testSimpleExpressions() {
-        Symbol.execute("print stringstart Hello World! stringend");
-        assertEquals("Simple String expression", "Hello World!", outStream.toString());
-        outStream.reset();
+    public void testPrint() {
         Symbol.execute("print one two three");
-        assertEquals("Simple Number expression", "123", outStream.toString());
-        outStream.reset();
-        Symbol.execute("print true");
-        assertEquals("Simple Boolean expression", "true", outStream.toString());
+        assertEquals("Simple print test", "123", outStream.toString());
     }
 }

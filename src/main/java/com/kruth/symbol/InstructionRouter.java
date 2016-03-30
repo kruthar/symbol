@@ -4,6 +4,7 @@ import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.instructions.Comment;
 import com.kruth.symbol.instructions.Instruction;
 import com.kruth.symbol.instructions.Print;
+import com.kruth.symbol.instructions.Println;
 import com.kruth.symbol.lexers.LineLexer;
 
 /**
@@ -28,6 +29,8 @@ public class InstructionRouter {
                 return new Comment(instruction);
             case "print":
                 return new Print(instructionSplit[1]);
+            case "println":
+                return new Println(instructionSplit[1]);
             case "set":
                 String[] setSplit = instructionSplit[1].split(" ", 2);
                 instructionState.setVariable(setSplit[0], new Expression(setSplit[1]).evaluate());
