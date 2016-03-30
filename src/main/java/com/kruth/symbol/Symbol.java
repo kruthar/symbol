@@ -8,8 +8,8 @@ import com.kruth.symbol.lexers.LineLexer;
  */
 public class Symbol {
     public static void main(String args[]) {
-        Symbol.executeFile("comparators.symb");
-        //Symbol.execute("print stringstart true =  stringend plus true");
+        //Symbol.executeFile("comparators.symb");
+        Symbol.execute("print stringstart Hello World! stringend");
     }
 
     public static void executeFile(String filename) {
