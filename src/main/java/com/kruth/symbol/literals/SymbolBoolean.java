@@ -74,11 +74,11 @@ public class SymbolBoolean extends Literal {
 
     @Override
     public int comparedTo(Literal other) throws OperationNotSupportedException {
-        if (!(other instanceof SymbolBoolean)) {
-            throw new OperationNotSupportedException("SymbolBoolean does not support the minus operation.");
+        if (other instanceof SymbolBoolean) {
+            return Boolean.compare(value, ((SymbolBoolean) other).getValue());
         }
 
-        return Boolean.compare(value, ((SymbolBoolean) other).getValue());
+        throw new OperationNotSupportedException("ComparedTo not supported between SymbolBoolean and " + other.getClass());
     }
 
     public static boolean hasKeyword(String keyword) {

@@ -3,6 +3,8 @@ package com.kruth.symbol.literals;
 import com.kruth.symbol.lexers.SpaceLexer;
 import org.junit.Test;
 
+import javax.naming.OperationNotSupportedException;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -27,7 +29,7 @@ public class TestSymbolNumber {
     }
 
     @Test
-    public void testMinus() {
+    public void testMinus() throws OperationNotSupportedException {
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
 
@@ -35,7 +37,7 @@ public class TestSymbolNumber {
     }
 
     @Test
-    public void testTimes() {
+    public void testTimes() throws OperationNotSupportedException {
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
 
@@ -43,7 +45,7 @@ public class TestSymbolNumber {
     }
 
     @Test
-    public void testDividedBy() {
+    public void testDividedBy() throws OperationNotSupportedException {
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
 
@@ -51,7 +53,7 @@ public class TestSymbolNumber {
     }
 
     @Test
-    public void testModulo() {
+    public void testModulo() throws OperationNotSupportedException {
         SymbolNumber five = new SymbolNumber(5);
         SymbolNumber three = new SymbolNumber(3);
 
@@ -59,7 +61,7 @@ public class TestSymbolNumber {
     }
 
     @Test
-    public void testCompareTo() {
+    public void testCompareTo() throws OperationNotSupportedException {
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
 

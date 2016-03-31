@@ -2,6 +2,7 @@ package com.kruth.symbol.literals;
 
 import com.kruth.symbol.lexers.SpaceLexer;
 
+import javax.naming.OperationNotSupportedException;
 import java.util.*;
 
 /**
@@ -47,42 +48,30 @@ public class SymbolNumber extends Literal {
     }
 
     @Override
-    public Literal times(Literal other) {
-        if (other instanceof SymbolString) {
-            System.out.println("ERROR: SymbolNumber cannot times a SymbolString");
-            return new SymbolNumber(-1);
-        } else if (other instanceof SymbolNumber) {
+    public Literal times(Literal other) throws OperationNotSupportedException {
+        if (other instanceof SymbolNumber) {
             return new SymbolNumber(this.value * ((SymbolNumber) other).getValue());
         }
 
-        System.out.println("ERROR: Unknown type for Times operation with SymbolNumber: " + other.getClass());
-        return new SymbolNumber(-1);
+        throw new OperationNotSupportedException("Times not supported between SymbolNumber and " + other.getClass());
     }
 
     @Override
-    public Literal dividedby(Literal other) {
-        if (other instanceof SymbolString) {
-            System.out.println("ERROR: SymbolNumber cannot dividedby a SymbolString");
-            return new SymbolNumber(-1);
-        } else if (other instanceof SymbolNumber) {
+    public Literal dividedby(Literal other) throws OperationNotSupportedException {
+        if (other instanceof SymbolNumber) {
             return new SymbolNumber(this.value / ((SymbolNumber) other).getValue());
         }
 
-        System.out.println("ERROR: Unknown type for DividedBy operation with SymbolNumber: " + other.getClass());
-        return new SymbolNumber(-1);
+        throw new OperationNotSupportedException("DivideBy not supported between SymbolNumber and " + other.getClass());
     }
 
     @Override
-    public Literal modulo(Literal other) {
-        if (other instanceof SymbolString) {
-            System.out.println("ERROR: SymbolNumber cannot modulo a SymbolString");
-            return new SymbolNumber(-1);
-        } else if (other instanceof SymbolNumber) {
+    public Literal modulo(Literal other) throws OperationNotSupportedException {
+        if (other instanceof SymbolNumber) {
             return new SymbolNumber(this.value % ((SymbolNumber) other).getValue());
         }
 
-        System.out.println("ERROR: Unknown type for DividedBy operation with SymbolNumber: " + other.getClass());
-        return new SymbolNumber(-1);
+        throw new OperationNotSupportedException("Modulo not supported between SymbolNumber and " + other.getClass());
     }
 
     @Override
@@ -98,26 +87,21 @@ public class SymbolNumber extends Literal {
     }
 
     @Override
-    public Literal minus(Literal other) {
-        if (other instanceof SymbolString) {
-            System.out.println("ERROR SymbolNumber cannot minus a SymbolString");
-            return new SymbolNumber(-1);
-        } else if (other instanceof SymbolNumber) {
+    public Literal minus(Literal other) throws OperationNotSupportedException {
+        if (other instanceof SymbolNumber) {
             return new SymbolNumber(this.value - ((SymbolNumber) other).getValue());
         }
 
-        System.out.println("ERROR: Unknown type for Plus operation with SymbolNumber: " + other.getClass());
-        return new SymbolNumber(-1);
+        throw new OperationNotSupportedException("Minus not supported between SymbolNumber and " + other.getClass());
     }
 
     @Override
-    public int comparedTo(Literal other) {
-        if (!(other instanceof SymbolNumber)) {
-            System.out.println("ERROR: Cannot compare SymbolNumber to " + other.getClass());
-            System.exit(1);
+    public int comparedTo(Literal other) throws OperationNotSupportedException {
+        if (other instanceof SymbolNumber) {
+            return Integer.compare(value, ((SymbolNumber) other).getValue());
         }
 
-        return Integer.compare(value, ((SymbolNumber) other).getValue());
+        throw new OperationNotSupportedException("ComparedTo not supported between SymbolNumber and " + other.getClass());
     }
 
     public static boolean hasKeyword(String keyword) {

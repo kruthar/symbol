@@ -82,13 +82,12 @@ public class SymbolString extends Literal {
     }
 
     @Override
-    public int comparedTo(Literal other) {
-        if (!(other instanceof SymbolString)) {
-            System.out.println("ERROR: Cannot compare SymbolBoolean to " + other.getClass());
-            System.exit(1);
+    public int comparedTo(Literal other) throws OperationNotSupportedException {
+        if (other instanceof SymbolString) {
+            return this.value.compareTo(((SymbolString) other).getValue());
         }
 
-        return this.value.compareTo(((SymbolString) other).getValue());
+        throw new OperationNotSupportedException("ComparedTo not supported between SymbolString and " + other.getClass());
     }
 
     public static boolean hasKeyword(String keyword) {
