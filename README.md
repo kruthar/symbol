@@ -86,3 +86,26 @@ Comparative expressions are implmented, but unfortunately not anywhere you can u
     > print true notequals false
     true
     ```
+
+### Basic Arithmetic
+Basic mathematical operations
+
+```
+> print one plus one
+2
+> print two minus one
+1
+> print two times two
+4
+> print four dividedby two
+2
+```
+
+Order of operations and parenthesis
+
+```
+> print one plus one times two
+3
+> print open one plus one close times two
+4
+```
