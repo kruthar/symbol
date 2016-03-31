@@ -84,6 +84,22 @@ public class TestBasicExpressions {
     }
 
     @Test
+    public void testParenthesisOperations() {
+        Symbol.execute("print open one plus one close times two");
+        assertEquals("Parenthesis Multiplication before Addition", "4", outStream.toString());
+        outStream.reset();
+        Symbol.execute("print open three minus one close times two");
+        assertEquals("Parenthesis Multiplication before Subtraction", "4", outStream.toString());
+        outStream.reset();
+        Symbol.execute("print open two plus four close dividedby two");
+        assertEquals("Parenthesis Division before Addition", "3", outStream.toString());
+        outStream.reset();
+        Symbol.execute("print open six minus two close dividedby two");
+        assertEquals("Parenthesis Multiplication before Addition", "2", outStream.toString());
+        outStream.reset();
+    }
+
+    @Test
     public void testComparators() {
         Symbol.execute("print one equals one");
         assertEquals("Equality positive test", "true", outStream.toString());
