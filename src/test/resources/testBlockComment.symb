@@ -1,5 +1,5 @@
 blockcomment
-print stringstart Hello stringend
-print stringstart World stringend
+print string Hello string
+print string World string
 blockcomment
-print stringstart After stringend
+print string After string

@@ -34,7 +34,7 @@ This is a string with numbers and symbols: #123
 
 Some big considerations here:
 
-* Would it be easier to have a single word beginning and end delimiter? EX ```stringstart``` and ```stringend```
+* Would it be easier to have a single word beginning and end delimiter? EX ```string``` and ```string```
 * What if some one has the string ```string end``` in their string definition? How do you escape? One idea:
 
   ```

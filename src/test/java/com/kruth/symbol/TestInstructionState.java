@@ -27,8 +27,8 @@ public class TestInstructionState {
 
     @Test
     public void testVariables() {
-        Symbol.execute("set string1 stringstart hello stringend");
-        Symbol.execute("set string2 stringstart world stringend");
+        Symbol.execute("set string1 string hello string");
+        Symbol.execute("set string2 string world string");
         Symbol.execute("set num1 one");
         Symbol.execute("set num2 two");
 

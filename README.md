@@ -52,7 +52,7 @@ Values are considered Literals, here are the types of Literals available so far:
 * SymbolString - Typical string
 
     ```
-    > print stringstart Hello World! stringend
+    > print string Hello World! string
     Hello World!
     ```
 * SymbolNumber - Currently these are strictly ints, but I plan for these to be unencombered numbers similar to numbers in Python. SymbolNumbers are not delimited you just type out the digits.

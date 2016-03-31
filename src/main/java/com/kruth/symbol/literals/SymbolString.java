@@ -14,8 +14,7 @@ public class SymbolString extends Literal {
     private static final Map<String, Integer> KEYWORDS;
     static {
         Map<String, Integer> aMap = new HashMap<>();
-        aMap.put("stringstart", 0);
-        aMap.put("stringend", 1);
+        aMap.put("string", 0);
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 
@@ -26,7 +25,7 @@ public class SymbolString extends Literal {
     }
 
     public SymbolString(SpaceLexer lexer) {
-        if (!lexer.hasNext() || lexer.next().toLowerCase() != "stringstart") {
+        if (!lexer.hasNext() || lexer.next().toLowerCase() != "string") {
             // TODO: Do something bad here
         }
 
@@ -35,7 +34,7 @@ public class SymbolString extends Literal {
         } else {
             String result = lexer.next();
 
-            while (lexer.hasNext() && !lexer.peek().toLowerCase().equals("stringend")) {
+            while (lexer.hasNext() && !lexer.peek().toLowerCase().equals("string")) {
                 result += " " + lexer.next();
             }
             lexer.next();

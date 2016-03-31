@@ -17,7 +17,7 @@ public class TestSymbolString {
         SymbolString string1 = new SymbolString(testString);
         assertEquals("Basic string constructor test", testString, string1.getValue());
 
-        String testCode = String.format("stringstart %s stringend", testString);
+        String testCode = String.format("string %s string", testString);
         SymbolString string2 = new SymbolString(new SpaceLexer(testCode));
         assertEquals("SpaceLexer constructor test", testString, string2.getValue());
     }

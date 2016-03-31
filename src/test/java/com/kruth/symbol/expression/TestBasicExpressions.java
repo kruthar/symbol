@@ -28,7 +28,7 @@ public class TestBasicExpressions {
 
     @Test
     public void testSimpleExpressions() {
-        Symbol.execute("print stringstart Hello World! stringend");
+        Symbol.execute("print string Hello World! string");
         assertEquals("Simple String expression", "Hello World!", outStream.toString());
         outStream.reset();
         Symbol.execute("print one two three");
@@ -58,15 +58,15 @@ public class TestBasicExpressions {
         outStream.reset();
 
         // Strings
-        Symbol.execute("print stringstart Hello stringend plus stringstart World stringend");
+        Symbol.execute("print string Hello string plus string World string");
         assertEquals("Simple String addition", "HelloWorld", outStream.toString());
         outStream.reset();
 
         // Mixed Types
-        Symbol.execute("print stringstart one stringend plus two");
+        Symbol.execute("print string one string plus two");
         assertEquals("String + Number", "one2", outStream.toString());
         outStream.reset();
-        Symbol.execute("print three plus stringstart six stringend");
+        Symbol.execute("print three plus string six string");
         assertEquals("Number + String", "3six", outStream.toString());
     }
 
@@ -119,10 +119,10 @@ public class TestBasicExpressions {
         Symbol.execute("print one equals one");
         assertEquals("Equality positive test", "true", outStream.toString());
         outStream.reset();
-        Symbol.execute("print stringstart hello stringend equals stringstart world stringend");
+        Symbol.execute("print string hello string equals string world string");
         assertEquals("Equality negative test", "false", outStream.toString());
         outStream.reset();
-        Symbol.execute("print stringstart hello stringend notequals stringstart world stringend");
+        Symbol.execute("print string hello string notequals string world string");
         assertEquals("Inequality positive test", "true", outStream.toString());
         outStream.reset();
         Symbol.execute("print one notequals one");
