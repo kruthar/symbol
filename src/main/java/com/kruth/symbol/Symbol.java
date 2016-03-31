@@ -8,7 +8,7 @@ import com.kruth.symbol.lexers.LineLexer;
  */
 public class Symbol {
     public static void main(String args[]) {
-        Symbol.executeFile("test.symb");
+        Symbol.executeFile("variables.symb");
         //Symbol.execute("print one plus one times two");
     }
 

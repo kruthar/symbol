@@ -34,7 +34,6 @@ public class InstructionState {
 
     public void setVariable(String name, Literal value) {
         variableMap.put(name, value);
-        System.out.println(name + " set to " + value);
     }
 
     public Literal getVariable(String name) {

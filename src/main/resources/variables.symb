@@ -1,5 +1,0 @@
-set hello stringstart Hello World! stringend
-set twotwo two
-set three one plus two
-set one5 stringstart one stringend plus five
-print stringstart twotwo =  stringend plus twotwo
