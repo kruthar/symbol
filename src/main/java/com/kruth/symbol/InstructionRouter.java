@@ -16,7 +16,7 @@ public class InstructionRouter {
         String[] instructionSplit = instruction.split(" ", 2);
 
         if (instructionState.getComment()) {
-            if (instructionSplit[0] == "blockcomment") {
+            if (instructionSplit[0].equals("blockcomment")) {
                 instructionState.setComment(false);
             }
             return new Comment(instruction);

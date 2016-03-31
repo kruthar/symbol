@@ -1,0 +1,2 @@
+comment print stringstart Hello stringend
+print stringstart World stringend

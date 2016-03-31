@@ -135,8 +135,7 @@ public class Expression implements ExpressionComponent {
                 }
 
                 if (newLiteral != null) {
-                    reducedComponents = reducedComponents.subList(3, reducedComponents.size());
-                    reducedComponents.add(0, newLiteral);
+                    reduceComponents(reducedComponents, i, newLiteral);
                     foundOperation = true;
                 }
             }
@@ -172,8 +171,7 @@ public class Expression implements ExpressionComponent {
                 }
 
                 if (newLiteral != null) {
-                    reducedComponents = reducedComponents.subList(3, reducedComponents.size());
-                    reducedComponents.add(0, newLiteral);
+                    reduceComponents(reducedComponents, i, newLiteral);
                     foundOperation = true;
                 }
             }
@@ -202,8 +200,7 @@ public class Expression implements ExpressionComponent {
                 }
 
                 if (newLiteral != null) {
-                    reducedComponents = reducedComponents.subList(3, reducedComponents.size());
-                    reducedComponents.add(0, newLiteral);
+                    reduceComponents(reducedComponents, i, newLiteral);
                     foundOperation = true;
                 }
             }
@@ -222,5 +219,12 @@ public class Expression implements ExpressionComponent {
 
     public static boolean hasKeyword(String keyword) {
         return KEYWORDS.containsKey(keyword);
+    }
+
+    private void reduceComponents(List list, int index, Literal newLiteral) {
+        list.remove(index - 1);
+        list.remove(index - 1);
+        list.remove(index - 1);
+        list.add(index - 1, newLiteral);
     }
 }

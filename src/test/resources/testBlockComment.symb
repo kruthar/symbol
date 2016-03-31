@@ -1,0 +1,5 @@
+blockcomment
+print stringstart Hello stringend
+print stringstart World stringend
+blockcomment
+print stringstart After stringend
