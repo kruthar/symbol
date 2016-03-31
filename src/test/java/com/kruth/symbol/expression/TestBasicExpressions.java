@@ -82,4 +82,20 @@ public class TestBasicExpressions {
         assertEquals("Multiplication before Addition", "5", outStream.toString());
         outStream.reset();
     }
+
+    @Test
+    public void testComparators() {
+        Symbol.execute("print one equals one");
+        assertEquals("Equality positive test", "true", outStream.toString());
+        outStream.reset();
+        Symbol.execute("print stringstart hello stringend equals stringstart world stringend");
+        assertEquals("Equality negative test", "false", outStream.toString());
+        outStream.reset();
+        Symbol.execute("print stringstart hello stringend notequals stringstart world stringend");
+        assertEquals("Inequality positive test", "true", outStream.toString());
+        outStream.reset();
+        Symbol.execute("print one notequals one");
+        assertEquals("Inequality negative test", "false", outStream.toString());
+        outStream.reset();
+    }
 }

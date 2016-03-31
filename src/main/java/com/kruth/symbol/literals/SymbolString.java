@@ -83,10 +83,7 @@ public class SymbolString extends Literal {
             System.exit(1);
         }
 
-        // TODO: implement comparing Strings
-        // This is not possible -> return String.compare(value, ((SymbolString) other).getValue());
-        System.out.println("WARN: Comparing Strings not implemented yet.");
-        return 1;
+        return this.value.compareTo(((SymbolString) other).getValue());
     }
 
     public static boolean hasKeyword(String keyword) {
