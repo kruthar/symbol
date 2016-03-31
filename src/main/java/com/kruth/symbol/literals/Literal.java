@@ -10,6 +10,7 @@ import javax.naming.OperationNotSupportedException;
 public abstract class Literal implements ExpressionComponent {
     public abstract Literal times(Literal other) throws OperationNotSupportedException;
     public abstract Literal dividedby(Literal other) throws OperationNotSupportedException;
+    public abstract Literal modulo(Literal other) throws OperationNotSupportedException;
     public abstract Literal plus(Literal other);
     public abstract Literal minus(Literal other) throws OperationNotSupportedException;
     public abstract int comparedTo(Literal other) throws OperationNotSupportedException;

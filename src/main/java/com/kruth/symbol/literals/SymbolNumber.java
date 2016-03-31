@@ -73,6 +73,19 @@ public class SymbolNumber extends Literal {
     }
 
     @Override
+    public Literal modulo(Literal other) {
+        if (other instanceof SymbolString) {
+            System.out.println("ERROR: SymbolNumber cannot modulo a SymbolString");
+            return new SymbolNumber(-1);
+        } else if (other instanceof SymbolNumber) {
+            return new SymbolNumber(this.value % ((SymbolNumber) other).getValue());
+        }
+
+        System.out.println("ERROR: Unknown type for DividedBy operation with SymbolNumber: " + other.getClass());
+        return new SymbolNumber(-1);
+    }
+
+    @Override
     public Literal plus(Literal other) {
         if (other instanceof SymbolString) {
             return new SymbolString(this.toString() + other.toString());

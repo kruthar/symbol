@@ -53,6 +53,9 @@ public class TestBasicExpressions {
         Symbol.execute("print four two dividedby three");
         assertEquals("Simple division test", "14", outStream.toString());
         outStream.reset();
+        Symbol.execute("print eight modulo three");
+        assertEquals("Simple modulo test", "2", outStream.toString());
+        outStream.reset();
 
         // Strings
         Symbol.execute("print stringstart Hello stringend plus stringstart World stringend");
@@ -79,7 +82,13 @@ public class TestBasicExpressions {
         assertEquals("Division before Addition", "4", outStream.toString());
         outStream.reset();
         Symbol.execute("print six minus two dividedby two");
-        assertEquals("Multiplication before Addition", "5", outStream.toString());
+        assertEquals("Division before Addition", "5", outStream.toString());
+        outStream.reset();
+        Symbol.execute("print six plus two modulo two");
+        assertEquals("Modulo before Addition", "6", outStream.toString());
+        outStream.reset();
+        Symbol.execute("print six minus two modulo two");
+        assertEquals("Modulo before Subtraction", "6", outStream.toString());
         outStream.reset();
     }
 
@@ -96,6 +105,12 @@ public class TestBasicExpressions {
         outStream.reset();
         Symbol.execute("print open six minus two close dividedby two");
         assertEquals("Parenthesis Multiplication before Addition", "2", outStream.toString());
+        outStream.reset();
+        Symbol.execute("print open six plus two close modulo two");
+        assertEquals("Parenthesis modulo before Addition", "0", outStream.toString());
+        outStream.reset();
+        Symbol.execute("print open six minus two close modulo two");
+        assertEquals("Parenthesis modulo before Subtraction", "0", outStream.toString());
         outStream.reset();
     }
 

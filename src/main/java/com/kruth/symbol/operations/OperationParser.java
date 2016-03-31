@@ -18,6 +18,7 @@ public class OperationParser {
         aMap.put("dividedby", DividedBy.class);
         aMap.put("plus", Plus.class);
         aMap.put("minus", Minus.class);
+        aMap.put("modulo", Modulo.class);
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 

@@ -51,6 +51,14 @@ public class TestSymbolNumber {
     }
 
     @Test
+    public void testModulo() {
+        SymbolNumber five = new SymbolNumber(5);
+        SymbolNumber three = new SymbolNumber(3);
+
+        assertEquals("Simple modulo, 5 % 3 = 2", 2, ((SymbolNumber) five.modulo(three)).getValue());
+    }
+
+    @Test
     public void testCompareTo() {
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);

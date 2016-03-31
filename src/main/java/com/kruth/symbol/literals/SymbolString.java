@@ -67,6 +67,11 @@ public class SymbolString extends Literal {
     }
 
     @Override
+    public Literal modulo(Literal other) throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("SymbolString does not support the modulo operation.");
+    }
+
+    @Override
     public Literal plus(Literal other) {
         return new SymbolString(this.value + other.toString());
     }

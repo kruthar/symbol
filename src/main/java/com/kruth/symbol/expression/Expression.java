@@ -168,6 +168,14 @@ public class Expression implements ExpressionComponent {
                         e.printStackTrace();
                         System.exit(1);
                     }
+                } else if (reducedComponents.get(i) instanceof Modulo) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).modulo((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("Modulo operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
                 }
 
                 if (newLiteral != null) {

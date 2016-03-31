@@ -58,6 +58,11 @@ public class SymbolBoolean extends Literal {
     }
 
     @Override
+    public Literal modulo(Literal other) throws OperationNotSupportedException {
+        throw new OperationNotSupportedException("SymbolBoolean does not support the modulo operation.");
+    }
+
+    @Override
     public Literal plus(Literal other) {
         return new SymbolBoolean(this.value || ((SymbolBoolean) other).getValue());
     }

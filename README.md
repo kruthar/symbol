@@ -99,6 +99,8 @@ Basic mathematical operations
 4
 > print four dividedby two
 2
+> print five modulo three
+2
 ```
 
 Order of operations and parenthesis
