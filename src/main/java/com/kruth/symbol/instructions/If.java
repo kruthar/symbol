@@ -29,18 +29,24 @@ public class If {
         }
 
         if (instructionSplit[0].equals("else")) {
-            // Lex out the 'else' line
-            instructionState.nextLine();
+            String elseLine = instructionState.nextLine();
+            String[] elseSplit = elseLine.split(" ", 3);
+            if (elseSplit.length > 2 && elseSplit[1].equals("if")) {
+                If.parse(elseSplit[2], execute && !conditionTrue);
+            } else {
+                while (!instructionSplit[0].equals("fi")) {
+                    // Still inside of the if block, route this instruction
+                    instructionRouter.routeNextInstruction(execute && !conditionTrue);
+                    nextInstruction = instructionState.peekNextLine();
+                    instructionSplit = nextInstruction.split(" ", 2);
+                }
 
-            while (!instructionSplit[0].equals("fi")) {
-                // Still inside of the if block, route this instruction
-                instructionRouter.routeNextInstruction(execute && !conditionTrue);
-                nextInstruction = instructionState.peekNextLine();
-                instructionSplit = nextInstruction.split(" ", 2);
+                // Lex out the 'fi' line
+                instructionState.nextLine();
             }
+        } else {
+            // Lex out the 'fi' line
+            instructionState.nextLine();
         }
-
-        // Lex out the 'fi' line
-        instructionState.nextLine();
     }
 }
