@@ -128,5 +128,39 @@ public class TestBasicExpressions {
         Symbol.executeLine("print one notequals one");
         assertEquals("Inequality negative test", "false", outStream.toString());
         outStream.reset();
+
+        Symbol.executeLine("print two greaterthan one");
+        assertEquals("Greater than positive test", "true", outStream.toString());
+        outStream.reset();
+        Symbol.executeLine("print one greaterthan two");
+        assertEquals("Greater than negative test", "false", outStream.toString());
+        outStream.reset();
+
+        Symbol.executeLine("print one lessthan two");
+        assertEquals("Less than positive test", "true", outStream.toString());
+        outStream.reset();
+        Symbol.executeLine("print two lessthan one");
+        assertEquals("Less than negative test", "false", outStream.toString());
+        outStream.reset();
+
+        Symbol.executeLine("print two greaterthanequals one");
+        assertEquals("Greater than equals greater positive test", "true", outStream.toString());
+        outStream.reset();
+        Symbol.executeLine("print one greaterthanequals one");
+        assertEquals("Greater than equals equals positive test", "true", outStream.toString());
+        outStream.reset();
+        Symbol.executeLine("print one greaterthanequals two");
+        assertEquals("Greater than equals negative test", "false", outStream.toString());
+        outStream.reset();
+
+        Symbol.executeLine("print one lessthanequals two");
+        assertEquals("Less than equals less positive test", "true", outStream.toString());
+        outStream.reset();
+        Symbol.executeLine("print one lessthanequals one");
+        assertEquals("Less than equals equals positive test", "true", outStream.toString());
+        outStream.reset();
+        Symbol.executeLine("print two lessthanequals one");
+        assertEquals("Less than equals negative test", "false", outStream.toString());
+        outStream.reset();
     }
 }

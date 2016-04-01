@@ -1,9 +1,7 @@
 package com.kruth.symbol.expression;
 
 import com.kruth.symbol.InstructionState;
-import com.kruth.symbol.comparators.ComparatorParser;
-import com.kruth.symbol.comparators.Equals;
-import com.kruth.symbol.comparators.NotEquals;
+import com.kruth.symbol.comparators.*;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolBoolean;
@@ -129,6 +127,38 @@ public class Expression implements ExpressionComponent {
                         newLiteral = ((Literal) reducedComponents.get(i - 1)).notEqualTo((Literal) reducedComponents.get(i + 1));
                     } catch (OperationNotSupportedException e) {
                         System.out.println("NotEqualTo operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+                } else if (reducedComponents.get(i) instanceof GreaterThan) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).greaterThan((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("GreaterThan operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+                } else if (reducedComponents.get(i) instanceof LessThan) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).lessThan((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("LessThan operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+                } else if (reducedComponents.get(i) instanceof GreaterThanEquals) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).greaterThanOrEqualTo((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("GreaterThanEquals operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+                } else if (reducedComponents.get(i) instanceof LessThanEquals) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).lessThanOrEqualTo((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("LessThanEquals operation not supported with these types.");
                         e.printStackTrace();
                         System.exit(1);
                     }

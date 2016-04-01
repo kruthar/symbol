@@ -1,33 +1,4 @@
-println one
-if true
-    println two
-fi
-
-println three
-if false
-    println four
-else
-    println five
-fi
-
-println six
-if true
-    println seven
-else
-    println eight
-fi
-
-println nine
-if false
-    println one zero
-else if false
-    println one one
-else if true
-    println one two
-else if true
-    println one three
-else
-    println one four
-fi
-
-println one five
+println one greaterthan two
+println one lessthan two
+println one greaterthanequals two
+println one lessthanequals one

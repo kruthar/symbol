@@ -16,6 +16,10 @@ public class ComparatorParser {
         Map<String, Class> aMap = new HashMap<>();
         aMap.put("equals", Equals.class);
         aMap.put("notequals", NotEquals.class);
+        aMap.put("greaterthan", GreaterThan.class);
+        aMap.put("lessthan", LessThan.class);
+        aMap.put("greaterthanequals", GreaterThanEquals.class);
+        aMap.put("lessthanequals", LessThanEquals.class);
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 

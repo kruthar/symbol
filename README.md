@@ -88,6 +88,30 @@ Comparative expressions are implmented, but unfortunately not anywhere you can u
     > print true notequals false
     true
     ```
+* greaterthan
+
+    ```
+    > print one greaterthan two
+    false
+    ```
+* greaterthanequals
+
+    ```
+    > print one greaterthanequals one
+    true
+    ```
+* lessthan
+
+    ```
+    > print one lessthan two
+    true
+    ```
+* lessthanequals
+
+    ```
+    > print one lessthanequals two
+    true
+    ```
 
 ### Basic Arithmetic
 Basic mathematical operations
