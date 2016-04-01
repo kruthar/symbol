@@ -28,7 +28,7 @@ public class TestPrintln {
 
     @Test
     public void TestPrintln() {
-        Symbol.execute("println one two three");
+        Symbol.executeLine("println one two three");
         assertEquals("Simple println test", "123\n", outStream.toString());
     }
 }

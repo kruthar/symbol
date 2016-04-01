@@ -1,28 +1,30 @@
 package com.kruth.symbol;
 
-import com.kruth.symbol.instructions.Instruction;
-import com.kruth.symbol.lexers.LineLexer;
-
 /**
  * Created by kruthar on 2/23/16.
  */
 public class Symbol {
+    private static InstructionState instructionState = InstructionState.getInstance();
+    private static InstructionRouter instructionRouter = InstructionRouter.getInstance();
+
     public static void main(String args[]) {
-        Symbol.execute("print five modulo three");
+        Symbol.executeFile("if.symb");
     }
 
     public static void executeFile(String filename) {
-        LineLexer lex = new LineLexer(filename);
-
-        while (lex.hasNext()) {
-            execute(lex.next());
-        }
+        instructionState.setLineLexerFile(filename);
+        execute();
     }
 
-    public static void execute(String line) {
-        Instruction instruction = InstructionRouter.getInstruction(line);
-        if (instruction != null) {
-            instruction.runInstruction();
+    public static void executeLine(String line) {
+        instructionState.setLineLexerString(line);
+        execute();
+    }
+
+    public static void execute() {
+
+        while (instructionState.hasNextLine()) {
+            instructionRouter.routeNextInstruction();
         }
     }
 }

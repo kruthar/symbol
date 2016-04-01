@@ -6,14 +6,9 @@ import com.kruth.symbol.literals.Literal;
 /**
  * Created by kruthar on 2/23/16.
  */
-public class Print implements Instruction {
-    private Expression expression;
-
-    public Print (String expression) {
-        this.expression = new Expression(expression);
-    }
-
-    public void runInstruction() {
+public class Print {
+    public static void parse(String line) {
+        Expression expression = new Expression(line);
         Literal literal = expression.evaluate();
         System.out.print(literal.toString());
     }

@@ -1,36 +1,41 @@
 package com.kruth.symbol;
 
 import com.kruth.symbol.expression.Expression;
-import com.kruth.symbol.instructions.Comment;
-import com.kruth.symbol.instructions.Instruction;
-import com.kruth.symbol.instructions.Print;
-import com.kruth.symbol.instructions.Println;
-import com.kruth.symbol.lexers.LineLexer;
+import com.kruth.symbol.instructions.*;
 
 /**
  * Created by kruthar on 2/24/16.
  */
 public class InstructionRouter {
-    public static Instruction getInstruction(String instruction) {
-        InstructionState instructionState = InstructionState.getInstance();
-        String[] instructionSplit = instruction.split(" ", 2);
+    private static InstructionState instructionState = InstructionState.getInstance();
+    private static InstructionRouter instructionRouter = null;
 
-        if (instructionState.getComment()) {
-            if (instructionSplit[0].equals("blockcomment")) {
-                instructionState.setComment(false);
-            }
-            return new Comment(instruction);
+    protected InstructionRouter() {}
+
+    public static InstructionRouter getInstance() {
+        if (instructionRouter == null) {
+            instructionRouter = new InstructionRouter();
         }
+        return instructionRouter;
+    }
+
+    public static void routeNextInstruction() {
+        String instruction = instructionState.nextLine();
+        String[] instructionSplit = instruction.split(" ", 2);
 
         switch (instructionSplit[0].toLowerCase()) {
             case "blockcomment":
-                instructionState.setComment(true);
+                BlockComment.parse(instruction);
+                break;
             case "comment":
-                return new Comment(instruction);
+                Comment.parse(instruction);
+                break;
             case "print":
-                return new Print(instructionSplit[1]);
+                Print.parse(instructionSplit[1]);
+                break;
             case "println":
-                return new Println(instructionSplit[1]);
+                Println.parse(instructionSplit[1]);
+                break;
             case "set":
                 String[] setSplit = instructionSplit[1].split(" ", 2);
                 instructionState.setVariable(setSplit[0], new Expression(setSplit[1]).evaluate());
@@ -38,7 +43,5 @@ public class InstructionRouter {
             default:
                 System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
         }
-
-        return null;
     }
 }

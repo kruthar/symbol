@@ -1,8 +1,10 @@
 package com.kruth.symbol;
 
 import com.kruth.symbol.expression.Expression;
+import com.kruth.symbol.lexers.LineLexer;
 import com.kruth.symbol.literals.Literal;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +13,7 @@ import java.util.Map;
  */
 public class InstructionState {
     private boolean inComment = false;
+    private LineLexer lineLexer = null;
     private static InstructionState instructionState = null;
 
     private Map<String, Literal> variableMap = new HashMap<>();
@@ -42,5 +45,21 @@ public class InstructionState {
 
     public boolean hasVariable(String name) {
         return variableMap.containsKey(name) && variableMap.get(name) != null;
+    }
+
+    public void setLineLexerFile(String filename) {
+        lineLexer = new LineLexer(new File(getClass().getClassLoader().getResource(filename).getFile()));
+    }
+
+    public void setLineLexerString(String line) {
+        lineLexer = new LineLexer(line);
+    }
+
+    public Boolean hasNextLine() {
+        return lineLexer.hasNext();
+    }
+
+    public String nextLine() {
+        return lineLexer.next();
     }
 }

@@ -14,17 +14,13 @@ public class LineLexer implements Iterator<String> {
     private List<String> lines;
     private int nextIndex;
 
-    /**
-     * Takes a file name of a file in the resource file and parses it into a list of lines.
-     * @param filename
-     */
-    public LineLexer(String filename) {
+    public LineLexer(File file) {
         nextIndex = 0;
         lines = new ArrayList<String>();
 
         Scanner scanner = null;
         try {
-            scanner = new Scanner(new File(getClass().getClassLoader().getResource(filename).getFile()));
+            scanner = new Scanner(file);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -32,6 +28,13 @@ public class LineLexer implements Iterator<String> {
         while (scanner.hasNext()) {
             lines.add(scanner.nextLine());
         }
+    }
+
+    public LineLexer(String line) {
+        nextIndex = 0;
+        lines = new ArrayList<String>();
+
+        lines.add(line);
     }
 
     public boolean hasNext() {
