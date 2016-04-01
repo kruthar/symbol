@@ -62,4 +62,8 @@ public class InstructionState {
     public String nextLine() {
         return lineLexer.next();
     }
+
+    public String peekNextLine() {
+        return lineLexer.peek();
+    }
 }

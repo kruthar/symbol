@@ -7,9 +7,11 @@ import com.kruth.symbol.literals.Literal;
  * Created by kruthar on 2/23/16.
  */
 public class Print {
-    public static void parse(String line) {
-        Expression expression = new Expression(line);
-        Literal literal = expression.evaluate();
-        System.out.print(literal.toString());
+    public static void parse(String line, Boolean execute) {
+        if (execute) {
+            Expression expression = new Expression(line);
+            Literal literal = expression.evaluate();
+            System.out.print(literal.toString());
+        }
     }
 }

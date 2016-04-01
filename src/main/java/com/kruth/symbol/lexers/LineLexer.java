@@ -45,6 +45,10 @@ public class LineLexer implements Iterator<String> {
         return lines.get(nextIndex++);
     }
 
+    public String peek() {
+        return lines.get(nextIndex);
+    }
+
     public void remove() {
         throw new UnsupportedOperationException();
     }

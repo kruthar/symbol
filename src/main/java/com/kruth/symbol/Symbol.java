@@ -8,7 +8,7 @@ public class Symbol {
     private static InstructionRouter instructionRouter = InstructionRouter.getInstance();
 
     public static void main(String args[]) {
-        Symbol.executeFile("if.symb");
+        Symbol.executeFile("test.symb");
     }
 
     public static void executeFile(String filename) {
@@ -24,7 +24,7 @@ public class Symbol {
     public static void execute() {
 
         while (instructionState.hasNextLine()) {
-            instructionRouter.routeNextInstruction();
+            instructionRouter.routeNextInstruction(true);
         }
     }
 }

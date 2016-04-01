@@ -8,7 +8,7 @@ import com.kruth.symbol.InstructionState;
 public class BlockComment {
     private static InstructionState instructionState = InstructionState.getInstance();
 
-    public static void parse(String line) {
+    public static void parse(String line, Boolean execute) {
         String[] instructionSplit = instructionState.nextLine().split(" ", 2);
 
         while (!instructionSplit[0].equals("blockcomment")) {
