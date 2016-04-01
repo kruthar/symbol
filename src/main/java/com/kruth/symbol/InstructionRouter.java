@@ -21,7 +21,13 @@ public class InstructionRouter {
 
     public static void routeNextInstruction(Boolean execute) {
         String instruction = instructionState.nextLine();
-        String[] instructionSplit = instruction.split(" ", 2);
+
+        // Return if we have an empty line
+        if (instruction.trim().length() < 1) {
+            return;
+        }
+
+        String[] instructionSplit = instruction.trim().split(" ", 2);
 
         switch (instructionSplit[0].toLowerCase()) {
             case "blockcomment":

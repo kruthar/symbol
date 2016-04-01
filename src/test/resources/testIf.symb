@@ -1,29 +1,33 @@
 println one
 if true
-println two
+    println two
 fi
+
 println three
 if false
-println four
+    println four
 else
-println five
+    println five
 fi
+
 println six
 if true
-println seven
+    println seven
 else
-println eight
+    println eight
 fi
+
 println nine
 if false
-println one zero
+    println one zero
 else if false
-println one one
+    println one one
 else if true
-println one two
+    println one two
 else if true
-println one three
+    println one three
 else
-println one four
+    println one four
 fi
+
 println one five
