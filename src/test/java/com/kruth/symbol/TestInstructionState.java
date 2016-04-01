@@ -27,10 +27,10 @@ public class TestInstructionState {
 
     @Test
     public void testVariables() {
-        Symbol.executeLine("set string1 string hello string");
-        Symbol.executeLine("set string2 string world string");
-        Symbol.executeLine("set num1 one");
-        Symbol.executeLine("set num2 two");
+        Symbol.executeLine("string1 is string hello string");
+        Symbol.executeLine("string2 is string world string");
+        Symbol.executeLine("num1 is one");
+        Symbol.executeLine("num2 is two");
 
         Symbol.executeLine("print string1 plus string2");
         assertEquals("String variable addition", "helloworld", outStream.toString());

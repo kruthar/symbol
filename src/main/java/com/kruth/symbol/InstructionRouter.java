@@ -36,12 +36,13 @@ public class InstructionRouter {
             case "println":
                 Println.parse(instructionSplit[1]);
                 break;
-            case "set":
-                String[] setSplit = instructionSplit[1].split(" ", 2);
-                instructionState.setVariable(setSplit[0], new Expression(setSplit[1]).evaluate());
-                break;
             default:
-                System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
+                String[] variableSplit = instructionSplit[1].split(" ", 2);
+                if (variableSplit[0].equals("is")) {
+                    instructionState.setVariable(instructionSplit[0], new Expression(variableSplit[1]).evaluate());
+                } else {
+                    System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
+                }
         }
     }
 }

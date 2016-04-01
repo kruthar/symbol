@@ -18,13 +18,6 @@ Instructions are what I am calling the...instructions of the language here are t
     > print one two three
     123
     ```
-* `set` - You can set variables with this
-    
-    ```
-    > set var one two three
-    > print var
-    123
-    ```
 * `comment` - single line comment
 
     ```
@@ -34,7 +27,7 @@ Instructions are what I am calling the...instructions of the language here are t
     1
     2
     ```
-* 'blockcomment' - open and close a multiline comment
+* `blockcomment` - open and close a multiline comment
 
     ```
     > print one
@@ -45,6 +38,15 @@ Instructions are what I am calling the...instructions of the language here are t
     > print three
     1
     3
+    ```
+
+### Variables
+You can set variables using the `is` keyword
+
+    ```
+    > var is one two three
+    > print var
+    123
     ```
 
 ### Literal Types
