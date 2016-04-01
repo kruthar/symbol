@@ -113,3 +113,17 @@ Order of operations and parenthesis
 > print open one plus one close times two
 4
 ```
+
+### Control Flow
+* if/else blocks are a mix of Java and Shell syntax
+
+```
+> if false
+>   print one
+> else if true
+>   print two
+> else
+>   print three
+> fi
+2
+```
