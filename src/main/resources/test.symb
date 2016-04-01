@@ -5,5 +5,12 @@ fi
 println three
 if false
 println four
-fi
+else
 println five
+fi
+println six
+if true
+println seven
+else
+println eight
+fi
