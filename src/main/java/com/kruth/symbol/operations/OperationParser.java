@@ -19,6 +19,8 @@ public class OperationParser {
         aMap.put("plus", Plus.class);
         aMap.put("minus", Minus.class);
         aMap.put("modulo", Modulo.class);
+        aMap.put("or", Or.class);
+        aMap.put("and", And.class);
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 

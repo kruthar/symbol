@@ -250,6 +250,35 @@ public class Expression implements ExpressionComponent {
             }
         }
 
+        // Combine Boolean statments with Or and And operators
+        while (reducedComponents.size() > 1) {
+            boolean foundOperation = false;
+
+            for (int i = 1; i < reducedComponents.size(); i += 2) {
+                SymbolBoolean newBool = null;
+                if (reducedComponents.get(i) instanceof Or &&
+                        reducedComponents.get(i - 1) instanceof SymbolBoolean &&
+                        reducedComponents.get(i + 1) instanceof SymbolBoolean) {
+                    newBool = new SymbolBoolean(((SymbolBoolean) reducedComponents.get(i - 1)).getValue() || ((SymbolBoolean) reducedComponents.get(i + 1)).getValue());
+                }
+
+                if (reducedComponents.get(i) instanceof And &&
+                        reducedComponents.get(i - 1) instanceof SymbolBoolean &&
+                        reducedComponents.get(i + 1) instanceof SymbolBoolean) {
+                    newBool = new SymbolBoolean(((SymbolBoolean) reducedComponents.get(i - 1)).getValue() && ((SymbolBoolean) reducedComponents.get(i + 1)).getValue());
+                }
+
+                if (newBool != null) {
+                    reduceComponents(reducedComponents, i, newBool);
+                    foundOperation = true;
+                }
+            }
+
+            if (!foundOperation) {
+                break;
+            }
+        }
+
         if (reducedComponents.size() > 1) {
             System.out.println("ERROR: Did not fully reduce operation");
             System.out.println();

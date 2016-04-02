@@ -39,6 +39,29 @@ public class TestBasicExpressions {
     }
 
     @Test
+    public void testBooleanOperators() {
+        Symbol.executeLine("print true or true");
+        assertEquals("true || true == true", "true", outStream.toString());
+        outStream.reset();
+        Symbol.executeLine("print true or false");
+        assertEquals("true || false == true", "true", outStream.toString());
+        outStream.reset();
+        Symbol.executeLine("print false or false");
+        assertEquals("false || false == false", "false", outStream.toString());
+        outStream.reset();
+
+        Symbol.executeLine("print true and true");
+        assertEquals("true && true == true", "true", outStream.toString());
+        outStream.reset();
+        Symbol.executeLine("print true and false");
+        assertEquals("true && false == false", "false", outStream.toString());
+        outStream.reset();
+        Symbol.executeLine("print false and false");
+        assertEquals("false && false == false", "false", outStream.toString());
+        outStream.reset();
+    }
+
+    @Test
     public void testSimpleMathExpressions() {
         // Numbers
         Symbol.executeLine("print one plus one");
