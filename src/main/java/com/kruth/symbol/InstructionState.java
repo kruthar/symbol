@@ -1,6 +1,7 @@
 package com.kruth.symbol;
 
 import com.kruth.symbol.expression.Expression;
+import com.kruth.symbol.instructions.Function;
 import com.kruth.symbol.lexers.LineLexer;
 import com.kruth.symbol.literals.Literal;
 
@@ -19,6 +20,7 @@ public class InstructionState {
 
     private Stack<Integer> loopStack = new Stack<>();
     private Map<String, Literal> variableMap = new HashMap<>();
+    private Map<String, Function> functionMap = new HashMap<>();
 
     protected InstructionState() {}
 
@@ -81,5 +83,14 @@ public class InstructionState {
         if (!loopStack.empty()) {
             loopStack.pop();
         }
+    }
+
+    public void addFunction(Function func) {
+        if (functionMap.containsKey(func.getKey())) {
+            System.out.println("This function signature already exists, should this be an error?");
+            System.exit(1);
+        }
+
+        functionMap.put(func.getKey(), func);
     }
 }

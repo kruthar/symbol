@@ -1,21 +1,5 @@
-<<<<<<< Updated upstream
-println one greaterthan two
-println one lessthan two
-println one greaterthanequals two
-println one lessthanequals one
-=======
-<<<<<<< HEAD
-println string once string
-counter is zero
-while counter lessthan three
-    println counter
-    counter is counter plus one
+function add accepts o t
+    return o plus t
 end
-println string done string
-=======
-println one greaterthan two
-println one lessthan two
-println one greaterthanequals two
-println one lessthanequals one
->>>>>>> 160512f926b2a0a255131f809b7834f77e75e473
->>>>>>> Stashed changes
+
+println add one two
