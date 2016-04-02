@@ -52,4 +52,12 @@ public class LineLexer implements Iterator<String> {
     public void remove() {
         throw new UnsupportedOperationException();
     }
+
+    public int getIndex() {
+        return nextIndex;
+    }
+
+    public void setIndex(int index) {
+        nextIndex = index;
+    }
 }

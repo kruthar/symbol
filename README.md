@@ -151,3 +151,16 @@ Order of operations and parenthesis
 > fi
 2
 ```
+
+* while loops
+
+```
+> counter is zero
+> while counter lessthan three
+>   println counter
+>   counter is counter plus one
+> end
+0
+1
+2
+```

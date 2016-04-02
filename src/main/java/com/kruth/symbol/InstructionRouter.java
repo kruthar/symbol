@@ -45,6 +45,9 @@ public class InstructionRouter {
             case "if":
                 If.parse(instructionSplit[1], execute);
                 break;
+            case "while":
+                While.parse(instructionSplit[1], execute);
+                break;
             default:
                 String[] variableSplit = instructionSplit[1].split(" ", 2);
                 if (variableSplit[0].equals("is")) {

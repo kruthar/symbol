@@ -7,6 +7,7 @@ import com.kruth.symbol.literals.Literal;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Stack;
 
 /**
  * Created by kruthar on 3/15/16.
@@ -16,6 +17,7 @@ public class InstructionState {
     private LineLexer lineLexer = null;
     private static InstructionState instructionState = null;
 
+    private Stack<Integer> loopStack = new Stack<>();
     private Map<String, Literal> variableMap = new HashMap<>();
 
     protected InstructionState() {}
@@ -65,5 +67,19 @@ public class InstructionState {
 
     public String peekNextLine() {
         return lineLexer.peek();
+    }
+
+    public void pushCurrentLoopMarker() {
+        loopStack.push(lineLexer.getIndex());
+    }
+
+    public void resetToCurrentLoopMarker() {
+        lineLexer.setIndex(loopStack.peek());
+    }
+
+    public void popCurrentLoopMarker() {
+        if (!loopStack.empty()) {
+            loopStack.pop();
+        }
     }
 }

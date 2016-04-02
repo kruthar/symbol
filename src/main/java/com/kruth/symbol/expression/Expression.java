@@ -67,7 +67,7 @@ public class Expression implements ExpressionComponent {
             } else if (ComparatorParser.hasKeyword(lexer.peek().toLowerCase())){
                 addComponent(ComparatorParser.parse(lexer));
             } else if (instructionState.hasVariable(lexer.peek().toLowerCase())) {
-                addComponent(instructionState.getVariable(lexer.next()));
+                addComponent(new Variable(lexer.next()));
             } else {
                 System.out.println("Unrecognized Expression start");
                 System.exit(1);
@@ -99,10 +99,12 @@ public class Expression implements ExpressionComponent {
 
     public Literal evaluate() {
         List<ExpressionComponent> reducedComponents = new ArrayList<>();
-        // Run through the component list and evaluate any sub expressions first
+        // Run through the component list and evaluate any sub expressions, and retrieve variable values first
         for (ExpressionComponent component: components) {
             if (component instanceof Expression) {
                 reducedComponents.add(((Expression) component).evaluate());
+            } else if (component instanceof Variable) {
+                reducedComponents.add(instructionState.getVariable(((Variable) component).getName()));
             } else {
                 reducedComponents.add(component);
             }
