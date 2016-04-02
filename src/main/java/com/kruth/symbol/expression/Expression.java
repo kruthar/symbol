@@ -110,73 +110,6 @@ public class Expression implements ExpressionComponent {
             }
         }
 
-        // Reduce Comparative expressions
-        while (reducedComponents.size() > 1) {
-            boolean foundOperation = false;
-
-            for (int i = 1; i < reducedComponents.size(); i += 2) {
-                Literal newLiteral = null;
-                if (reducedComponents.get(i) instanceof Equals) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).equalTo((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("EqualTo operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
-                } else if (reducedComponents.get(i) instanceof NotEquals) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).notEqualTo((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("NotEqualTo operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
-                } else if (reducedComponents.get(i) instanceof GreaterThan) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).greaterThan((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("GreaterThan operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
-                } else if (reducedComponents.get(i) instanceof LessThan) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).lessThan((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("LessThan operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
-                } else if (reducedComponents.get(i) instanceof GreaterThanEquals) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).greaterThanOrEqualTo((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("GreaterThanEquals operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
-                } else if (reducedComponents.get(i) instanceof LessThanEquals) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).lessThanOrEqualTo((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("LessThanEquals operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
-                }
-
-                if (newLiteral != null) {
-                    reduceComponents(reducedComponents, i, newLiteral);
-                    foundOperation = true;
-                }
-            }
-
-            if (!foundOperation) {
-                break;
-            }
-        }
-
         // After all sub expressions have been reduced, perform typical order of operations
         // Times & DividedBy
         while (reducedComponents.size() > 1) {
@@ -234,6 +167,73 @@ public class Expression implements ExpressionComponent {
                         newLiteral = ((Literal) reducedComponents.get(i - 1)).minus((Literal) reducedComponents.get(i + 1));
                     } catch (OperationNotSupportedException e) {
                         System.out.println("Minus operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+                }
+
+                if (newLiteral != null) {
+                    reduceComponents(reducedComponents, i, newLiteral);
+                    foundOperation = true;
+                }
+            }
+
+            if (!foundOperation) {
+                break;
+            }
+        }
+
+        // Reduce Comparative expressions
+        while (reducedComponents.size() > 1) {
+            boolean foundOperation = false;
+
+            for (int i = 1; i < reducedComponents.size(); i += 2) {
+                Literal newLiteral = null;
+                if (reducedComponents.get(i) instanceof Equals) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).equalTo((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("EqualTo operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+                } else if (reducedComponents.get(i) instanceof NotEquals) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).notEqualTo((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("NotEqualTo operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+                } else if (reducedComponents.get(i) instanceof GreaterThan) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).greaterThan((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("GreaterThan operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+                } else if (reducedComponents.get(i) instanceof LessThan) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).lessThan((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("LessThan operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+                } else if (reducedComponents.get(i) instanceof GreaterThanEquals) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).greaterThanOrEqualTo((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("GreaterThanEquals operation not supported with these types.");
+                        e.printStackTrace();
+                        System.exit(1);
+                    }
+                } else if (reducedComponents.get(i) instanceof LessThanEquals) {
+                    try {
+                        newLiteral = ((Literal) reducedComponents.get(i - 1)).lessThanOrEqualTo((Literal) reducedComponents.get(i + 1));
+                    } catch (OperationNotSupportedException e) {
+                        System.out.println("LessThanEquals operation not supported with these types.");
                         e.printStackTrace();
                         System.exit(1);
                     }
