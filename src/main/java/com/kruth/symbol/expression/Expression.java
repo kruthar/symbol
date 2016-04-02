@@ -69,7 +69,7 @@ public class Expression implements ExpressionComponent {
             } else if (instructionState.hasVariable(lexer.peek().toLowerCase())) {
                 addComponent(new Variable(lexer.next()));
             } else {
-                System.out.println("Unrecognized Expression start");
+                System.out.println("Unrecognized Expression start: " + lexer.peek().toLowerCase());
                 System.exit(1);
             }
         }
