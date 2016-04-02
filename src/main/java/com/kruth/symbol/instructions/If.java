@@ -19,13 +19,13 @@ public class If {
         boolean conditionTrue = ((SymbolBoolean) conditional).getValue();
 
         String nextInstruction = instructionState.peekNextLine();
-        String[] instructionSplit = nextInstruction.split(" ", 2);
+        String[] instructionSplit = nextInstruction.trim().split(" ", 2);
 
         while (!instructionSplit[0].equals("fi") && !instructionSplit[0].equals("else")) {
             // Still inside of the if block, route this instruction
             instructionRouter.routeNextInstruction(execute && conditionTrue);
             nextInstruction = instructionState.peekNextLine();
-            instructionSplit = nextInstruction.split(" ", 2);
+            instructionSplit = nextInstruction.trim().split(" ", 2);
         }
 
         if (instructionSplit[0].equals("else")) {

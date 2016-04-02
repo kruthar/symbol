@@ -33,13 +33,13 @@ public class While {
             instructionState.resetToCurrentLoopMarker();
 
             String nextInstruction = instructionState.peekNextLine();
-            String[] instructionSplit = nextInstruction.split(" ", 2);
+            String[] instructionSplit = nextInstruction.trim().split(" ", 2);
 
             while (!instructionSplit[0].equals("end")) {
                 // Still inside of the while block, route this instruction
                 instructionRouter.routeNextInstruction(execute);
                 nextInstruction = instructionState.peekNextLine();
-                instructionSplit = nextInstruction.split(" ", 2);
+                instructionSplit = nextInstruction.trim().split(" ", 2);
             }
 
             try {
