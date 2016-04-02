@@ -1,6 +1,5 @@
 package com.kruth.symbol.instructions;
 
-import com.kruth.symbol.InstructionRouter;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -13,11 +12,8 @@ import java.rmi.UnexpectedException;
  * Created by kruthar on 4/1/16.
  */
 public class While {
-    private static InstructionState instructionState = InstructionState.getInstance();
-    private static InstructionRouter instructionRouter = InstructionRouter.getInstance();
-
-    public static void parse(String line, Boolean execute) {
-        Expression conditionExpression = new Expression(new SpaceLexer(line));
+    public static void parse(InstructionState instructionState, String line, Boolean execute) {
+        Expression conditionExpression = new Expression(instructionState, new SpaceLexer(line));
         Boolean condition = false;
 
         try {
@@ -37,7 +33,7 @@ public class While {
 
             while (!instructionSplit[0].equals("end")) {
                 // Still inside of the while block, route this instruction
-                instructionRouter.routeNextInstruction(execute);
+                instructionState.routeNextInstruction(execute);
                 nextInstruction = instructionState.peekNextLine();
                 instructionSplit = nextInstruction.trim().split(" ", 2);
             }

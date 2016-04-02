@@ -12,8 +12,6 @@ import java.util.Map;
  * Created by kruthar on 4/1/16.
  */
 public class Function {
-    private static InstructionState instructionState = InstructionState.getInstance();
-
     private String name;
     private String[] parameters;
     private List<String> instructions;
@@ -24,7 +22,7 @@ public class Function {
         this.instructions = instructions;
     }
 
-    public static void parse(String line) {
+    public static void parse(InstructionState instructionState, String line) {
         String[] lineSplit = line.split(" ");
 
         if (lineSplit.length < 1) {

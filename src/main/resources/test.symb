@@ -1,5 +1,5 @@
-function add accepts o t
-    return o plus t
-end
+if true
+    println true
+fi
 
-println add one two
+println false

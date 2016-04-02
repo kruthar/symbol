@@ -24,8 +24,8 @@ public class Expression implements ExpressionComponent {
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 
+    private InstructionState instructionState;
     private List<ExpressionComponent> components = new ArrayList<>();
-    private InstructionState instructionState = InstructionState.getInstance();
 
     public Expression() {}
 
@@ -34,11 +34,12 @@ public class Expression implements ExpressionComponent {
     }
 
 
-    public Expression(String expressionString) {
-        this(new SpaceLexer(expressionString));
+    public Expression(InstructionState instructionState, String expressionString) {
+        this(instructionState, new SpaceLexer(expressionString));
     }
 
-    public Expression(SpaceLexer lexer) {
+    public Expression(InstructionState instructionState, SpaceLexer lexer) {
+        this.instructionState = instructionState;
         components = new ArrayList<>();
 
         while (lexer.hasNext()) {
@@ -47,7 +48,7 @@ public class Expression implements ExpressionComponent {
                 // If we are opening an expression then close the current expression,
                 // then pass the lexer to in inner expression
                 if (keyword.equals("open")) {
-                    addComponent(new Expression(lexer));
+                    addComponent(new Expression(instructionState, lexer));
                 } else if (keyword.equals("close")) {
                     // If we are closing an expression, then end the loop here and allow the Expression to finish
                     // and the lexer to continue in the upper level of the stack

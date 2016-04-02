@@ -4,27 +4,25 @@ package com.kruth.symbol;
  * Created by kruthar on 2/23/16.
  */
 public class Symbol {
-    private static InstructionState instructionState = InstructionState.getInstance();
-    private static InstructionRouter instructionRouter = InstructionRouter.getInstance();
-
     public static void main(String args[]) {
         Symbol.executeFile("test.symb");
     }
 
     public static void executeFile(String filename) {
+        InstructionState instructionState = new InstructionState();
         instructionState.setLineLexerFile(filename);
-        execute();
+        execute(instructionState);
     }
 
     public static void executeLine(String line) {
+        InstructionState instructionState = new InstructionState();
         instructionState.setLineLexerString(line);
-        execute();
+        execute(instructionState);
     }
 
-    public static void execute() {
-
+    public static void execute(InstructionState instructionState) {
         while (instructionState.hasNextLine()) {
-            instructionRouter.routeNextInstruction(true);
+            instructionState.routeNextInstruction(true);
         }
     }
 }
