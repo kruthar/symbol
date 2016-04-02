@@ -13,4 +13,8 @@ public class Variable implements ExpressionComponent {
     public String getName() {
         return name;
     }
+
+    public String toString() {
+        return name;
+    }
 }
