@@ -29,5 +29,9 @@ public class TestEuler {
     public void testEuler() {
         Symbol.executeFile("euler/euler1.symb");
         assertEquals("Euler #1", "233168", outStream.toString());
+        outStream.reset();
+        Symbol.executeFile("euler/euler2.symb");
+        assertEquals("Euler #2", "4613732", outStream.toString());
+        outStream.reset();
     }
 }
