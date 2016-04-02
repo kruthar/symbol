@@ -4,10 +4,22 @@ A programming language that contains no symbol characters
 Silly idea, I know, but just imagine a world where you could program and not have to reach for those pesky curly braces, where you never again have to hold Shift to add two numbers together.
 Introducing symbol, a programming language made completely of non-symbol characters. I also have no experience in developing a code language, won't this be fun?! We'll cross that bridge when we come to it.
 
-At this point I have a bit of code written, full list of features below. Testing things is primitive, there is a main method in Symbol.java that can run a single line of code or run a .symb file (that's the current extension, like it? Got a better idea, let me know).
-There are currently no tests, want to help me write some?
+## Getting Started
+At this point there is no launcher, but running symbol programs is as issue as pushing the gree play button in your favorite IDE.
 
-If you somehow stumbled onto this repo and have any interest in what I am trying to accomplish feel free to use the issue tracker to add ideas and thoughts.
+1. Get the code:
+
+```
+git clone https://github.com/kruthar/symbol.git
+```
+
+2. Import into your favorite IDE.
+3. Read the current feature spec below and write your first symbol script in the `src/main/resources` folder.
+4. Execute the file from the `main` method in `srs/main/java/Symbol.java`
+
+```
+Symbol.executeFile("test.symb");
+```
 
 ## What we can currently do:
 ### Instructions
