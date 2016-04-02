@@ -176,3 +176,8 @@ Order of operations and parenthesis
 1
 2
 ```
+
+## Testing Against Project Euler
+Spoiler Alert! One of the test files is testing against Project Euler problems, don't peak if you haven't solved them yet!
+
+If you have, or just don't care, check out `src/test/resources/euler` for sample symbol scripts.
