@@ -37,6 +37,11 @@ public class LineLexer implements Iterator<String> {
         lines.add(line);
     }
 
+    public LineLexer(List<String> instructions) {
+        nextIndex = 0;
+        lines = instructions;
+    }
+
     public boolean hasNext() {
         return nextIndex < lines.size();
     }

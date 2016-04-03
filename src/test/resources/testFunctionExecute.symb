@@ -1,0 +1,12 @@
+function add accepts left right
+    return left plus right
+end
+
+comment this should not print anything
+execute add one sep one
+
+function printadd accepts left right
+    println left plus right
+end
+
+execute printadd one sep one

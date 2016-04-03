@@ -2,6 +2,7 @@ package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.expression.Expression;
+import com.kruth.symbol.literals.Literal;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -64,7 +65,28 @@ public class Function {
         instructionState.addFunction(new Function(name, parameters, instructions));
     }
 
+    public String[] getParameters() {
+        return parameters;
+    }
+
     public String getKey() {
-        return name + parameters.length;
+        return name;
+    }
+
+    public Literal execute(InstructionState instructionState, Map<String, Expression> parameterExpressionMap) {
+        InstructionState functionState = new InstructionState();
+        functionState.setLineLexerList(instructions);
+
+        for (Map.Entry<String, Expression> parameter: parameterExpressionMap.entrySet()) {
+            functionState.setVariable(parameter.getKey(), parameter.getValue().evaluate());
+        }
+
+        functionState.setParentState(instructionState);
+
+        while (functionState.hasNextLine()) {
+            functionState.routeNextInstruction(true);
+        }
+
+        return functionState.getReturnValue();
     }
 }

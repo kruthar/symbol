@@ -3,10 +3,12 @@ package com.kruth.symbol;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.instructions.*;
 import com.kruth.symbol.lexers.LineLexer;
+import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -16,23 +18,36 @@ import java.util.Stack;
 public class InstructionState {
     private boolean inComment = false;
     private LineLexer lineLexer = null;
+    private InstructionState parentState = null;
+    private Literal returnValue = null;
 
     private Stack<Integer> loopStack = new Stack<>();
     private Map<String, Literal> variableMap = new HashMap<>();
     private Map<String, Function> functionMap = new HashMap<>();
 
-    protected InstructionState() {}
+    public InstructionState() {}
 
     public void setVariable(String name, Literal value) {
         variableMap.put(name, value);
     }
 
     public Literal getVariable(String name) {
-        return variableMap.get(name);
+        if (variableMap.containsKey(name)) {
+            return variableMap.get(name);
+        } else {
+            return parentState.getVariable(name);
+        }
     }
 
     public boolean hasVariable(String name) {
-        return variableMap.containsKey(name) && variableMap.get(name) != null;
+        Boolean hasLocal = variableMap.containsKey(name) && variableMap.get(name) != null;
+        Boolean hasParent = false;
+
+        if (parentState != null) {
+            hasParent = parentState.hasVariable(name);
+        }
+
+        return hasLocal || hasParent;
     }
 
     public void setLineLexerFile(String filename) {
@@ -41,6 +56,14 @@ public class InstructionState {
 
     public void setLineLexerString(String line) {
         lineLexer = new LineLexer(line);
+    }
+
+    public void setLineLexerList(List<String> instructions) {
+        lineLexer = new LineLexer(instructions);
+    }
+
+    public void setParentState(InstructionState parent) {
+        parentState = parent;
     }
 
     public Boolean hasNextLine() {
@@ -78,6 +101,30 @@ public class InstructionState {
         functionMap.put(func.getKey(), func);
     }
 
+    public Boolean hasFunction(String name) {
+        Boolean hasLocal = functionMap.containsKey(name);
+        Boolean hasParent = false;
+
+        if (parentState != null) {
+            hasParent = parentState.hasFunction(name);
+        }
+
+        return hasLocal || hasParent;
+    }
+
+    public Literal parseFunctionCall(InstructionState instructionState, SpaceLexer lexer) {
+        String name = lexer.next();
+        Function function = functionMap.get(name);
+
+        Map<String, Expression> parameterExpressionMap = new HashMap<>();
+
+        for(String parameter: function.getParameters()) {
+            parameterExpressionMap.put(parameter, new Expression(instructionState, lexer));
+        }
+
+        return function.execute(instructionState, parameterExpressionMap);
+    }
+
     public void routeNextInstruction(Boolean execute) {
         String instruction = nextLine();
 
@@ -109,6 +156,16 @@ public class InstructionState {
                 break;
             case "function":
                 Function.parse(this, instructionSplit[1]);
+                break;
+            case "execute":
+                Expression execExpression = new Expression(this, instructionSplit[1]);
+                execExpression.evaluate();
+                break;
+            case "return":
+                Expression returnExpression = new Expression(this, instructionSplit[1]);
+                this.setReturnValue(returnExpression.evaluate());
+                this.endInstructions();
+                break;
             default:
                 String[] variableSplit = instructionSplit[1].split(" ", 2);
                 if (variableSplit[0].equals("is")) {
@@ -118,6 +175,20 @@ public class InstructionState {
                 } else {
                     System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
                 }
+        }
+    }
+
+    public void setReturnValue(Literal val) {
+        returnValue = val;
+    }
+
+    public Literal getReturnValue() {
+        return returnValue;
+    }
+
+    public void endInstructions() {
+        while (this.hasNextLine()) {
+            this.nextLine();
         }
     }
 }
