@@ -1,12 +1,5 @@
 function add accepts left right
-    return left plus right
+    println left plus right
 end
 
-comment 2
 println add one sep one
-
-comment 6
-println add one sep one plus four
-
-comment 3
-println add add one sep one sep sep one

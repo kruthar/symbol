@@ -5,6 +5,7 @@ import com.kruth.symbol.instructions.*;
 import com.kruth.symbol.lexers.LineLexer;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
+import com.kruth.symbol.literals.SymbolNull;
 
 import java.io.File;
 import java.util.HashMap;
@@ -19,7 +20,7 @@ public class InstructionState {
     private boolean inComment = false;
     private LineLexer lineLexer = null;
     private InstructionState parentState = null;
-    private Literal returnValue = null;
+    private Literal returnValue = new SymbolNull();
 
     private Stack<Integer> loopStack = new Stack<>();
     private Map<String, Literal> variableMap = new HashMap<>();

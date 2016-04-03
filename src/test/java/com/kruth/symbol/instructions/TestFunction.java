@@ -35,6 +35,6 @@ public class TestFunction {
     @Test
     public void testFunctionReturns() {
         Symbol.executeFile("testFunctionReturns.symb");
-        assertEquals("Test function calls returns as expressions", "2\n6\n3\n", outStream.toString());
+        assertEquals("Test function calls returns as expressions", "2\n6\n3\ntest\nnull\n", outStream.toString());
     }
 }

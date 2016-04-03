@@ -10,3 +10,9 @@ println add one sep one plus four
 
 comment 3
 println add add one sep one sep sep one
+
+function printer
+    println string test string
+end
+
+println printer
