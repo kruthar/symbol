@@ -51,6 +51,15 @@ Instructions are what I am calling the...instructions of the language here are t
     1
     3
     ```
+* `execute` - executes an expression, this is really only useful with functions. Function calls are expressions, and so to fire a function you need the execute command
+
+    ```
+    > function printer
+    >   println string hello string
+    > end
+    > execute printer
+    hello
+    ```
 
 ### Variables
 You can set variables using the `is` keyword
@@ -176,6 +185,42 @@ Order of operations and parenthesis
 1
 2
 ```
+
+### Functions
+Functions are here! There are two main types:
+* non-returning functions - functions can end without returning, maybe they print instead
+
+    ```
+    > function printer
+    >   println string helloworld string
+    > end
+    > execute printer
+    helloworld
+    ```
+* returning functions - functions that return a value
+
+    ```
+    > function add accepts left right
+    >   return left plus right
+    > end
+    > println add one sep two
+    3
+    ```
+
+Functions can be defined with any number parameters, after the method name use the keyword `accepts` then a list of parameter names.
+
+When calling a function that accepts parameters you must end each parameter with the `sep` keyword for "seperate". This keyword let's you seperate expressions when you are listing expressions.
+Here is an advanced example of the `sep` keyword:
+
+```
+> function add accepts left right
+>   return left plus right
+> end
+> println add add one sep one sep sep two
+```
+
+The above function call to `add` has another call to `add` as one of it's parameters. This is perfectly acceptible. Function parameters are expressions, and function calls reduce to expressions, so function calls can be used as parameters to other functions.
+The main thing to note here is the double `sep`, that's wierd, but necessary when you think about it. The first `sep` is to end the second parameter expression to the inner call to `add`. The second `sep` is to seperate the entire expression of the inner add call as the first parameter expression to the outer call to `add`. Clear as mud?
 
 ## Testing Against Project Euler
 Spoiler Alert! One of the test files is testing against Project Euler problems, don't peak if you haven't solved them yet!
