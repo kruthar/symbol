@@ -27,22 +27,8 @@ public class TestInstructionState {
 
     @Test
     public void testVariables() {
-        Symbol.executeLine("string1 is string hello string");
-        Symbol.executeLine("string2 is string world string");
-        Symbol.executeLine("num1 is one");
-        Symbol.executeLine("num2 is two");
-
-        Symbol.executeLine("print string1 plus string2");
-        assertEquals("String variable addition", "helloworld", outStream.toString());
-        outStream.reset();
-        Symbol.executeLine("print num1 plus num2");
-        assertEquals("Number variable addition", "3", outStream.toString());
-        outStream.reset();
-        Symbol.executeLine("print string1 plus three four");
-        assertEquals("String variable and literal addition", "hello34", outStream.toString());
-        outStream.reset();
-        Symbol.executeLine("print num1 plus five");
-        assertEquals("Number variable and literal addition", "6", outStream.toString());
+        Symbol.executeFile("testVariables.symb");
+        assertEquals("Simple variable tests", "helloworld\n3\nhello34\n6\n", outStream.toString());
         outStream.reset();
     }
 }
