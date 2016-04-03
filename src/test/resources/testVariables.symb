@@ -1,7 +1,7 @@
-string1 is string hello string
-string2 is string world string
-num1 is one
-num2 is two
+variable string1 is string hello string
+variable string2 is string world string
+variable num1 is one
+variable num2 is two
 
 println string1 plus string2
 println num1 plus num2

@@ -62,12 +62,21 @@ Instructions are what I am calling the...instructions of the language here are t
     ```
 
 ### Variables
-You can set variables using the `is` keyword
+You can set variables using the `variable` instruction and `is` keyword
 
     ```
-    > var is one two three
+    > variable var is one two three
     > print var
     123
+    ```
+
+Assigning variables with variable values works how you would expect
+
+    ```
+    > variable test is one
+    > variable test is test plus two
+    > println test
+    3
     ```
 
 ### Literal Types
@@ -176,10 +185,10 @@ Order of operations and parenthesis
 * while loops
 
 ```
-> counter is zero
+> variable counter is zero
 > while counter lessthan three
 >   println counter
->   counter is counter plus one
+>   variable counter is counter plus one
 > end
 0
 1

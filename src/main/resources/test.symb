@@ -1,5 +1,3 @@
-function add accepts left right
-    println left plus right
-end
+variable test is string test this string
 
-println add one sep one
+println test

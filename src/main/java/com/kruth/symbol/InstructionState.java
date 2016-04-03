@@ -1,6 +1,7 @@
 package com.kruth.symbol;
 
 import com.kruth.symbol.expression.Expression;
+import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.instructions.*;
 import com.kruth.symbol.lexers.LineLexer;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -167,15 +168,11 @@ public class InstructionState {
                 this.setReturnValue(returnExpression.evaluate());
                 this.endInstructions();
                 break;
+            case "variable":
+                Variable.parse(this, instructionSplit[1], execute);
+                break;
             default:
-                String[] variableSplit = instructionSplit[1].split(" ", 2);
-                if (variableSplit[0].equals("is")) {
-                    if (execute) {
-                        setVariable(instructionSplit[0], new Expression(this, variableSplit[1]).evaluate());
-                    }
-                } else {
-                    System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
-                }
+                System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
         }
     }
 

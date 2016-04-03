@@ -2,6 +2,7 @@ package com.kruth.symbol.expression;
 
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.comparators.*;
+import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolBoolean;
