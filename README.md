@@ -104,6 +104,18 @@ Values are considered Literals, here are the types of Literals available so far:
     false
     ```
 
+### Data Structures
+* SymbolList - simple list, don't have much functionality yes except for defining and printing, and adding together
+
+    ```
+    > variable list1 is list one sep two sep list
+    > variable list2 is list three sep four sep list
+    > println list1
+    > println list1 plus list2
+    [1, 2]
+    [1, 2, 3, 4]
+    ```
+
 ### Comparisons
 Comparative expressions are implmented, but unfortunately not anywhere you can use them except to print.
 * equals - tests equality

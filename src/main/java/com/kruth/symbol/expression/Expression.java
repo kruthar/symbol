@@ -9,6 +9,7 @@ import com.kruth.symbol.literals.SymbolBoolean;
 import com.kruth.symbol.literals.SymbolNumber;
 import com.kruth.symbol.literals.SymbolString;
 import com.kruth.symbol.operations.*;
+import com.kruth.symbol.literals.SymbolList;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.*;
@@ -67,6 +68,8 @@ public class Expression implements ExpressionComponent {
                 addComponent(new SymbolString(lexer));
             } else if (SymbolBoolean.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(new SymbolBoolean(lexer));
+            } else if (SymbolList.hasKeyword(lexer.peek().toLowerCase())) {
+                addComponent(new SymbolList(instructionState, lexer));
             } else if (OperationParser.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(OperationParser.parse(lexer));
             } else if (ComparatorParser.hasKeyword(lexer.peek().toLowerCase())){

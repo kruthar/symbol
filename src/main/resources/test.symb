@@ -1,3 +1,6 @@
-variable test is string test this string
+variable first is list one sep two sep three sep list
+variable second is list four sep five sep six sep list
 
-println test
+println first
+println second
+println first plus second

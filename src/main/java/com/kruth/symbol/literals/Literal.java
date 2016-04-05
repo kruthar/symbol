@@ -40,4 +40,23 @@ public abstract class Literal implements ExpressionComponent {
         int compared = this.comparedTo(other);
         return new SymbolBoolean(compared <= 0);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Literal)) {
+            return false;
+        }
+
+        Literal sl = (Literal) o;
+
+        try {
+            return ((SymbolBoolean) this.equalTo(sl)).getValue();
+        } catch (OperationNotSupportedException e) {
+            return false;
+        }
+    }
 }
