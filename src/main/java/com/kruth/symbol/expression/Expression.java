@@ -1,5 +1,7 @@
 package com.kruth.symbol.expression;
 
+import com.kruth.symbol.dots.Dot;
+import com.kruth.symbol.dots.DotParser;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.comparators.*;
@@ -66,8 +68,10 @@ public class Expression implements ExpressionComponent {
                 addComponent(new SymbolList(instructionState, lexer));
             } else if (OperationParser.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(OperationParser.parse(lexer));
-            } else if (ComparatorParser.hasKeyword(lexer.peek().toLowerCase())){
+            } else if (ComparatorParser.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(ComparatorParser.parse(lexer));
+            } else if (DotParser.hasKeyword(lexer.peek().toLowerCase())) {
+                addComponent(DotParser.parse(instructionState, lexer));
             } else if (instructionState.hasFunction(lexer.peek().toLowerCase())) {
                 addComponent(instructionState.parseFunctionCall(instructionState, lexer));
             } else if (instructionState.hasVariable(lexer.peek().toLowerCase())) {
@@ -80,12 +84,14 @@ public class Expression implements ExpressionComponent {
     }
 
     public void addComponent(ExpressionComponent component) {
-        if (!components.isEmpty() && (
-            (components.get(components.size() - 1) instanceof Literal && component instanceof Literal) ||
-            (components.get(components.size() -1) instanceof Operation && component instanceof Operation))) {
-            System.out.println("bad expression - two literals or two operations");
-            System.exit(1);
-        }
+        // This logic not actually necessary for happy path so commenting out to allow method components.
+        // Will probably have to reinstitue this plus more logic around when to allow adding method components at some point.
+//        if (!components.isEmpty() && (
+//            (components.get(components.size() - 1) instanceof Literal && component instanceof Literal) ||
+//            (components.get(components.size() -1) instanceof Operation && component instanceof Operation))) {
+//            System.out.println("bad expression - two literals or two operations");
+//            System.exit(1);
+//        }
         components.add(component);
     }
 
@@ -111,6 +117,22 @@ public class Expression implements ExpressionComponent {
                 reducedComponents.add(instructionState.getVariable(((Variable) component).getName()));
             } else {
                 reducedComponents.add(component);
+            }
+        }
+
+        // Apply dot methods
+        while (reducedComponents.size() > 1) {
+            boolean foundOperation = false;
+
+            for (int i = 1; i < reducedComponents.size(); i++) {
+                // Essentially noop for now
+                if (reducedComponents.get(i) instanceof Dot) {
+                    reducedComponents.remove(i);
+                }
+            }
+
+            if (!foundOperation) {
+                break;
             }
         }
 

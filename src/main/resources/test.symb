@@ -1,5 +1,3 @@
 variable first is list one sep two sep three sep list
-variable second is list four sep five sep six sep list
-
 println first
-println second
+println first dot get one two sep three sep sep

@@ -9,6 +9,7 @@ import com.kruth.symbol.expression.ExpressionComponent;
  */
 public class Variable implements ExpressionComponent {
     private String name;
+    private InstructionState instructionState;
 
     public Variable(String name) {
         this.name = name;
