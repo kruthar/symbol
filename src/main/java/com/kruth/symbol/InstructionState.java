@@ -5,7 +5,6 @@ import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.instructions.*;
 import com.kruth.symbol.lexers.LineLexer;
 import com.kruth.symbol.lexers.SpaceLexer;
-import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolNull;
 
 import java.io.File;
@@ -18,22 +17,21 @@ import java.util.Stack;
  * Created by kruthar on 3/15/16.
  */
 public class InstructionState {
-    private boolean inComment = false;
     private LineLexer lineLexer = null;
     private InstructionState parentState = null;
-    private Literal returnValue = new SymbolNull();
+    private SymbolObject returnValue = new SymbolNull();
 
     private Stack<Integer> loopStack = new Stack<>();
-    private Map<String, Literal> variableMap = new HashMap<>();
+    private Map<String, SymbolObject> variableMap = new HashMap<>();
     private Map<String, Function> functionMap = new HashMap<>();
 
     public InstructionState() {}
 
-    public void setVariable(String name, Literal value) {
+    public void setVariable(String name, SymbolObject value) {
         variableMap.put(name, value);
     }
 
-    public Literal getVariable(String name) {
+    public SymbolObject getVariable(String name) {
         if (variableMap.containsKey(name)) {
             return variableMap.get(name);
         } else {
@@ -114,7 +112,7 @@ public class InstructionState {
         return hasLocal || hasParent;
     }
 
-    public Literal parseFunctionCall(InstructionState instructionState, SpaceLexer lexer) {
+    public SymbolObject parseFunctionCall(InstructionState instructionState, SpaceLexer lexer) {
         String name = lexer.next();
         Function function = functionMap.get(name);
 
@@ -176,11 +174,11 @@ public class InstructionState {
         }
     }
 
-    public void setReturnValue(Literal val) {
+    public void setReturnValue(SymbolObject val) {
         returnValue = val;
     }
 
-    public Literal getReturnValue() {
+    public SymbolObject getReturnValue() {
         return returnValue;
     }
 

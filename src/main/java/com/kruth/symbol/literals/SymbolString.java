@@ -1,5 +1,6 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.lexers.SpaceLexer;
 
 import javax.naming.OperationNotSupportedException;
@@ -81,7 +82,7 @@ public class SymbolString extends Literal {
         throw new OperationNotSupportedException("SymbolString does not support the minus operation.");
     }
 
-    public int compareTo(Literal other) {
+    public int compareTo(SymbolObject other) {
         if (other instanceof SymbolString) {
             return this.value.compareTo((String) other.getValue());
         }

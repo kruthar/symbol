@@ -1,5 +1,6 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.lexers.SpaceLexer;
 
 import javax.naming.OperationNotSupportedException;
@@ -74,7 +75,7 @@ public class SymbolBoolean extends Literal {
     }
 
     @Override
-    public int compareTo(Literal other) {
+    public int compareTo(SymbolObject other) {
         if (other instanceof SymbolBoolean) {
             return Boolean.compare(value, (Boolean) other.getValue());
         }

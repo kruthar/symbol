@@ -1,9 +1,8 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.expression.Expression;
-import com.kruth.symbol.literals.Literal;
-import com.kruth.symbol.literals.SymbolBoolean;
 
 /**
  * Created by kruthar on 3/31/16.
@@ -11,7 +10,7 @@ import com.kruth.symbol.literals.SymbolBoolean;
 public class If {
     public static void parse(InstructionState instructionState, String line, Boolean execute) {
         Expression conditionalExpression = new Expression(instructionState, line);
-        Literal conditional = conditionalExpression.evaluate();
+        SymbolObject conditional = conditionalExpression.evaluate();
         boolean conditionTrue = (Boolean) conditional.getValue();
 
         String nextInstruction = instructionState.peekNextLine();

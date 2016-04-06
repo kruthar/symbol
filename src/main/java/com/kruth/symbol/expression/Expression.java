@@ -1,6 +1,7 @@
 package com.kruth.symbol.expression;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.comparators.*;
 import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -9,7 +10,7 @@ import com.kruth.symbol.literals.SymbolBoolean;
 import com.kruth.symbol.literals.SymbolNumber;
 import com.kruth.symbol.literals.SymbolString;
 import com.kruth.symbol.operations.*;
-import com.kruth.symbol.literals.SymbolList;
+import com.kruth.symbol.structures.SymbolList;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.*;
@@ -29,13 +30,6 @@ public class Expression implements ExpressionComponent {
 
     private InstructionState instructionState;
     private List<ExpressionComponent> components = new ArrayList<>();
-
-    public Expression() {}
-
-    public Expression(ExpressionComponent component) {
-        components = Arrays.asList(component);
-    }
-
 
     public Expression(InstructionState instructionState, String expressionString) {
         this(instructionState, new SpaceLexer(expressionString));
@@ -107,7 +101,7 @@ public class Expression implements ExpressionComponent {
         return result;
     }
 
-    public Literal evaluate() {
+    public SymbolObject evaluate() {
         List<ExpressionComponent> reducedComponents = new ArrayList<>();
         // Run through the component list and evaluate any sub expressions, and retrieve variable values first
         for (ExpressionComponent component: components) {
@@ -257,7 +251,7 @@ public class Expression implements ExpressionComponent {
             System.out.println("ERROR: Did not fully reduce operation");
             System.out.println();
         }
-        return (Literal) reducedComponents.get(0);
+        return (SymbolObject) reducedComponents.get(0);
     }
 
     public static boolean hasKeyword(String keyword) {

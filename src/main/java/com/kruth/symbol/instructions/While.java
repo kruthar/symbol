@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
@@ -52,7 +53,7 @@ public class While {
     }
 
     private static Boolean getConditionValue(Expression conditionExpression) throws UnexpectedException {
-        Literal condition = conditionExpression.evaluate();
+        SymbolObject condition = conditionExpression.evaluate();
 
         if (!(condition instanceof SymbolBoolean)) {
             throw new UnexpectedException("Expecting a SymbolBoolean expression in while condition, recieved: " + condition.getClass());

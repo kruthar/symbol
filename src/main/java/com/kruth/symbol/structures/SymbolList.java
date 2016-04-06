@@ -1,8 +1,10 @@
-package com.kruth.symbol.literals;
+package com.kruth.symbol.structures;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
+import com.kruth.symbol.literals.Literal;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.*;
@@ -10,7 +12,7 @@ import java.util.*;
 /**
  * Created by kruthar on 4/3/16.
  */
-public class SymbolList extends Literal {
+public class SymbolList extends Structure {
     private static final Map<String, Boolean> KEYWORDS;
     static {
         Map<String, Boolean> aMap = new HashMap<>();
@@ -18,9 +20,9 @@ public class SymbolList extends Literal {
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 
-    private List<Literal> value;
+    private List<SymbolObject> value;
 
-    public SymbolList(List<Literal> list) {
+    public SymbolList(List<SymbolObject> list) {
         value = new ArrayList<>(list);
     }
 
@@ -56,7 +58,7 @@ public class SymbolList extends Literal {
         return value.size();
     }
 
-    public List<Literal> getList() {
+    public List<SymbolObject> getList() {
         return value;
     }
 
@@ -65,34 +67,14 @@ public class SymbolList extends Literal {
     }
 
     @Override
-    public Literal times(Literal other) throws OperationNotSupportedException {
-        throw new OperationNotSupportedException("SymbolList does not support the times operation.");
-    }
-
-    @Override
-    public Literal dividedby(Literal other) throws OperationNotSupportedException {
-        throw new OperationNotSupportedException("SymbolList does not support the dividecby operation.");
-    }
-
-    @Override
-    public Literal modulo(Literal other) throws OperationNotSupportedException {
-        throw new OperationNotSupportedException("SymbolList does not support the modulo operation.");
-    }
-
-    @Override
-    public Literal plus(Literal other) {
-        List<Literal> result = new ArrayList<>(value);
+    public SymbolObject plus(SymbolObject other) {
+        List<SymbolObject> result = new ArrayList<>(value);
         result.addAll(((SymbolList) other).getList());
         return new SymbolList(result);
     }
 
     @Override
-    public Literal minus(Literal other) throws OperationNotSupportedException {
-        throw new OperationNotSupportedException("SymbolList does not support the minus operation.");
-    }
-
-    @Override
-    public int compareTo(Literal other) {
+    public int compareTo(SymbolObject other) {
         if (!(other instanceof SymbolList)) {
             return -1;
         }

@@ -1,5 +1,6 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.expression.ExpressionComponent;
 
 import javax.naming.OperationNotSupportedException;
@@ -7,7 +8,7 @@ import javax.naming.OperationNotSupportedException;
 /**
  * Created by kruthar on 2/24/16.
  */
-public abstract class Literal implements ExpressionComponent, Comparable<Literal> {
+public abstract class Literal implements SymbolObject {
     public abstract Literal times(Literal other) throws OperationNotSupportedException;
     public abstract Literal dividedby(Literal other) throws OperationNotSupportedException;
     public abstract Literal modulo(Literal other) throws OperationNotSupportedException;
@@ -32,8 +33,6 @@ public abstract class Literal implements ExpressionComponent, Comparable<Literal
         return new SymbolBoolean(compared <= 0);
     }
 
-    public abstract Object getValue();
-
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -44,6 +43,4 @@ public abstract class Literal implements ExpressionComponent, Comparable<Literal
 
         return this.getValue().equals(((Literal) o).getValue());
     }
-
-    public abstract int compareTo(Literal other);
 }

@@ -1,5 +1,7 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.SymbolObject;
+
 import javax.naming.OperationNotSupportedException;
 
 /**
@@ -41,7 +43,7 @@ public class SymbolNull extends Literal {
     }
 
     @Override
-    public int compareTo(Literal other) {
+    public int compareTo(SymbolObject other) {
         if (other instanceof SymbolNull) {
             return 0;
         }
