@@ -3,4 +3,3 @@ variable second is list four sep five sep six sep list
 
 println first
 println second
-println first plus second

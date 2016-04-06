@@ -24,12 +24,4 @@ public class TestSymbolList {
         SymbolList stringConstructor = new SymbolList(new InstructionState(), new SpaceLexer("list one sep two sep list"));
         assertEquals("Test list constructor", new ArrayList<SymbolObject>(Arrays.asList((Literal) new SymbolNumber(1), new SymbolNumber(2))), stringConstructor.getValue());
     }
-
-    @Test
-    public void testPlus() {
-        SymbolList one = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1), new SymbolNumber(2)));
-        SymbolList two = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(3), new SymbolNumber(4)));
-
-        assertEquals("Simple addition, [1, 2] + [3, 4] = [1, 2, 3, 4]", new ArrayList<>(Arrays.asList((Literal) new SymbolNumber(1), new SymbolNumber(2), new SymbolNumber(3), new SymbolNumber(4))), one.plus(two).getValue());
-    }
 }

@@ -67,13 +67,6 @@ public class SymbolList extends Structure {
     }
 
     @Override
-    public SymbolObject plus(SymbolObject other) {
-        List<SymbolObject> result = new ArrayList<>(value);
-        result.addAll(((SymbolList) other).getList());
-        return new SymbolList(result);
-    }
-
-    @Override
     public int compareTo(SymbolObject other) {
         if (!(other instanceof SymbolList)) {
             return -1;
