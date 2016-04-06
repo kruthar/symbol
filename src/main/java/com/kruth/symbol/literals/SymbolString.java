@@ -51,7 +51,8 @@ public class SymbolString extends Literal {
         return value;
     }
 
-    public String getValue() {
+    @Override
+    public Object getValue() {
         return value;
     }
 
@@ -80,13 +81,12 @@ public class SymbolString extends Literal {
         throw new OperationNotSupportedException("SymbolString does not support the minus operation.");
     }
 
-    @Override
-    public int comparedTo(Literal other) throws OperationNotSupportedException {
+    public int compareTo(Literal other) {
         if (other instanceof SymbolString) {
-            return this.value.compareTo(((SymbolString) other).getValue());
+            return this.value.compareTo((String) other.getValue());
         }
 
-        throw new OperationNotSupportedException("ComparedTo not supported between SymbolString and " + other.getClass());
+        return -1;
     }
 
     public static boolean hasKeyword(String keyword) {

@@ -47,7 +47,8 @@ public class SymbolList extends Literal {
         return result;
     }
 
-    public List<Literal> getValue() {
+    @Override
+    public Object getValue() {
         return value;
     }
 
@@ -91,17 +92,17 @@ public class SymbolList extends Literal {
     }
 
     @Override
-    public int comparedTo(Literal other) throws OperationNotSupportedException {
-        if (value.size() != ((SymbolList) other).size())  {
+    public int compareTo(Literal other) {
+        if (!(other instanceof SymbolList)) {
             return -1;
         }
 
-        for (int i = 0; i < value.size(); i++) {
-            if (((SymbolBoolean) value.get(i).notEqualTo(other)).getValue()) {
-                return 1;
-            }
+        SymbolList sl = (SymbolList) other;
+
+        if (value.equals(sl)) {
+            return 0;
         }
 
-        return 0;
+        return -1;
     }
 }

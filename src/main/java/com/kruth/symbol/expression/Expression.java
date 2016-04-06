@@ -200,53 +200,17 @@ public class Expression implements ExpressionComponent {
             for (int i = 1; i < reducedComponents.size(); i += 2) {
                 Literal newLiteral = null;
                 if (reducedComponents.get(i) instanceof Equals) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).equalTo((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("EqualTo operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
+                    newLiteral = new SymbolBoolean(reducedComponents.get(i - 1).equals(reducedComponents.get(i + 1)));
                 } else if (reducedComponents.get(i) instanceof NotEquals) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).notEqualTo((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("NotEqualTo operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
+                    newLiteral = new SymbolBoolean(!reducedComponents.get(i - 1).equals(reducedComponents.get(i + 1)));
                 } else if (reducedComponents.get(i) instanceof GreaterThan) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).greaterThan((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("GreaterThan operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
+                    newLiteral = ((Literal) reducedComponents.get(i - 1)).greaterThan((Literal) reducedComponents.get(i + 1));
                 } else if (reducedComponents.get(i) instanceof LessThan) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).lessThan((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("LessThan operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
+                    newLiteral = ((Literal) reducedComponents.get(i - 1)).lessThan((Literal) reducedComponents.get(i + 1));
                 } else if (reducedComponents.get(i) instanceof GreaterThanEquals) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).greaterThanOrEqualTo((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("GreaterThanEquals operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
+                    newLiteral = ((Literal) reducedComponents.get(i - 1)).greaterThanOrEqualTo((Literal) reducedComponents.get(i + 1));
                 } else if (reducedComponents.get(i) instanceof LessThanEquals) {
-                    try {
-                        newLiteral = ((Literal) reducedComponents.get(i - 1)).lessThanOrEqualTo((Literal) reducedComponents.get(i + 1));
-                    } catch (OperationNotSupportedException e) {
-                        System.out.println("LessThanEquals operation not supported with these types.");
-                        e.printStackTrace();
-                        System.exit(1);
-                    }
+                    newLiteral = ((Literal) reducedComponents.get(i - 1)).lessThanOrEqualTo((Literal) reducedComponents.get(i + 1));
                 }
 
                 if (newLiteral != null) {
@@ -269,13 +233,13 @@ public class Expression implements ExpressionComponent {
                 if (reducedComponents.get(i) instanceof Or &&
                         reducedComponents.get(i - 1) instanceof SymbolBoolean &&
                         reducedComponents.get(i + 1) instanceof SymbolBoolean) {
-                    newBool = new SymbolBoolean(((SymbolBoolean) reducedComponents.get(i - 1)).getValue() || ((SymbolBoolean) reducedComponents.get(i + 1)).getValue());
+                    newBool = (SymbolBoolean) ((SymbolBoolean) reducedComponents.get(i - 1)).plus((SymbolBoolean) reducedComponents.get(i + 1));
                 }
 
                 if (reducedComponents.get(i) instanceof And &&
                         reducedComponents.get(i - 1) instanceof SymbolBoolean &&
                         reducedComponents.get(i + 1) instanceof SymbolBoolean) {
-                    newBool = new SymbolBoolean(((SymbolBoolean) reducedComponents.get(i - 1)).getValue() && ((SymbolBoolean) reducedComponents.get(i + 1)).getValue());
+                    newBool = (SymbolBoolean) ((SymbolBoolean) reducedComponents.get(i - 1)).times((SymbolBoolean) reducedComponents.get(i + 1));
                 }
 
                 if (newBool != null) {

@@ -58,6 +58,6 @@ public class While {
             throw new UnexpectedException("Expecting a SymbolBoolean expression in while condition, recieved: " + condition.getClass());
         }
 
-        return ((SymbolBoolean) condition).getValue();
+        return (Boolean) condition.getValue();
     }
 }

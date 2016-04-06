@@ -38,10 +38,10 @@ public class TestSymbolBoolean {
         SymbolBoolean boolTrue = new SymbolBoolean(true);
         SymbolBoolean boolFalse = new SymbolBoolean(false);
 
-        assertEquals("false + false = false", false, ((SymbolBoolean) boolFalse.plus(boolFalse)).getValue());
-        assertEquals("false + true = true", true, ((SymbolBoolean) boolFalse.plus(boolTrue)).getValue());
-        assertEquals("true + false = true", true, ((SymbolBoolean) boolTrue.plus(boolFalse)).getValue());
-        assertEquals("true + true = false", true, ((SymbolBoolean) boolTrue.plus(boolTrue)).getValue());
+        assertEquals("false + false = false", false, boolFalse.plus(boolFalse).getValue());
+        assertEquals("false + true = true", true, boolFalse.plus(boolTrue).getValue());
+        assertEquals("true + false = true", true, boolTrue.plus(boolFalse).getValue());
+        assertEquals("true + true = false", true, boolTrue.plus(boolTrue).getValue());
     }
 
     @Test(expected = OperationNotSupportedException.class)
@@ -57,10 +57,10 @@ public class TestSymbolBoolean {
         SymbolBoolean boolTrue = new SymbolBoolean(true);
         SymbolBoolean boolFalse = new SymbolBoolean(false);
 
-        assertEquals("false * false = false", false, ((SymbolBoolean) boolFalse.times(boolFalse)).getValue());
-        assertEquals("false * true = false", false, ((SymbolBoolean) boolFalse.times(boolTrue)).getValue());
-        assertEquals("true * false = false", false, ((SymbolBoolean) boolTrue.times(boolFalse)).getValue());
-        assertEquals("true * true = true", true, ((SymbolBoolean) boolTrue.times(boolTrue)).getValue());
+        assertEquals("false * false = false", false, boolFalse.times(boolFalse).getValue());
+        assertEquals("false * true = false", false, boolFalse.times(boolTrue).getValue());
+        assertEquals("true * false = false", false, boolTrue.times(boolFalse).getValue());
+        assertEquals("true * true = true", true, boolTrue.times(boolTrue).getValue());
     }
 
     @Test(expected = OperationNotSupportedException.class)
@@ -76,13 +76,9 @@ public class TestSymbolBoolean {
         SymbolBoolean boolTrue = new SymbolBoolean(true);
         SymbolBoolean boolFalse = new SymbolBoolean(false);
 
-        try {
-            assertEquals("true == true", 0, boolTrue.comparedTo(boolTrue));
-            assertEquals("true != false", 1, boolTrue.comparedTo(boolFalse));
-            assertEquals("false != true", -1, boolFalse.comparedTo(boolTrue));
-            assertEquals("false == false", 0, boolFalse.comparedTo(boolFalse));
-        } catch (OperationNotSupportedException e) {
-            fail("Failed to compare SymbolBooleans.");
-        }
+        assertEquals("true == true", 0, boolTrue.compareTo(boolTrue));
+        assertEquals("true != false", 1, boolTrue.compareTo(boolFalse));
+        assertEquals("false != true", -1, boolFalse.compareTo(boolTrue));
+        assertEquals("false == false", 0, boolFalse.compareTo(boolFalse));
     }
 }

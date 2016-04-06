@@ -30,74 +30,65 @@ public class TestComparators {
     }
 
     @Test
-    public void testSymbolStringComparators() throws OperationNotSupportedException {
+    public void testSymbolStringComparators() {
         SymbolString string1 = new SymbolString("hello");
         SymbolString string2 = new SymbolString("world");
 
-        assertEquals("String equality false", false, ((SymbolBoolean) string1.equalTo(string2)).getValue());
-        assertEquals("String equality true", true, ((SymbolBoolean) string1.equalTo(string1)).getValue());
+        assertEquals("String equality false", false, string1.equals(string2));
+        assertEquals("String equality true", true, string1.equals(string1));
 
-        assertEquals("String inequality true", true, ((SymbolBoolean) string1.notEqualTo(string2)).getValue());
-        assertEquals("String inequality false", false, ((SymbolBoolean) string1.notEqualTo(string1)).getValue());
+        assertEquals("String greater than true", true, string2.greaterThan(string1).getValue());
+        assertEquals("String greater than false", false, string1.greaterThan(string2).getValue());
+        assertEquals("String greater than or equal to greater true", true, string2.greaterThanOrEqualTo(string1).getValue());
+        assertEquals("String greater than or equal to equal true", true, string2.greaterThanOrEqualTo(string2).getValue());
+        assertEquals("String greater than or equal to greater false", false, string1.greaterThanOrEqualTo(string2).getValue());
 
-        assertEquals("String greater than true", true, ((SymbolBoolean) string2.greaterThan(string1)).getValue());
-        assertEquals("String greater than false", false, ((SymbolBoolean) string1.greaterThan(string2)).getValue());
-        assertEquals("String greater than or equal to greater true", true, ((SymbolBoolean) string2.greaterThanOrEqualTo(string1)).getValue());
-        assertEquals("String greater than or equal to equal true", true, ((SymbolBoolean) string2.greaterThanOrEqualTo(string2)).getValue());
-        assertEquals("String greater than or equal to greater false", false, ((SymbolBoolean) string1.greaterThanOrEqualTo(string2)).getValue());
-
-        assertEquals("String less than true", true, ((SymbolBoolean) string1.lessThan(string2)).getValue());
-        assertEquals("String less than true", false, ((SymbolBoolean) string2.lessThan(string1)).getValue());
-        assertEquals("String less than or equal to less true", true, ((SymbolBoolean) string1.lessThanOrEqualTo(string2)).getValue());
-        assertEquals("String less than or equal to equal true", true, ((SymbolBoolean) string1.lessThanOrEqualTo(string1)).getValue());
-        assertEquals("String less than or equal to less false", false, ((SymbolBoolean) string2.lessThanOrEqualTo(string1)).getValue());
+        assertEquals("String less than true", true, string1.lessThan(string2).getValue());
+        assertEquals("String less than true", false, string2.lessThan(string1).getValue());
+        assertEquals("String less than or equal to less true", true, string1.lessThanOrEqualTo(string2).getValue());
+        assertEquals("String less than or equal to equal true", true, string1.lessThanOrEqualTo(string1).getValue());
+        assertEquals("String less than or equal to less false", false, string2.lessThanOrEqualTo(string1).getValue());
     }
 
     @Test
-    public void testSymbolNumberComparators() throws OperationNotSupportedException {
+    public void testSymbolNumberComparators() {
         SymbolNumber num1 = new SymbolNumber(1);
         SymbolNumber num2 = new SymbolNumber(2);
 
-        assertEquals("Number equality false", false, ((SymbolBoolean) num1.equalTo(num2)).getValue());
-        assertEquals("Number equality true", true, ((SymbolBoolean) num1.equalTo(num1)).getValue());
+        assertEquals("Number equality false", false, num1.equals(num2));
+        assertEquals("Number equality true", true, num1.equals(num1));
 
-        assertEquals("Number inequality true", true, ((SymbolBoolean) num1.notEqualTo(num2)).getValue());
-        assertEquals("Number inequality false", false, ((SymbolBoolean) num1.notEqualTo(num1)).getValue());
+        assertEquals("Number greater than true", true, num2.greaterThan(num1).getValue());
+        assertEquals("Number greater than false", false, num1.greaterThan(num2).getValue());
+        assertEquals("Number greater than or equal to greater true", true, num2.greaterThanOrEqualTo(num1).getValue());
+        assertEquals("Number greater than or equal to equal true", true, num2.greaterThanOrEqualTo(num2).getValue());
+        assertEquals("Number greater than or equal to greater false", false, num1.greaterThanOrEqualTo(num2).getValue());
 
-        assertEquals("Number greater than true", true, ((SymbolBoolean) num2.greaterThan(num1)).getValue());
-        assertEquals("Number greater than false", false, ((SymbolBoolean) num1.greaterThan(num2)).getValue());
-        assertEquals("Number greater than or equal to greater true", true, ((SymbolBoolean) num2.greaterThanOrEqualTo(num1)).getValue());
-        assertEquals("Number greater than or equal to equal true", true, ((SymbolBoolean) num2.greaterThanOrEqualTo(num2)).getValue());
-        assertEquals("Number greater than or equal to greater false", false, ((SymbolBoolean) num1.greaterThanOrEqualTo(num2)).getValue());
-
-        assertEquals("Number less than true", true, ((SymbolBoolean) num1.lessThan(num2)).getValue());
-        assertEquals("Number less than false", false, ((SymbolBoolean) num2.lessThan(num1)).getValue());
-        assertEquals("Number less than or equal to less true", true, ((SymbolBoolean) num1.lessThanOrEqualTo(num2)).getValue());
-        assertEquals("Number less than or equal to equal true", true, ((SymbolBoolean) num1.lessThanOrEqualTo(num1)).getValue());
-        assertEquals("Number less than or equal to less false", false, ((SymbolBoolean) num2.lessThanOrEqualTo(num1)).getValue());
+        assertEquals("Number less than true", true, num1.lessThan(num2).getValue());
+        assertEquals("Number less than false", false, num2.lessThan(num1).getValue());
+        assertEquals("Number less than or equal to less true", true, num1.lessThanOrEqualTo(num2).getValue());
+        assertEquals("Number less than or equal to equal true", true, num1.lessThanOrEqualTo(num1).getValue());
+        assertEquals("Number less than or equal to less false", false, num2.lessThanOrEqualTo(num1).getValue());
     }
 
     @Test
-    public void testSymbolBooleanComparators() throws OperationNotSupportedException {
+    public void testSymbolBooleanComparators() {
         SymbolBoolean bool1 = new SymbolBoolean(true);
         SymbolBoolean bool2 = new SymbolBoolean(false);
 
-        assertEquals("Boolean equality false", false, ((SymbolBoolean) bool1.equalTo(bool2)).getValue());
-        assertEquals("Boolean equality true", true, ((SymbolBoolean) bool1.equalTo(bool1)).getValue());
+        assertEquals("Boolean equality false", false, bool1.equals(bool2));
+        assertEquals("Boolean equality true", true, bool1.equals(bool1));
 
-        assertEquals("Boolean inequality true", true, ((SymbolBoolean) bool1.notEqualTo(bool2)).getValue());
-        assertEquals("Boolean inequality false", false, ((SymbolBoolean) bool1.notEqualTo(bool1)).getValue());
+        assertEquals("Boolean greater than true", true, bool1.greaterThan(bool2).getValue());
+        assertEquals("Boolean greater than false", false, bool2.greaterThan(bool1).getValue());
+        assertEquals("Boolean greater than or equal to greater true", true, bool1.greaterThanOrEqualTo(bool2).getValue());
+        assertEquals("Boolean greater than or equal to equal true", true, bool1.greaterThanOrEqualTo(bool1).getValue());
+        assertEquals("Boolean greater than or equal to greater false", false, bool2.greaterThanOrEqualTo(bool1).getValue());
 
-        assertEquals("Boolean greater than true", true, ((SymbolBoolean) bool1.greaterThan(bool2)).getValue());
-        assertEquals("Boolean greater than false", false, ((SymbolBoolean) bool2.greaterThan(bool1)).getValue());
-        assertEquals("Boolean greater than or equal to greater true", true, ((SymbolBoolean) bool1.greaterThanOrEqualTo(bool2)).getValue());
-        assertEquals("Boolean greater than or equal to equal true", true, ((SymbolBoolean) bool1.greaterThanOrEqualTo(bool1)).getValue());
-        assertEquals("Boolean greater than or equal to greater false", false, ((SymbolBoolean) bool2.greaterThanOrEqualTo(bool1)).getValue());
-
-        assertEquals("Boolean less than true", true, ((SymbolBoolean) bool2.lessThan(bool1)).getValue());
-        assertEquals("Boolean less than false", false, ((SymbolBoolean) bool1.lessThan(bool2)).getValue());
-        assertEquals("Boolean less than or equal to less true", true, ((SymbolBoolean) bool2.lessThanOrEqualTo(bool1)).getValue());
-        assertEquals("Boolean less than or equal to equal true", true, ((SymbolBoolean) bool2.lessThanOrEqualTo(bool2)).getValue());
-        assertEquals("Boolean less than or equal to less false", false, ((SymbolBoolean) bool1.lessThanOrEqualTo(bool2)).getValue());
+        assertEquals("Boolean less than true", true, bool2.lessThan(bool1).getValue());
+        assertEquals("Boolean less than false", false, bool1.lessThan(bool2).getValue());
+        assertEquals("Boolean less than or equal to less true", true, bool2.lessThanOrEqualTo(bool1).getValue());
+        assertEquals("Boolean less than or equal to equal true", true, bool2.lessThanOrEqualTo(bool2).getValue());
+        assertEquals("Boolean less than or equal to less false", false, bool1.lessThanOrEqualTo(bool2).getValue());
     }
 }

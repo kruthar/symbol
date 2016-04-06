@@ -12,7 +12,7 @@ public class If {
     public static void parse(InstructionState instructionState, String line, Boolean execute) {
         Expression conditionalExpression = new Expression(instructionState, line);
         Literal conditional = conditionalExpression.evaluate();
-        boolean conditionTrue = ((SymbolBoolean) conditional).getValue();
+        boolean conditionTrue = (Boolean) conditional.getValue();
 
         String nextInstruction = instructionState.peekNextLine();
         String[] instructionSplit = nextInstruction.trim().split(" ", 2);

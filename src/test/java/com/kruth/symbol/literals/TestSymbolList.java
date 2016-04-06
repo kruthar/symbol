@@ -28,6 +28,6 @@ public class TestSymbolList {
         SymbolList one = new SymbolList(Arrays.asList((Literal) new SymbolNumber(1), new SymbolNumber(2)));
         SymbolList two = new SymbolList(Arrays.asList((Literal) new SymbolNumber(3), new SymbolNumber(4)));
 
-        assertEquals("Simple addition, [1, 2] + [3, 4] = [1, 2, 3, 4]", new ArrayList<>(Arrays.asList((Literal) new SymbolNumber(1), new SymbolNumber(2), new SymbolNumber(3), new SymbolNumber(4))), ((SymbolList) one.plus(two)).getValue());
+        assertEquals("Simple addition, [1, 2] + [3, 4] = [1, 2, 3, 4]", new ArrayList<>(Arrays.asList((Literal) new SymbolNumber(1), new SymbolNumber(2), new SymbolNumber(3), new SymbolNumber(4))), one.plus(two).getValue());
     }
 }

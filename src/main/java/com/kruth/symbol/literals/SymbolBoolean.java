@@ -35,7 +35,8 @@ public class SymbolBoolean extends Literal {
         value = val;
     }
 
-    public boolean getValue() {
+    @Override
+    public Object getValue() {
         return value;
     }
 
@@ -49,7 +50,7 @@ public class SymbolBoolean extends Literal {
 
     @Override
     public Literal times(Literal other) {
-        return new SymbolBoolean(this.value && ((SymbolBoolean) other).getValue());
+        return new SymbolBoolean(this.value && (Boolean) other.getValue());
     }
 
     @Override
@@ -64,7 +65,7 @@ public class SymbolBoolean extends Literal {
 
     @Override
     public Literal plus(Literal other) {
-        return new SymbolBoolean(this.value || ((SymbolBoolean) other).getValue());
+        return new SymbolBoolean(this.value || (Boolean) other.getValue());
     }
 
     @Override
@@ -73,12 +74,12 @@ public class SymbolBoolean extends Literal {
     }
 
     @Override
-    public int comparedTo(Literal other) throws OperationNotSupportedException {
+    public int compareTo(Literal other) {
         if (other instanceof SymbolBoolean) {
-            return Boolean.compare(value, ((SymbolBoolean) other).getValue());
+            return Boolean.compare(value, (Boolean) other.getValue());
         }
 
-        throw new OperationNotSupportedException("ComparedTo not supported between SymbolBoolean and " + other.getClass());
+        return -1;
     }
 
     public static boolean hasKeyword(String keyword) {

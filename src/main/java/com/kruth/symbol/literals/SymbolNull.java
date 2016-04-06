@@ -36,7 +36,15 @@ public class SymbolNull extends Literal {
     }
 
     @Override
-    public int comparedTo(Literal other) throws OperationNotSupportedException {
-        return 0;
+    public Object getValue() {
+        return null;
+    }
+
+    @Override
+    public int compareTo(Literal other) {
+        if (other instanceof SymbolNull) {
+            return 0;
+        }
+        return -1;
     }
 }

@@ -65,8 +65,8 @@ public class TestSymbolNumber {
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
 
-        assertEquals("compareTo equals, 1 == 1", 0, one.comparedTo(one));
-        assertEquals("compareTo greater than, 2 > 1", 1, two.comparedTo(one));
-        assertEquals("compareTo less than, 1 < 2", -1, one.comparedTo(two));
+        assertEquals("compareTo equals, 1 == 1", 0, one.compareTo(one));
+        assertEquals("compareTo greater than, 2 > 1", 1, two.compareTo(one));
+        assertEquals("compareTo less than, 1 < 2", -1, one.compareTo(two));
     }
 }

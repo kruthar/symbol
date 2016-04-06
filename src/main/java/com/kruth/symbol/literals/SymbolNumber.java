@@ -43,14 +43,15 @@ public class SymbolNumber extends Literal {
         return String.valueOf(value);
     }
 
-    public int getValue() {
-        return this.value;
+    @Override
+    public Object getValue() {
+        return value;
     }
 
     @Override
     public Literal times(Literal other) throws OperationNotSupportedException {
         if (other instanceof SymbolNumber) {
-            return new SymbolNumber(this.value * ((SymbolNumber) other).getValue());
+            return new SymbolNumber(this.value * (Integer) other.getValue());
         }
 
         throw new OperationNotSupportedException("Times not supported between SymbolNumber and " + other.getClass());
@@ -59,7 +60,7 @@ public class SymbolNumber extends Literal {
     @Override
     public Literal dividedby(Literal other) throws OperationNotSupportedException {
         if (other instanceof SymbolNumber) {
-            return new SymbolNumber(this.value / ((SymbolNumber) other).getValue());
+            return new SymbolNumber(this.value / (Integer) other.getValue());
         }
 
         throw new OperationNotSupportedException("DivideBy not supported between SymbolNumber and " + other.getClass());
@@ -68,7 +69,7 @@ public class SymbolNumber extends Literal {
     @Override
     public Literal modulo(Literal other) throws OperationNotSupportedException {
         if (other instanceof SymbolNumber) {
-            return new SymbolNumber(this.value % ((SymbolNumber) other).getValue());
+            return new SymbolNumber(this.value % (Integer) other.getValue());
         }
 
         throw new OperationNotSupportedException("Modulo not supported between SymbolNumber and " + other.getClass());
@@ -79,7 +80,7 @@ public class SymbolNumber extends Literal {
         if (other instanceof SymbolString) {
             return new SymbolString(this.toString() + other.toString());
         } else if (other instanceof SymbolNumber) {
-            return new SymbolNumber(this.value + ((SymbolNumber) other).getValue());
+            return new SymbolNumber(this.value + (Integer) other.getValue());
         }
 
         System.out.println("ERROR: Unknown type for Plus operation with SymbolNumber: " + other.getClass());
@@ -89,19 +90,18 @@ public class SymbolNumber extends Literal {
     @Override
     public Literal minus(Literal other) throws OperationNotSupportedException {
         if (other instanceof SymbolNumber) {
-            return new SymbolNumber(this.value - ((SymbolNumber) other).getValue());
+            return new SymbolNumber(this.value - (Integer) other.getValue());
         }
 
         throw new OperationNotSupportedException("Minus not supported between SymbolNumber and " + other.getClass());
     }
 
-    @Override
-    public int comparedTo(Literal other) throws OperationNotSupportedException {
+    public int compareTo(Literal other) {
         if (other instanceof SymbolNumber) {
-            return Integer.compare(value, ((SymbolNumber) other).getValue());
+            return Integer.compare(value, (Integer) other.getValue());
         }
 
-        throw new OperationNotSupportedException("ComparedTo not supported between SymbolNumber and " + other.getClass());
+        return -1;
     }
 
     public static boolean hasKeyword(String keyword) {

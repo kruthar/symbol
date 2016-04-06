@@ -29,7 +29,7 @@ public class TestSymbolString {
         SymbolString string1 = new SymbolString(testString1);
         SymbolString string2 = new SymbolString(testString2);
 
-        assertEquals("'hello' + 'world' = 'helloworld'", testString1 + testString2, ((SymbolString) string1.plus(string2)).getValue());
+        assertEquals("'hello' + 'world' = 'helloworld'", testString1 + testString2, string1.plus(string2).getValue());
     }
 
     @Test(expected = OperationNotSupportedException.class)
