@@ -7,14 +7,13 @@ import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.comparators.*;
 import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.lexers.SpaceLexer;
-import com.kruth.symbol.literals.Literal;
-import com.kruth.symbol.literals.SymbolBoolean;
-import com.kruth.symbol.literals.SymbolNumber;
-import com.kruth.symbol.literals.SymbolString;
+import com.kruth.symbol.literals.*;
 import com.kruth.symbol.operations.*;
 import com.kruth.symbol.structures.SymbolList;
 
 import javax.naming.OperationNotSupportedException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
@@ -127,7 +126,10 @@ public class Expression implements ExpressionComponent {
             for (int i = 1; i < reducedComponents.size(); i++) {
                 // Essentially noop for now
                 if (reducedComponents.get(i) instanceof Dot) {
-                    reducedComponents.remove(i);
+                    SymbolObject newObject = invokeMethod((SymbolObject) reducedComponents.get(i - 1), (Dot) reducedComponents.get(i));
+                    reducedComponents.remove(i - 1);
+                    reducedComponents.remove(i - 1);
+                    reducedComponents.add(i - 1, newObject);
                 }
             }
 
@@ -285,5 +287,31 @@ public class Expression implements ExpressionComponent {
         list.remove(index - 1);
         list.remove(index - 1);
         list.add(index - 1, newLiteral);
+    }
+
+    private SymbolObject invokeMethod(SymbolObject obj, Dot dot) {
+        for (Method method: obj.getClass().getDeclaredMethods()) {
+            if (method.getName().equals(dot.getName())) {
+                Class<?>[] types = method.getParameterTypes();
+                List<SymbolObject> parameters = dot.getParameters();
+
+                for (int i = 0; i < types.length; i++) {
+                    if (!types[i].isAssignableFrom(parameters.get(i).getClass())) {
+                        continue;
+                    }
+                }
+
+                try {
+                    return (SymbolObject) method.invoke(obj, parameters.toArray());
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        System.out.println("Failed to invoke " + dot + " on <" + obj.getClass() + "> " + obj);
+        return new SymbolNull();
     }
 }

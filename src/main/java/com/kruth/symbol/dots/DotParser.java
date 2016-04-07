@@ -1,6 +1,7 @@
 package com.kruth.symbol.dots;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.expression.ExpressionComponent;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -27,10 +28,10 @@ public class DotParser {
         lexer.next();
 
         String name = lexer.next();
-        List<Expression> parameters = new ArrayList<>();
+        List<SymbolObject> parameters = new ArrayList<>();
 
         while (!lexer.peek().equals("sep")) {
-            parameters.add(new Expression(instructionState, lexer));
+            parameters.add(new Expression(instructionState, lexer).evaluate());
         }
 
         // Lex out the 'sep'

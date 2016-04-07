@@ -5,6 +5,7 @@ import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
+import com.kruth.symbol.literals.SymbolNumber;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.*;
@@ -79,5 +80,9 @@ public class SymbolList extends Structure {
         }
 
         return -1;
+    }
+
+    public SymbolObject get(SymbolNumber index) {
+        return value.get((Integer) index.getValue());
     }
 }
