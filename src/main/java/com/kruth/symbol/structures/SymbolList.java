@@ -55,10 +55,6 @@ public class SymbolList extends Structure {
         return value;
     }
 
-    public int size() {
-        return value.size();
-    }
-
     public List<SymbolObject> getList() {
         return value;
     }
@@ -82,7 +78,42 @@ public class SymbolList extends Structure {
         return -1;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof SymbolList)) {
+            return false;
+        }
+
+        for (int i = 0; i < this.getList().size(); i++) {
+            if (!this.value.get(i).equals(((SymbolList) o).getList().get(i))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public void put(SymbolObject obj) {
+        value.add(obj);
+    }
+
+    public void put(SymbolNumber index, SymbolObject obj) {
+        value.add((Integer) index.getValue(), obj);
+    }
+
     public SymbolObject get(SymbolNumber index) {
         return value.get((Integer) index.getValue());
+    }
+
+    public SymbolNumber size() {
+        return new SymbolNumber(value.size());
+    }
+
+    public void remove(SymbolNumber index) {
+        value.remove(index);
     }
 }

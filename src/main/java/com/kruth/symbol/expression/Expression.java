@@ -295,6 +295,10 @@ public class Expression implements ExpressionComponent {
                 Class<?>[] types = method.getParameterTypes();
                 List<SymbolObject> parameters = dot.getParameters();
 
+                if (types.length != parameters.size()) {
+                    continue;
+                }
+
                 for (int i = 0; i < types.length; i++) {
                     if (!types[i].isAssignableFrom(parameters.get(i).getClass())) {
                         continue;

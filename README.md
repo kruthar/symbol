@@ -228,6 +228,23 @@ Functions are here! There are two main types:
     3
     ```
 
+### Dot Methods
+SymbolObjects will have various 'dot' methods that perform actions on that object. The syntax is a little wierd but it makes sense with how the `sep` keyword works. You'll get used to it.
+
+```
+> variable mylist is list one sep two sep three sep list
+> println mylist dot size sep
+3
+> execute mylist dot remove zero sep sep
+> println mylist
+[2, 3]
+```
+
+A few things to notice:
+* the `dot` keyword after a SymbolObject (or an expression that reduces to a SymbolObject) invokes the following method name with the following list of parameters
+* similar to how functions work, you have to use the `execute` instruction if you are invoking a dot method that has no return value
+* the `dot` invokation has to be ended by `sep` even if it does not have any parameters.
+
 Functions can be defined with any number parameters, after the method name use the keyword `accepts` then a list of parameter names.
 
 When calling a function that accepts parameters you must end each parameter with the `sep` keyword for "seperate". This keyword let's you seperate expressions when you are listing expressions.

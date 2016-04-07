@@ -1,2 +1,7 @@
 variable first is list one sep two sep three sep list
-println first dot get one sep sep
+println first
+execute first dot put zero sep four sep sep
+println first
+println first dot size sep
+execute first dot remove one sep sep
+println first
