@@ -1,13 +1,18 @@
 package com.kruth.symbol.structure;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.Symbol;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolNumber;
 import com.kruth.symbol.structures.SymbolList;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,6 +22,25 @@ import static org.junit.Assert.assertEquals;
  * Created by kruthar on 4/4/16.
  */
 public class TestSymbolList {
+    private final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+
+    @Before
+    public void setupStreams() {
+        System.setOut(new PrintStream(outStream));
+    }
+
+    @After
+    public void cleanupStreams() {
+        System.setOut(null);
+    }
+
+    @Test
+    public void testSymbolListExpressions() {
+        Symbol.executeFile("testSymbolList.symb");
+        assertEquals("SymbolList expressions", "[1, 2, 3]\n[4, 1, 2, 3]\n[4, 1, 2, 3, 5]\n5\n[4, 2, 3, 5]\n", outStream.toString());
+        outStream.reset();
+    }
+
     @Test
     public void testConstructors() {
         SymbolList objectConstructor = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1), new SymbolNumber(2)));
