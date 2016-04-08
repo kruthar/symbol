@@ -1,9 +1,3 @@
-println one thousand one
-println twelve thousand thirteen
-println twenty thousand thirty
-println one hundred thousand forty five
-println two hundred five thousand one hundred
-println three hundred eighteen thousand two hundred eight
-println four hundred ninety thousand three hundred fifteen
-println five hundred thousand four hundred twenty
-println six hundred thousand five hundred thirty two
+println one million
+println one billion
+println one trillion

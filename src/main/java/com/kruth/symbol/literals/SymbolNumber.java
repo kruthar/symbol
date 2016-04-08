@@ -54,6 +54,8 @@ public class SymbolNumber extends Literal {
 
         prefixMap = new HashMap<>();
         prefixMap.put("thousand", 1000);
+        prefixMap.put("million", 1000000);
+        prefixMap.put("billion", 1000000000);
 
         Map<String, Integer> unionMap = new HashMap<>();
         unionMap.putAll(singleMap);

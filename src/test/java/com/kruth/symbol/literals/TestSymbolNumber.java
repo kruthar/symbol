@@ -105,5 +105,26 @@ public class TestSymbolNumber {
         assertEquals("test 212000", 212000, new SymbolNumber(new SpaceLexer("two hundred twelve thousand")).getValue());
         assertEquals("test 360000", 360000, new SymbolNumber(new SpaceLexer("three hundred sixty thousand")).getValue());
         assertEquals("test 491000", 491000, new SymbolNumber(new SpaceLexer("four hundred ninety one thousand")).getValue());
+
+        assertEquals("test 1001", 1001, new SymbolNumber(new SpaceLexer("one thousand one")).getValue());
+        assertEquals("test 12013", 12013, new SymbolNumber(new SpaceLexer("twelve thousand thirteen")).getValue());
+        assertEquals("test 20030", 20030, new SymbolNumber(new SpaceLexer("twenty thousand thirty")).getValue());
+        assertEquals("test 100045", 100045, new SymbolNumber(new SpaceLexer("one hundred thousand forty five")).getValue());
+        assertEquals("test 205100", 205100, new SymbolNumber(new SpaceLexer("two hundred five thousand one hundred")).getValue());
+        assertEquals("test 318208", 318208, new SymbolNumber(new SpaceLexer("three hundred eighteen thousand two hundred eight")).getValue());
+        assertEquals("test 490315", 490315, new SymbolNumber(new SpaceLexer("four hundred ninety thousand three hundred fifteen")).getValue());
+        assertEquals("test 500420", 500420, new SymbolNumber(new SpaceLexer("five hundred thousand four hundred twenty")).getValue());
+        assertEquals("test 600532", 600532, new SymbolNumber(new SpaceLexer("six hundred thousand five hundred thirty two")).getValue());
+
+        assertEquals("test 1,001,001", 1001001, new SymbolNumber(new SpaceLexer("one million one thousand one")).getValue());
+        assertEquals("test 16,012,013", 16012013, new SymbolNumber(new SpaceLexer("sixteen million twelve thousand thirteen")).getValue());
+        assertEquals("test 80,020,030", 80020030, new SymbolNumber(new SpaceLexer("eighty million twenty thousand thirty")).getValue());
+        assertEquals("test 100,100,045", 100100045, new SymbolNumber(new SpaceLexer("one hundred million one hundred thousand forty five")).getValue());
+        assertEquals("test 203,205,100", 203205100, new SymbolNumber(new SpaceLexer("two hundred three million two hundred five thousand one hundred")).getValue());
+        assertEquals("test 314,318,208", 314318208, new SymbolNumber(new SpaceLexer("three hundred fourteen million three hundred eighteen thousand two hundred eight")).getValue());
+        assertEquals("test 450,490,315", 450490315, new SymbolNumber(new SpaceLexer("four hundred fifty million four hundred ninety thousand three hundred fifteen")).getValue());
+        assertEquals("test 572,500,420", 572500420, new SymbolNumber(new SpaceLexer("five hundred seventy two million five hundred thousand four hundred twenty")).getValue());
+
+        assertEquals("test 1,314,318,208", 1314318208, new SymbolNumber(new SpaceLexer("one billion three hundred fourteen million three hundred eighteen thousand two hundred eight")).getValue());
     }
 }
