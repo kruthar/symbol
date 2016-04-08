@@ -1,9 +1,9 @@
-variable first is list one sep two sep three sep list
-println first
-execute first dot put zero sep four sep sep
-println first
-execute first dot put five sep sep
-println first
-println first dot size sep
-execute first dot remove one sep sep
-println first
+println one thousand one
+println twelve thousand thirteen
+println twenty thousand thirty
+println one hundred thousand forty five
+println two hundred five thousand one hundred
+println three hundred eighteen thousand two hundred eight
+println four hundred ninety thousand three hundred fifteen
+println five hundred thousand four hundred twenty
+println six hundred thousand five hundred thirty two

@@ -31,7 +31,17 @@ public class SpaceLexer implements Iterator<String> {
     }
 
     public String peek() {
+        if (words.size() <= nextIndex) {
+            return null;
+        }
         return words.get(nextIndex);
+    }
+
+    public String peek(int offset) {
+        if (words.size() <= nextIndex + offset) {
+            return null;
+        }
+        return words.get(nextIndex + offset);
     }
 
     public void remove() {
