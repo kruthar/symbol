@@ -15,7 +15,7 @@ variable fib1 is one
 variable fib2 is one
 variable total is zero
 
-while fib2 lessthan limit
+while fib2 lessthan limit do
     if fib2 modulo two equals zero
         variable total is total plus fib2
     fi

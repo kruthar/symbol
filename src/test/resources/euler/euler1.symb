@@ -12,7 +12,7 @@ variable limit is one zero zero zero
 variable counter is one
 variable total is zero
 
-while counter lessthan limit
+while counter lessthan limit do
     if counter modulo three equals zero or counter modulo five equals zero
         variable total is total plus counter
     fi

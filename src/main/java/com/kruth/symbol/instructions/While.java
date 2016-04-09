@@ -8,63 +8,49 @@ import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolBoolean;
 
 import java.rmi.UnexpectedException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by kruthar on 4/1/16.
  */
 public class While {
-    public static void parse(InstructionState instructionState, String line, Boolean execute) {
+    public static void parse(InstructionState parentState, String line, Boolean execute) {
         SpaceLexer lexer = new SpaceLexer(line);
 
         if (lexer.hasNext()) {
-            Expression conditionExpression = new Expression(instructionState, lexer.advancedTo("do"));
-            Boolean condition = false;
+            String conditionString = lexer.advancedTo("do");
 
-            try {
-                condition = getConditionValue(conditionExpression);
-            } catch (UnexpectedException e) {
-                e.printStackTrace();
-                System.exit(1);
-            }
+            List<String> lines = new ArrayList<>();
+            while (parentState.hasNextLine()) {
+                String next = parentState.nextLine();
+                String[] nextSplit = next.trim().split(" ", 2);
 
-            instructionState.pushCurrentLoopMarker();
-
-            while (condition) {
-                instructionState.resetToCurrentLoopMarker();
-
-                String nextInstruction = instructionState.peekNextLine();
-                String[] instructionSplit = nextInstruction.trim().split(" ", 2);
-
-                while (!instructionSplit[0].equals("end")) {
-                    // Still inside of the while block, route this instruction
-                    instructionState.routeNextInstruction(execute);
-                    nextInstruction = instructionState.peekNextLine();
-                    instructionSplit = nextInstruction.trim().split(" ", 2);
+                if (nextSplit[0].equals("end")) {
+                    break;
                 }
 
-                try {
-                    condition = getConditionValue(conditionExpression);
-                } catch (UnexpectedException e) {
-                    e.printStackTrace();
-                    System.exit(1);
-                }
+                lines.add(next);
             }
 
-            // Lex out the 'end' line, then pop off the loopmarker
-            instructionState.nextLine();
-            instructionState.popCurrentLoopMarker();
+            if (execute) {
+                InstructionState instructionState = new InstructionState();
+                instructionState.setParentState(parentState);
+                instructionState.setLineLexerList(lines);
+                instructionState.pushCurrentLoopMarker();
+
+                Expression conditionExpression = new Expression(instructionState, conditionString);
+
+                while ((Boolean) conditionExpression.evaluate().getValue()) {
+                    instructionState.resetToCurrentLoopMarker();
+
+                    while (instructionState.hasNextLine()) {
+                        instructionState.routeNextInstruction(execute);
+                    }
+                }
+            }
         } else {
             System.out.println("ERROR: expecting a conditional expression after while");
         }
-    }
-
-    private static Boolean getConditionValue(Expression conditionExpression) throws UnexpectedException {
-        SymbolObject condition = conditionExpression.evaluate();
-
-        if (!(condition instanceof SymbolBoolean)) {
-            throw new UnexpectedException("Expecting a SymbolBoolean expression in while condition, recieved: " + condition.getClass());
-        }
-
-        return (Boolean) condition.getValue();
     }
 }
