@@ -83,7 +83,9 @@ public class Function {
             functionState.setVariable(parameter.getKey(), parameter.getValue().evaluate());
         }
 
-        functionState.setParentState(instructionState);
+        // Until we have a better understand about how we want to handle 'global' variables and functions,
+        // functions will have a self contained state and so will not need to associate a parent state.
+        //functionState.setParentState(instructionState);
 
         while (functionState.hasNextLine()) {
             functionState.routeNextInstruction(true);
