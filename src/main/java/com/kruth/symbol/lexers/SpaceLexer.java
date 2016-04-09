@@ -44,6 +44,17 @@ public class SpaceLexer implements Iterator<String> {
         return words.get(nextIndex + offset);
     }
 
+    public String restOfLine() {
+        String rest = "";
+
+        while (this.hasNext()) {
+            rest += this.next() + " ";
+        }
+
+
+        return rest.trim();
+    }
+
     public void remove() {
         throw new UnsupportedOperationException();
     }

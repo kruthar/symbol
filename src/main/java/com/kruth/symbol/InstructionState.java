@@ -20,6 +20,7 @@ public class InstructionState {
     private LineLexer lineLexer = null;
     private InstructionState parentState = null;
     private SymbolObject returnValue = new SymbolNull();
+    private Boolean continueBlockComment = false;
 
     private Stack<Integer> loopStack = new Stack<>();
     private Map<String, SymbolObject> variableMap = new HashMap<>();
@@ -126,8 +127,20 @@ public class InstructionState {
     }
 
     public void routeNextInstruction(Boolean execute) {
-        String instruction = nextLine();
+        if (continueBlockComment) {
+            continueBlockComment = false;
+            BlockComment.parse(this, execute);
+        }
 
+        String instruction = nextLine();
+        routeInstruction(instruction, execute);
+    }
+
+    public void routeLexerInstruction(SpaceLexer lexer, Boolean execute) {
+        routeInstruction(lexer.restOfLine(), execute);
+    }
+
+    public void routeInstruction(String instruction, Boolean execute) {
         // Return if we have an empty line
         if (instruction.trim().length() < 1) {
             return;
@@ -137,7 +150,7 @@ public class InstructionState {
 
         switch (instructionSplit[0].toLowerCase()) {
             case "blockcomment":
-                BlockComment.parse(this, instruction, execute);
+                BlockComment.parse(this, execute);
                 break;
             case "comment":
                 Comment.parse(instruction, execute);
@@ -186,5 +199,13 @@ public class InstructionState {
         while (this.hasNextLine()) {
             this.nextLine();
         }
+    }
+
+    public void setContinueBlockComment(Boolean set) {
+        continueBlockComment = set;
+    }
+
+    public void getContinueBlockComment() {
+
     }
 }

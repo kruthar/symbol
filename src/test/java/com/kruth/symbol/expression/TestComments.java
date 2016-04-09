@@ -36,7 +36,7 @@ public class TestComments {
     @Test
     public void testBlockComment() {
         Symbol.executeFile("testBlockComment.symb");
-        assertEquals("Block comment test", "After", outStream.toString());
+        assertEquals("Block comment test", "After\n1001000\n1000000000\nafter\n123\n", outStream.toString());
         outStream.reset();
     }
 }

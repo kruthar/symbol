@@ -2,4 +2,8 @@ blockcomment
 print string Hello string
 print string World string
 blockcomment
-print string After string
+println string After string
+println one million blockcomment blockcomment plus one thousand
+println one billion blockcomment
+println one trillion blockcomment println string after string
+println one two three

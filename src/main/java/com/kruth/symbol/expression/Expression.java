@@ -5,6 +5,7 @@ import com.kruth.symbol.dots.DotParser;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.comparators.*;
+import com.kruth.symbol.instructions.BlockComment;
 import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.*;
@@ -26,6 +27,7 @@ public class Expression implements ExpressionComponent {
         aMap.put("open", 0);
         aMap.put("close", 1);
         aMap.put("sep", 2);
+        aMap.put("blockcomment", 3);
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 
@@ -53,6 +55,8 @@ public class Expression implements ExpressionComponent {
                     break;
                 } else if (keyword.equals("sep")) {
                     break;
+                } else if (keyword.equals("blockcomment")) {
+                    BlockComment.midParse(instructionState, lexer);
                 } else {
                     System.out.println("Unrecognized Expression keyword: " + keyword);
                     System.exit(1);
