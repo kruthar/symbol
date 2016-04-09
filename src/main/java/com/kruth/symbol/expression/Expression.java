@@ -28,6 +28,7 @@ public class Expression implements ExpressionComponent {
         aMap.put("close", 1);
         aMap.put("sep", 2);
         aMap.put("blockcomment", 3);
+        aMap.put("comment", 4);
         KEYWORDS = Collections.unmodifiableMap(aMap);
     }
 
@@ -57,6 +58,8 @@ public class Expression implements ExpressionComponent {
                     break;
                 } else if (keyword.equals("blockcomment")) {
                     BlockComment.midParse(instructionState, lexer);
+                } else if (keyword.equals("comment")) {
+                    break;
                 } else {
                     System.out.println("Unrecognized Expression keyword: " + keyword);
                     System.exit(1);

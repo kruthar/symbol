@@ -1,5 +1,3 @@
-println one million blockcomment blockcomment plus one thousand
-blockcomment
-println one billion
-println one trillion blockcomment println string after string
 println one two three
+comment println four five six
+println seven eight comment nine
