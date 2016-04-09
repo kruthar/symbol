@@ -227,6 +227,24 @@ For loops have the same three parts you would expect in plain java for loops.
 
 `variable x is x plus one` - This is the increment instruction that progresses the loop
 
+* foreach loops
+
+```
+> foreach item in list one sep string two string sep false sep list do
+>    println item
+> end
+1
+two
+false
+```
+
+Foreach loops similar to those in python. They have a variable name and a Structure to iterate over.
+Foreach loops use the keywords `foreach`, `in`, `do`, and `end`.
+
+`item` - The name of the variable that will hold the current iterator value
+
+`list one sep string two string sep false sep list` - A structure to iterate over, this could also be a variable pointint to a Structure
+
 ### Functions
 Functions are here! There are two main types:
 * non-returning functions - functions can end without returning, maybe they print instead

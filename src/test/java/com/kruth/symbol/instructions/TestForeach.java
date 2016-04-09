@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by kruthar on 4/8/16.
  */
-public class TestFor {
+public class TestForeach {
     private final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
 
     @Before
@@ -27,8 +27,8 @@ public class TestFor {
     }
 
     @Test
-    public void testSimpleForLoops() {
-        Symbol.executeFile("testForLoop.symb");
-        assertEquals("Test Simple For loops", "0123456789", outStream.toString());
+    public void testSimpleForeachLoops() {
+        Symbol.executeFile("testForeachLoop.symb");
+        assertEquals("Test Simple Foreach loops", "1\ntwo\nfalse\n", outStream.toString());
     }
 }

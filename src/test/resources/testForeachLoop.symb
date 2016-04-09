@@ -1,3 +1,7 @@
+foreach item in list one sep string two string sep false sep list do
+    println item
+end
+
 if false
     foreach item in list one sep string two string sep false sep list do
         println item

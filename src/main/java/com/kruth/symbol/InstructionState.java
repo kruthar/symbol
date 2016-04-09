@@ -185,6 +185,9 @@ public class InstructionState {
             case "for":
                 For.parse(this, instructionSplit[1], execute);
                 break;
+            case "foreach":
+                Foreach.parse(this, instructionSplit[1], execute);
+                break;
             default:
                 System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
         }

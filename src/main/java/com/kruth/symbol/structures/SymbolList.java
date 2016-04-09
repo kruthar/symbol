@@ -79,6 +79,11 @@ public class SymbolList extends Structure {
     }
 
     @Override
+    public Iterator<SymbolObject> getIterator() {
+        return value.iterator();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (o == this) {
             return true;
