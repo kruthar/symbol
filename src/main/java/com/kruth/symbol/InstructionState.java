@@ -8,10 +8,7 @@ import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.SymbolNull;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
+import java.util.*;
 
 /**
  * Created by kruthar on 3/15/16.
@@ -213,5 +210,21 @@ public class InstructionState {
 
     public void setContinueBlockComment(Boolean set) {
         continueBlockComment = set;
+    }
+
+    public List<String> advanceTo(String stop) {
+        List<String> lines = new ArrayList<>();
+        while (hasNextLine()) {
+            String next = nextLine();
+            String[] nextSplit = next.trim().split(" ", 2);
+
+            if (nextSplit[0].equals(stop)) {
+                break;
+            }
+
+            lines.add(next);
+        }
+
+        return lines;
     }
 }

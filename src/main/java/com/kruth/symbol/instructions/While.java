@@ -20,18 +20,7 @@ public class While {
 
         if (lexer.hasNext()) {
             String conditionString = lexer.advancedTo("do");
-
-            List<String> lines = new ArrayList<>();
-            while (parentState.hasNextLine()) {
-                String next = parentState.nextLine();
-                String[] nextSplit = next.trim().split(" ", 2);
-
-                if (nextSplit[0].equals("end")) {
-                    break;
-                }
-
-                lines.add(next);
-            }
+            List<String> lines = parentState.advanceTo("end");
 
             if (execute) {
                 InstructionState instructionState = new InstructionState();

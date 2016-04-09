@@ -29,18 +29,7 @@ public class For {
                     // lex out 'with'
                     lexer.next();
                     String incrementInstruction = lexer.advancedTo("do");
-
-                    List<String> lines = new ArrayList<>();
-                    while (parentState.hasNextLine()) {
-                        String nextLine = parentState.nextLine();
-                        String[] nextSplit = nextLine.trim().split(" ");
-                        if (!nextSplit[0].equals("end")) {
-                            lines.add(nextLine);
-                        } else {
-                            // once we hit 'end' then break
-                            break;
-                        }
-                    }
+                    List<String> lines = parentState.advanceTo("end");
 
                     instructionState.setLineLexerList(lines);
 

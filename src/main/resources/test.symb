@@ -1,9 +1,10 @@
 println true
 variable counter is zero
 
-while counter lessthan one do
+if true
     variable insidewhile is false
     variable counter is counter plus one
-end
+fi
 
+println counter
 println insidewhile

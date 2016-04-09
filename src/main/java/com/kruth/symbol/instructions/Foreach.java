@@ -23,18 +23,7 @@ public class Foreach {
             if (lexer.hasNext() && lexer.next().equals("in")) {
                 if (lexer.hasNext()) {
                     SymbolObject list = new Expression(parentState, lexer.advancedTo("do")).evaluate();
-
-                    List<String> lines = new ArrayList<>();
-                    while (parentState.hasNextLine()) {
-                        String next = parentState.nextLine();
-                        String[] nextSplit = next.trim().split(" ", 2);
-
-                        if (nextSplit[0].equals("end")) {
-                            break;
-                        }
-
-                        lines.add(next);
-                    }
+                    List<String> lines = parentState.advanceTo("end");
 
                     if (execute) {
                         if (list instanceof Structure) {
