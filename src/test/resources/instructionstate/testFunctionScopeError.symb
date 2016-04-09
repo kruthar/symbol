@@ -1,0 +1,6 @@
+function func
+    variable inside is one
+end
+
+execute func sep
+println inside

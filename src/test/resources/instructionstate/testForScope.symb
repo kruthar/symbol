@@ -1,0 +1,8 @@
+variable test is one
+
+for variable x is zero while x lessthan one with variable x is x plus one do
+    variable test is test plus one
+end
+
+print test
+

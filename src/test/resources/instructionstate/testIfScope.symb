@@ -1,0 +1,7 @@
+variable test is one
+
+if true
+    variable test is test plus one
+fi
+
+print test

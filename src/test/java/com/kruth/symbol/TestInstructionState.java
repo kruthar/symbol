@@ -28,8 +28,56 @@ public class TestInstructionState {
 
     @Test
     public void testVariables() throws VariableDoesNotExistsException {
-        Symbol.executeFile("testVariables.symb");
+        Symbol.executeFile("instructionstate/testVariables.symb");
         assertEquals("Simple variable tests", "helloworld\n3\nhello34\n6\n", outStream.toString());
         outStream.reset();
+    }
+
+    @Test
+    public void testScopePassThroughs() throws VariableDoesNotExistsException {
+        Symbol.executeFile("instructionstate/testForScope.symb");
+        assertEquals("Test for loop scope pass through", "2", outStream.toString());
+        outStream.reset();
+
+        Symbol.executeFile("instructionstate/testForeachScope.symb");
+        assertEquals("Test foreach loop scope pass through", "2", outStream.toString());
+        outStream.reset();
+
+        Symbol.executeFile("instructionstate/testFunctionScope.symb");
+        assertEquals("Test function enclosed scope", "1", outStream.toString());
+        outStream.reset();
+
+        Symbol.executeFile("instructionstate/testIfScope.symb");
+        assertEquals("Test if scope pass through", "2", outStream.toString());
+        outStream.reset();
+
+        Symbol.executeFile("instructionstate/testWhileScope.symb");
+        assertEquals("Test while scope pass through", "2", outStream.toString());
+        outStream.reset();
+    }
+
+    @Test(expected = VariableDoesNotExistsException.class)
+    public void testForScope() throws VariableDoesNotExistsException {
+        Symbol.executeFile("instructionstate/testForScopeError.symb");
+    }
+
+    @Test(expected = VariableDoesNotExistsException.class)
+    public void testForeachScope() throws VariableDoesNotExistsException {
+        Symbol.executeFile("instructionstate/testForeachScopeError.symb");
+    }
+
+    @Test(expected = VariableDoesNotExistsException.class)
+    public void testFunctionScope() throws VariableDoesNotExistsException {
+        Symbol.executeFile("instructionstate/testFunctionScopeError.symb");
+    }
+
+    @Test(expected = VariableDoesNotExistsException.class)
+    public void testIfScope() throws VariableDoesNotExistsException {
+        Symbol.executeFile("instructionstate/testIfScopeError.symb");
+    }
+
+    @Test(expected = VariableDoesNotExistsException.class)
+    public void testWhileScope() throws VariableDoesNotExistsException {
+        Symbol.executeFile("instructionstate/testWhileScopeError.symb");
     }
 }

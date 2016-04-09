@@ -1,0 +1,5 @@
+foreach item in list one sep list do
+    variable inside is one
+end
+
+print inside

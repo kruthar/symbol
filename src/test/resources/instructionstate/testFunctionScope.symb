@@ -1,0 +1,7 @@
+function func accepts test
+    variable test is test plus one
+end
+
+variable test is one
+execute func test sep sep
+print test

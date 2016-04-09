@@ -1,0 +1,7 @@
+variable test is one
+
+foreach item in list one sep list do
+    variable test is test plus one
+end
+
+print test
