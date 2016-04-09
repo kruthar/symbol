@@ -207,6 +207,26 @@ Order of operations and parenthesis
 2
 ```
 
+* for loops
+
+```
+> for variable x is zero while x lessthan three with variable x is x plus one do
+>    println x
+> end
+0
+1
+2
+```
+
+For loops have the same three parts you would expect in plain java for loops.
+`for`, `while`, `with`, `do`, and `end` ar the keywords that surround the three main expressions of a for loop.
+
+`variable x is zero` - This is the initial variable declaration
+
+`x lessthan three` - This is the condition that gets run on each iteration
+
+`variable x is x plus one` - This is the increment instruction that progresses the loop
+
 ### Functions
 Functions are here! There are two main types:
 * non-returning functions - functions can end without returning, maybe they print instead
