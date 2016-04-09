@@ -29,7 +29,11 @@ public class InstructionState {
     public InstructionState() {}
 
     public void setVariable(String name, SymbolObject value) {
-        variableMap.put(name, value);
+        if (parentState != null && parentState.hasVariable(name)) {
+            parentState.setVariable(name, value);
+        } else {
+            variableMap.put(name, value);
+        }
     }
 
     public SymbolObject getVariable(String name) {
