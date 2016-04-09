@@ -1,5 +1,9 @@
-if false
-    foreach item in list one sep string two string sep false sep list do
-        println item
-    end
-fi
+println true
+variable counter is zero
+
+while counter lessthan one do
+    variable insidewhile is false
+    variable counter is counter plus one
+end
+
+println insidewhile

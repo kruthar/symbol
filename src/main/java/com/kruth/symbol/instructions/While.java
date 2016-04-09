@@ -14,30 +14,11 @@ import java.rmi.UnexpectedException;
  */
 public class While {
     public static void parse(InstructionState instructionState, String line, Boolean execute) {
-        Expression conditionExpression = new Expression(instructionState, new SpaceLexer(line));
-        Boolean condition = false;
+        SpaceLexer lexer = new SpaceLexer(line);
 
-        try {
-            condition = getConditionValue(conditionExpression);
-        } catch (UnexpectedException e) {
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-        instructionState.pushCurrentLoopMarker();
-
-        while (condition) {
-            instructionState.resetToCurrentLoopMarker();
-
-            String nextInstruction = instructionState.peekNextLine();
-            String[] instructionSplit = nextInstruction.trim().split(" ", 2);
-
-            while (!instructionSplit[0].equals("end")) {
-                // Still inside of the while block, route this instruction
-                instructionState.routeNextInstruction(execute);
-                nextInstruction = instructionState.peekNextLine();
-                instructionSplit = nextInstruction.trim().split(" ", 2);
-            }
+        if (lexer.hasNext()) {
+            Expression conditionExpression = new Expression(instructionState, lexer.advancedTo("do"));
+            Boolean condition = false;
 
             try {
                 condition = getConditionValue(conditionExpression);
@@ -45,11 +26,36 @@ public class While {
                 e.printStackTrace();
                 System.exit(1);
             }
-        }
 
-        // Lex out the 'end' line, then pop off the loopmarker
-        instructionState.nextLine();
-        instructionState.popCurrentLoopMarker();
+            instructionState.pushCurrentLoopMarker();
+
+            while (condition) {
+                instructionState.resetToCurrentLoopMarker();
+
+                String nextInstruction = instructionState.peekNextLine();
+                String[] instructionSplit = nextInstruction.trim().split(" ", 2);
+
+                while (!instructionSplit[0].equals("end")) {
+                    // Still inside of the while block, route this instruction
+                    instructionState.routeNextInstruction(execute);
+                    nextInstruction = instructionState.peekNextLine();
+                    instructionSplit = nextInstruction.trim().split(" ", 2);
+                }
+
+                try {
+                    condition = getConditionValue(conditionExpression);
+                } catch (UnexpectedException e) {
+                    e.printStackTrace();
+                    System.exit(1);
+                }
+            }
+
+            // Lex out the 'end' line, then pop off the loopmarker
+            instructionState.nextLine();
+            instructionState.popCurrentLoopMarker();
+        } else {
+            System.out.println("ERROR: expecting a conditional expression after while");
+        }
     }
 
     private static Boolean getConditionValue(Expression conditionExpression) throws UnexpectedException {
