@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.Symbol;
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class TestWhile {
     }
 
     @Test
-    public void testWhile() {
+    public void testWhile() throws VariableDoesNotExistsException {
         Symbol.executeFile("testWhile.symb");
         assertEquals("Simple while test", "once\n0\n1\n2\ndone\n", outStream.toString());
     }

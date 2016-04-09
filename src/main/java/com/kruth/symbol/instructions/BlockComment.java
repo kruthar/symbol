@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
 
@@ -8,7 +9,7 @@ import com.kruth.symbol.lexers.SpaceLexer;
  * Created by kruthar on 3/31/16.
  */
 public class BlockComment {
-    public static void parse(InstructionState instructionState, Boolean execute) {
+    public static void parse(InstructionState instructionState, Boolean execute) throws VariableDoesNotExistsException {
         Boolean found = false;
         while (!found) {
             SpaceLexer lexer = new SpaceLexer(instructionState.nextLine());

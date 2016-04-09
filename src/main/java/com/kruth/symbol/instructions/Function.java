@@ -2,6 +2,7 @@ package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.literals.Literal;
 
@@ -74,7 +75,7 @@ public class Function {
         return name;
     }
 
-    public SymbolObject execute(InstructionState instructionState, Map<String, Expression> parameterExpressionMap) {
+    public SymbolObject execute(InstructionState instructionState, Map<String, Expression> parameterExpressionMap) throws VariableDoesNotExistsException {
         InstructionState functionState = new InstructionState();
         functionState.setLineLexerList(instructions);
 

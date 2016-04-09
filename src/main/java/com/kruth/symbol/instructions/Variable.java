@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.expression.ExpressionComponent;
 
@@ -23,7 +24,7 @@ public class Variable implements ExpressionComponent {
         return name;
     }
 
-    public static void parse(InstructionState instructionState, String line, Boolean execute) {
+    public static void parse(InstructionState instructionState, String line, Boolean execute) throws VariableDoesNotExistsException {
         String[] variableSplit = line.split(" ", 3);
         if (variableSplit[1].equals("is")) {
             if (execute) {

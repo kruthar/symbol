@@ -1,5 +1,6 @@
 package com.kruth.symbol;
 
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,7 +27,7 @@ public class TestInstructionState {
     }
 
     @Test
-    public void testVariables() {
+    public void testVariables() throws VariableDoesNotExistsException {
         Symbol.executeFile("testVariables.symb");
         assertEquals("Simple variable tests", "helloworld\n3\nhello34\n6\n", outStream.toString());
         outStream.reset();

@@ -1,6 +1,7 @@
 package com.kruth.symbol.expression;
 
 import com.kruth.symbol.Symbol;
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,7 +28,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testSimpleExpressions() {
+    public void testSimpleExpressions() throws VariableDoesNotExistsException {
         Symbol.executeLine("print string Hello World! string");
         assertEquals("Simple String expression", "Hello World!", outStream.toString());
         outStream.reset();
@@ -39,7 +40,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testBooleanOperators() {
+    public void testBooleanOperators() throws VariableDoesNotExistsException {
         Symbol.executeLine("print true or true");
         assertEquals("true || true == true", "true", outStream.toString());
         outStream.reset();
@@ -62,7 +63,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testSimpleMathExpressions() {
+    public void testSimpleMathExpressions() throws VariableDoesNotExistsException {
         // Numbers
         Symbol.executeLine("print one plus one");
         assertEquals("Simple addition test", "2", outStream.toString());
@@ -94,7 +95,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testOrderOfOperations() {
+    public void testOrderOfOperations() throws VariableDoesNotExistsException {
         Symbol.executeLine("print one plus one times two");
         assertEquals("Multiplication before Addition", "3", outStream.toString());
         outStream.reset();
@@ -116,7 +117,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testParenthesisOperations() {
+    public void testParenthesisOperations() throws VariableDoesNotExistsException {
         Symbol.executeLine("print open one plus one close times two");
         assertEquals("Parenthesis Multiplication before Addition", "4", outStream.toString());
         outStream.reset();
@@ -138,7 +139,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testComparators() {
+    public void testComparators() throws VariableDoesNotExistsException {
         Symbol.executeLine("print one equals one");
         assertEquals("Equality positive test", "true", outStream.toString());
         outStream.reset();

@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.SymbolBoolean;
@@ -12,7 +13,7 @@ import java.util.List;
  * Created by kruthar on 4/8/16.
  */
 public class For {
-    public static void parse(InstructionState parentState, String instruction, Boolean execute) {
+    public static void parse(InstructionState parentState, String instruction, Boolean execute) throws VariableDoesNotExistsException {
         InstructionState instructionState = new InstructionState();
         instructionState.setParentState(parentState);
         SpaceLexer lexer = new SpaceLexer(instruction);

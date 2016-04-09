@@ -2,6 +2,7 @@ package com.kruth.symbol.structures;
 
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
@@ -27,7 +28,7 @@ public class SymbolList extends Structure {
         value = new ArrayList<>(list);
     }
 
-    public SymbolList(InstructionState instructionState, SpaceLexer lexer) {
+    public SymbolList(InstructionState instructionState, SpaceLexer lexer) throws VariableDoesNotExistsException {
         value = new ArrayList<>();
         // Lex out the starting 'list' keyword
         lexer.next();

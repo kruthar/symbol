@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.Symbol;
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -27,13 +28,13 @@ public class TestFunction {
     }
 
     @Test
-    public void testFunctionExecute() {
+    public void testFunctionExecute() throws VariableDoesNotExistsException {
         Symbol.executeFile("testFunctionExecute.symb");
         assertEquals("Test function calls from execute instruction", "2\n", outStream.toString());
     }
 
     @Test
-    public void testFunctionReturns() {
+    public void testFunctionReturns() throws VariableDoesNotExistsException {
         Symbol.executeFile("testFunctionReturns.symb");
         assertEquals("Test function calls returns as expressions", "2\n6\n3\ntest\nnull\n", outStream.toString());
     }

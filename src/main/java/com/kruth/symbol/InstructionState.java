@@ -1,5 +1,6 @@
 package com.kruth.symbol;
 
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.instructions.*;
@@ -114,7 +115,7 @@ public class InstructionState {
         return hasLocal || hasParent;
     }
 
-    public SymbolObject parseFunctionCall(InstructionState instructionState, SpaceLexer lexer) {
+    public SymbolObject parseFunctionCall(InstructionState instructionState, SpaceLexer lexer) throws VariableDoesNotExistsException {
         String name = lexer.next();
         Function function = functionMap.get(name);
 
@@ -127,7 +128,7 @@ public class InstructionState {
         return function.execute(instructionState, parameterExpressionMap);
     }
 
-    public void routeNextInstruction(Boolean execute) {
+    public void routeNextInstruction(Boolean execute) throws VariableDoesNotExistsException {
         if (continueBlockComment) {
             continueBlockComment = false;
             BlockComment.parse(this, execute);
@@ -137,11 +138,11 @@ public class InstructionState {
         routeInstruction(instruction, execute);
     }
 
-    public void routeLexerInstruction(SpaceLexer lexer, Boolean execute) {
+    public void routeLexerInstruction(SpaceLexer lexer, Boolean execute) throws VariableDoesNotExistsException {
         routeInstruction(lexer.restOfLine(), execute);
     }
 
-    public void routeInstruction(String instruction, Boolean execute) {
+    public void routeInstruction(String instruction, Boolean execute) throws VariableDoesNotExistsException {
         // Return if we have an empty line
         if (instruction.trim().length() < 1) {
             return;

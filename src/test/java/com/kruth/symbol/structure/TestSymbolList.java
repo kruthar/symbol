@@ -3,6 +3,7 @@ package com.kruth.symbol.structure;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.Symbol;
 import com.kruth.symbol.SymbolObject;
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolNumber;
@@ -35,14 +36,14 @@ public class TestSymbolList {
     }
 
     @Test
-    public void testSymbolListExpressions() {
+    public void testSymbolListExpressions() throws VariableDoesNotExistsException {
         Symbol.executeFile("testSymbolList.symb");
         assertEquals("SymbolList expressions", "[1, 2, 3]\n[4, 1, 2, 3]\n[4, 1, 2, 3, 5]\n5\n[4, 2, 3, 5]\n", outStream.toString());
         outStream.reset();
     }
 
     @Test
-    public void testConstructors() {
+    public void testConstructors() throws VariableDoesNotExistsException {
         SymbolList objectConstructor = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1), new SymbolNumber(2)));
         assertEquals("Test list constructor", new ArrayList<SymbolObject>(Arrays.asList((Literal) new SymbolNumber(1), new SymbolNumber(2))), objectConstructor.getValue());
 

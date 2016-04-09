@@ -5,6 +5,7 @@ import com.kruth.symbol.dots.DotParser;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.comparators.*;
+import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.instructions.BlockComment;
 import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -35,11 +36,11 @@ public class Expression implements ExpressionComponent {
     private InstructionState instructionState;
     private List<ExpressionComponent> components = new ArrayList<>();
 
-    public Expression(InstructionState instructionState, String expressionString) {
+    public Expression(InstructionState instructionState, String expressionString) throws VariableDoesNotExistsException {
         this(instructionState, new SpaceLexer(expressionString));
     }
 
-    public Expression(InstructionState instructionState, SpaceLexer lexer) {
+    public Expression(InstructionState instructionState, SpaceLexer lexer) throws VariableDoesNotExistsException {
         this.instructionState = instructionState;
         components = new ArrayList<>();
 
@@ -80,11 +81,12 @@ public class Expression implements ExpressionComponent {
                 addComponent(DotParser.parse(instructionState, lexer));
             } else if (instructionState.hasFunction(lexer.peek().toLowerCase())) {
                 addComponent(instructionState.parseFunctionCall(instructionState, lexer));
-            } else if (instructionState.hasVariable(lexer.peek().toLowerCase())) {
-                addComponent(new Variable(lexer.next()));
             } else {
-                System.out.println("Unrecognized Expression start: " + lexer.peek().toLowerCase());
-                System.exit(1);
+                if (instructionState.hasVariable(lexer.peek().toLowerCase())) {
+                    addComponent(new Variable(lexer.next()));
+                } else {
+                    throw new VariableDoesNotExistsException("Variable " + lexer.peek().toLowerCase() + " does not exist.");
+                }
             }
         }
     }
