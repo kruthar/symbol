@@ -1,7 +1,9 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
+import com.kruth.symbol.literals.SymbolBoolean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +27,7 @@ public class For {
 
                 if (lexer.peek().equals("with")) {
                     // lex out 'with'
+                    lexer.next();
                     String incrementInstruction = lexer.advancedTo("do");
 
                     List<String> lines = new ArrayList<>();
@@ -44,7 +47,21 @@ public class For {
                     // At this point we have lexed passed the lines of the loop, if we do not need to execute then just terminate.
                     // Else wise, start executing the loop
                     if (execute) {
-                        System.out.println("lets execute");
+                        // first step is to execute the variable declaration
+                        instructionState.routeInstruction(variableInstruction, execute);
+                        instructionState.pushCurrentLoopMarker();
+
+                        Expression condition = new Expression(instructionState, whileExpression);
+
+                        while ((Boolean) condition.evaluate().getValue()) {
+                            // Execute lines
+                            instructionState.resetToCurrentLoopMarker();
+                            while (instructionState.hasNextLine()) {
+                                instructionState.routeNextInstruction(execute);
+                            }
+                            // increment variable
+                            instructionState.routeInstruction(incrementInstruction, execute);
+                        }
                     }
                 } else {
                     System.out.println("ERROR: Expecting a variable declaration as the final part of the for loop");

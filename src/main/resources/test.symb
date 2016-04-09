@@ -1,5 +1,3 @@
-println string before loop string
 for variable x is zero while x lessthan ten with variable x is x plus one do
-    println x
+    print x
 end
-println string after loop string
