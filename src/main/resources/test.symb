@@ -1,3 +1,5 @@
-println one two three
-comment println four five six
-println seven eight comment nine
+println string before loop string
+for variable x is zero while x lessthan ten with variable x is x plus one do
+    println x
+end
+println string after loop string

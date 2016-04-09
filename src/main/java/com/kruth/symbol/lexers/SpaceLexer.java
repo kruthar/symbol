@@ -58,4 +58,20 @@ public class SpaceLexer implements Iterator<String> {
     public void remove() {
         throw new UnsupportedOperationException();
     }
+
+    public String advancedTo(String stop) {
+        String result = "";
+
+        while (hasNext()) {
+            String next = peek();
+
+            if (next.equals(stop)) {
+                break;
+            }
+
+            result += next() + " ";
+        }
+
+        return result.trim();
+    }
 }

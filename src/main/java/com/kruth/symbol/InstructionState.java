@@ -182,6 +182,9 @@ public class InstructionState {
             case "variable":
                 Variable.parse(this, instructionSplit[1], execute);
                 break;
+            case "for":
+                For.parse(this, instructionSplit[1], execute);
+                break;
             default:
                 System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
         }
@@ -203,9 +206,5 @@ public class InstructionState {
 
     public void setContinueBlockComment(Boolean set) {
         continueBlockComment = set;
-    }
-
-    public void getContinueBlockComment() {
-
     }
 }
