@@ -2,13 +2,19 @@ package com.kruth.symbol;
 
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 
+import java.io.File;
+
 /**
  * Created by kruthar on 2/23/16.
  */
 public class Symbol {
     public static void main(String args[]) {
+        if (args.length < 1) {
+            System.out.println("Symbol requires a file path.");
+        }
+
         try {
-            Symbol.executeFile("test.symb");
+            Symbol.executeFile(args[0]);
         } catch (VariableDoesNotExistsException e) {
             System.err.println("Variable does not exist.");
             e.printStackTrace();

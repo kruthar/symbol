@@ -9,6 +9,7 @@ import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.SymbolNull;
 
 import java.io.File;
+import java.net.URL;
 import java.util.*;
 
 /**
@@ -54,7 +55,16 @@ public class InstructionState {
     }
 
     public void setLineLexerFile(String filename) {
-        lineLexer = new LineLexer(new File(getClass().getClassLoader().getResource(filename).getFile()));
+        File symbFile;
+        URL resourceURL = getClass().getClassLoader().getResource(filename);
+
+        // If file isn't in the resources folder then look at the absolute path.
+        if (resourceURL != null) {
+            symbFile = new File(resourceURL.getFile());
+        } else {
+            symbFile = new File(filename);
+        }
+        lineLexer = new LineLexer(symbFile);
     }
 
     public void setLineLexerString(String line) {

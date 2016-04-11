@@ -1,0 +1,24 @@
+#!/usr/bin/env python
+
+import sys
+import os
+import inspect
+import re
+import subprocess
+
+this_path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+
+symbol_jars = []
+
+for dirpath, dirnames, filenames in os.walk(os.path.abspath(this_path + "/..")):
+    for filename in filenames:
+        if re.match("symbol.*jar", filename):
+            symbol_jars.append(dirpath + "/" + filename)
+
+run_command = ["java", "-cp", symbol_jars[0], "com.kruth.symbol.Symbol", sys.argv[1]]
+
+sys.exit(subprocess.call(run_command))
+
+
+
+

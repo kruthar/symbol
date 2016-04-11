@@ -21,6 +21,21 @@ git clone https://github.com/kruthar/symbol.git
 Symbol.executeFile("test.symb");
 ```
 
+## Running the bin tool (Under Construction)
+There is now a bin tool which will be the primary way to launch symbol programs
+
+1. Build the code, a jar will be produced in the `target` dir.
+
+```
+mvn package
+```
+
+2. Then you can run the build tool with the path to your `.symb` file
+
+```
+bin/symbol /path/to/your/test.symb
+```
+
 ## What we can currently do:
 ### Instructions
 Instructions are what I am calling the...instructions of the language here are the ones that work:
