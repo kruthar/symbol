@@ -9,6 +9,7 @@ import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolNumber;
 
 import javax.naming.OperationNotSupportedException;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
@@ -108,11 +109,11 @@ public class SymbolList extends Structure {
     }
 
     public void put(SymbolNumber index, SymbolObject obj) {
-        value.add((Integer) index.getValue(), obj);
+        value.add(((BigInteger) index.getValue()).intValue(), obj);
     }
 
     public SymbolObject get(SymbolNumber index) {
-        return value.get((Integer) index.getValue());
+        return value.get(((BigInteger) index.getValue()).intValue());
     }
 
     public SymbolNumber size() {

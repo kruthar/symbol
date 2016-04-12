@@ -4,78 +4,83 @@ import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.lexers.SpaceLexer;
 
 import javax.naming.OperationNotSupportedException;
+import java.math.BigInteger;
 import java.util.*;
 
 /**
  * Created by kruthar on 2/24/16.
  */
 public class SymbolNumber extends Literal {
-    private static final Map<String, Integer> KEYWORDS;
+    private static final Map<String, BigInteger> KEYWORDS;
 
-    private static Map<String, Integer> singleMap;
-    private static Map<String, Integer> teenMap;
-    private static Map<String, Integer> tensMap;
-    private static Map<String, Integer> prefixMap;
+    private static Map<String, BigInteger> singleMap;
+    private static Map<String, BigInteger> teenMap;
+    private static Map<String, BigInteger> tensMap;
+    private static Map<String, BigInteger> prefixMap;
 
     static {
         singleMap = new HashMap<>();
-        singleMap.put("zero", 0);
-        singleMap.put("one", 1);
-        singleMap.put("two", 2);
-        singleMap.put("three", 3);
-        singleMap.put("four", 4);
-        singleMap.put("five", 5);
-        singleMap.put("six", 6);
-        singleMap.put("seven", 7);
-        singleMap.put("eight", 8);
-        singleMap.put("nine", 9);
+        singleMap.put("zero", BigInteger.valueOf(0));
+        singleMap.put("one", BigInteger.valueOf(1));
+        singleMap.put("two", BigInteger.valueOf(2));
+        singleMap.put("three", BigInteger.valueOf(3));
+        singleMap.put("four", BigInteger.valueOf(4));
+        singleMap.put("five", BigInteger.valueOf(5));
+        singleMap.put("six", BigInteger.valueOf(6));
+        singleMap.put("seven", BigInteger.valueOf(7));
+        singleMap.put("eight", BigInteger.valueOf(8));
+        singleMap.put("nine", BigInteger.valueOf(9));
 
         teenMap = new HashMap<>();
-        teenMap.put("ten", 10);
-        teenMap.put("eleven", 11);
-        teenMap.put("twelve", 12);
-        teenMap.put("thirteen", 13);
-        teenMap.put("fourteen", 14);
-        teenMap.put("fifteen", 15);
-        teenMap.put("sixteen", 16);
-        teenMap.put("seventeen", 17);
-        teenMap.put("eighteen", 18);
-        teenMap.put("nineteen", 19);
+        teenMap.put("ten", BigInteger.valueOf(10));
+        teenMap.put("eleven", BigInteger.valueOf(11));
+        teenMap.put("twelve", BigInteger.valueOf(12));
+        teenMap.put("thirteen", BigInteger.valueOf(13));
+        teenMap.put("fourteen", BigInteger.valueOf(14));
+        teenMap.put("fifteen", BigInteger.valueOf(15));
+        teenMap.put("sixteen", BigInteger.valueOf(16));
+        teenMap.put("seventeen", BigInteger.valueOf(17));
+        teenMap.put("eighteen", BigInteger.valueOf(18));
+        teenMap.put("nineteen", BigInteger.valueOf(19));
 
         tensMap = new HashMap<>();
-        tensMap.put("twenty", 20);
-        tensMap.put("thirty", 30);
-        tensMap.put("forty", 40);
-        tensMap.put("fifty", 50);
-        tensMap.put("sixty", 60);
-        tensMap.put("seventy", 70);
-        tensMap.put("eighty", 80);
-        tensMap.put("ninety", 90);
+        tensMap.put("twenty", BigInteger.valueOf(20));
+        tensMap.put("thirty", BigInteger.valueOf(30));
+        tensMap.put("forty", BigInteger.valueOf(40));
+        tensMap.put("fifty", BigInteger.valueOf(50));
+        tensMap.put("sixty", BigInteger.valueOf(60));
+        tensMap.put("seventy", BigInteger.valueOf(70));
+        tensMap.put("eighty", BigInteger.valueOf(80));
+        tensMap.put("ninety", BigInteger.valueOf(90));
 
         prefixMap = new HashMap<>();
-        prefixMap.put("thousand", 1000);
-        prefixMap.put("million", 1000000);
-        prefixMap.put("billion", 1000000000);
+        prefixMap.put("thousand", BigInteger.valueOf(1000));
+        prefixMap.put("million", BigInteger.valueOf(1000000));
+        prefixMap.put("billion", BigInteger.valueOf(1000000000));
 
-        Map<String, Integer> unionMap = new HashMap<>();
+        Map<String, BigInteger> unionMap = new HashMap<>();
         unionMap.putAll(singleMap);
         unionMap.putAll(teenMap);
         unionMap.putAll(tensMap);
         unionMap.putAll(prefixMap);
-        unionMap.put("hundred", 100);
+        unionMap.put("hundred", BigInteger.valueOf(100));
 
         KEYWORDS = Collections.unmodifiableMap(unionMap);
     }
 
-    private int value;
+    private BigInteger value;
 
     public SymbolNumber(int num) {
+        value = BigInteger.valueOf(num);
+    }
+
+    public SymbolNumber(BigInteger num) {
         value = num;
     }
 
     public SymbolNumber(SpaceLexer lexer) {
         String string_num = "";
-        int total = 0;
+        BigInteger total = BigInteger.valueOf(0);
         Boolean digits = false;
 
         if (singleMap.containsKey(lexer.peek()) && singleMap.containsKey(lexer.peek(1))) {
@@ -92,24 +97,24 @@ public class SymbolNumber extends Literal {
                     if (string_num.length() == 0) {
                         string_num = String.valueOf(singleMap.get(next));
                     } else {
-                        string_num = String.valueOf(Integer.valueOf(string_num) + singleMap.get(next));
+                        string_num = String.valueOf(new BigInteger(string_num).add(singleMap.get(next)));
                     }
                 } else if (teenMap.containsKey(next)) {
                     if (string_num.length() == 0) {
                         string_num = String.valueOf(teenMap.get(next));
                     } else {
-                        string_num = String.valueOf(Integer.valueOf(string_num) + teenMap.get(next));
+                        string_num = String.valueOf(new BigInteger(string_num).add(teenMap.get(next)));
                     }
                 } else if (tensMap.containsKey(next)) {
                     if (!string_num.equals("")) {
-                        string_num = String.valueOf(Integer.valueOf(string_num) + tensMap.get(next));
+                        string_num = String.valueOf(new BigInteger(string_num).add(tensMap.get(next)));
                     } else {
                         if (singleMap.containsKey(lexer.peek())) {
-                            int sectionValue = 0;
+                            BigInteger sectionValue = BigInteger.valueOf(0);
                             if (!string_num.equals("")) {
-                                sectionValue += Integer.valueOf(string_num);
+                                sectionValue = sectionValue.add(new BigInteger(string_num));
                             }
-                            sectionValue += tensMap.get(next) + singleMap.get(lexer.next());
+                            sectionValue = sectionValue.add(tensMap.get(next).add(singleMap.get(lexer.next())));
                             string_num = String.valueOf(sectionValue);
                         } else if (tensMap.containsKey(lexer.peek())) {
                             System.out.println("ERROR: Invalid SymbolNumber, two tens digits in a row is not allowed");
@@ -126,14 +131,14 @@ public class SymbolNumber extends Literal {
                         System.out.println("ERROR: Invalid SymbolNumber, specify how many " + next + "s");
                     }
 
-                    total += Integer.valueOf(string_num) * prefixMap.get(next);
+                    total = total.add(new BigInteger(string_num).multiply(prefixMap.get(next)));
                     string_num = "";
                 }
             }
         }
 
         if (!string_num.equals("")) {
-            total += Integer.valueOf(string_num);
+            total = total.add(new BigInteger(string_num));
         }
         value = total;
     }
@@ -150,7 +155,7 @@ public class SymbolNumber extends Literal {
     @Override
     public Literal times(Literal other) throws OperationNotSupportedException {
         if (other instanceof SymbolNumber) {
-            return new SymbolNumber(this.value * (Integer) other.getValue());
+            return new SymbolNumber(this.value.multiply((BigInteger) other.getValue()));
         }
 
         throw new OperationNotSupportedException("Times not supported between SymbolNumber and " + other.getClass());
@@ -159,7 +164,7 @@ public class SymbolNumber extends Literal {
     @Override
     public Literal dividedby(Literal other) throws OperationNotSupportedException {
         if (other instanceof SymbolNumber) {
-            return new SymbolNumber(this.value / (Integer) other.getValue());
+            return new SymbolNumber(this.value.divide((BigInteger) other.getValue()));
         }
 
         throw new OperationNotSupportedException("DivideBy not supported between SymbolNumber and " + other.getClass());
@@ -168,7 +173,7 @@ public class SymbolNumber extends Literal {
     @Override
     public Literal modulo(Literal other) throws OperationNotSupportedException {
         if (other instanceof SymbolNumber) {
-            return new SymbolNumber(this.value % (Integer) other.getValue());
+            return new SymbolNumber(this.value.mod((BigInteger) other.getValue()));
         }
 
         throw new OperationNotSupportedException("Modulo not supported between SymbolNumber and " + other.getClass());
@@ -179,7 +184,7 @@ public class SymbolNumber extends Literal {
         if (other instanceof SymbolString) {
             return new SymbolString(this.toString() + other.toString());
         } else if (other instanceof SymbolNumber) {
-            return new SymbolNumber(this.value + (Integer) other.getValue());
+            return new SymbolNumber(this.value.add((BigInteger) other.getValue()));
         }
 
         System.out.println("ERROR: Unknown type for Plus operation with SymbolNumber: " + other.getClass());
@@ -189,7 +194,7 @@ public class SymbolNumber extends Literal {
     @Override
     public Literal minus(Literal other) throws OperationNotSupportedException {
         if (other instanceof SymbolNumber) {
-            return new SymbolNumber(this.value - (Integer) other.getValue());
+            return new SymbolNumber(this.value.subtract((BigInteger) other.getValue()));
         }
 
         throw new OperationNotSupportedException("Minus not supported between SymbolNumber and " + other.getClass());
@@ -197,7 +202,7 @@ public class SymbolNumber extends Literal {
 
     public int compareTo(SymbolObject other) {
         if (other instanceof SymbolNumber) {
-            return Integer.compare(value, (Integer) other.getValue());
+            return value.compareTo((BigInteger) other.getValue());
         }
 
         return -1;
