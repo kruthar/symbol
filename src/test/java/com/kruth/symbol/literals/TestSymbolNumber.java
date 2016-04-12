@@ -127,5 +127,8 @@ public class TestSymbolNumber {
         assertEquals("test 572,500,420", BigInteger.valueOf(572500420), new SymbolNumber(new SpaceLexer("five hundred seventy two million five hundred thousand four hundred twenty")).getValue());
 
         assertEquals("test 1,314,318,208", BigInteger.valueOf(1314318208), new SymbolNumber(new SpaceLexer("one billion three hundred fourteen million three hundred eighteen thousand two hundred eight")).getValue());
+        assertEquals("test 2,450,490,315", new BigInteger("2450490315"), new SymbolNumber(new SpaceLexer("two billion four hundred fifty million four hundred ninety thousand three hundred fifteen")).getValue());
+        assertEquals("test 3,572,500,420", new BigInteger("3572500420"), new SymbolNumber(new SpaceLexer("three billion five hundred seventy two million five hundred thousand four hundred twenty")).getValue());
+
     }
 }
