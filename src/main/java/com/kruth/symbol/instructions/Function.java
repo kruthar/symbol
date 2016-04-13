@@ -1,5 +1,6 @@
 package com.kruth.symbol.instructions;
 
+import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
@@ -18,14 +19,17 @@ public class Function {
     private String name;
     private String[] parameters;
     private List<String> instructions;
+    private int startLine;
 
-    public Function(String name, String[] parameters, List<String> instructions) {
+    public Function(String name, String[] parameters, List<String> instructions, int startLine) {
         this.name = name;
         this.parameters = parameters;
         this.instructions = instructions;
+        this.startLine = startLine;
     }
 
     public static void parse(InstructionState instructionState, String line) {
+        int startLine = ErrorState.getLine();
         String[] lineSplit = line.split(" ");
 
         if (lineSplit.length < 1) {
@@ -64,7 +68,7 @@ public class Function {
         }
 
         // Lex out the "end" line
-        instructionState.addFunction(new Function(name, parameters, instructions));
+        instructionState.addFunction(new Function(name, parameters, instructions, startLine));
     }
 
     public String[] getParameters() {
@@ -79,6 +83,9 @@ public class Function {
         InstructionState functionState = new InstructionState();
         functionState.setLineLexerList(instructions);
 
+        int previousLine = ErrorState.getLine();
+        ErrorState.setLine(startLine);
+
         for (Map.Entry<String, Expression> parameter: parameterExpressionMap.entrySet()) {
             functionState.setVariable(parameter.getKey(), parameter.getValue().evaluate());
         }
@@ -91,6 +98,7 @@ public class Function {
             functionState.routeNextInstruction(true);
         }
 
+        ErrorState.setLine(previousLine);
         return functionState.getReturnValue();
     }
 }
