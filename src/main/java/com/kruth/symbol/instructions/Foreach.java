@@ -1,5 +1,6 @@
 package com.kruth.symbol.instructions;
 
+import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
@@ -44,6 +45,7 @@ public class Foreach {
                         } else {
                             System.out.println("ERROR: Foreach loop expects input of type Structure");
                         }
+                        ErrorState.incrementLine();
                     }
                 } else {
                     System.out.println("ERROR: Expecting some type of Structure as input for foreach loop");

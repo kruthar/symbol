@@ -1,5 +1,6 @@
 package com.kruth.symbol.instructions;
 
+import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
@@ -38,6 +39,7 @@ public class While {
                         instructionState.routeNextInstruction(execute);
                     }
                 }
+                ErrorState.incrementLine();
             }
         } else {
             System.out.println("ERROR: expecting a conditional expression after while");

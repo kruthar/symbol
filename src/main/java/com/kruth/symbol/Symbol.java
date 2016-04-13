@@ -16,7 +16,6 @@ public class Symbol {
         try {
             Symbol.executeFile(args[0]);
         } catch (VariableDoesNotExistsException e) {
-            System.err.println("Variable does not exist.");
             e.printStackTrace();
         }
     }
@@ -24,6 +23,7 @@ public class Symbol {
     public static void executeFile(String filename) throws VariableDoesNotExistsException {
         InstructionState instructionState = new InstructionState();
         instructionState.setLineLexerFile(filename);
+        ErrorState.setFile(filename);
         execute(instructionState);
     }
 

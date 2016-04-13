@@ -1,5 +1,6 @@
 package com.kruth.symbol.instructions;
 
+import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
@@ -52,6 +53,7 @@ public class If {
                         instructionState.routeNextInstruction(!ifExecuted && executeBlock);
                     }
                 }
+                ErrorState.incrementLine();
             }
         } else {
             System.out.println("ERROR: If statement expects a boolean expression");

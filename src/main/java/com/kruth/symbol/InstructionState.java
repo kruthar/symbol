@@ -84,6 +84,7 @@ public class InstructionState {
     }
 
     public String nextLine() {
+        ErrorState.incrementLine();
         return lineLexer.next();
     }
 
@@ -96,6 +97,7 @@ public class InstructionState {
     }
 
     public void resetToCurrentLoopMarker() {
+        ErrorState.decrementLine(lineLexer.getIndex() - loopStack.peek());
         lineLexer.setIndex(loopStack.peek());
     }
 
@@ -236,6 +238,7 @@ public class InstructionState {
             lines.add(next);
         }
 
+        ErrorState.decrementLine(lines.size() + 1);
         return lines;
     }
 }

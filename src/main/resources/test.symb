@@ -1,8 +1,18 @@
+function func
+    println string function string
+end
+
 variable test is one
 
-while test lessthan two do
+foreach test in list one sep two sep three sep list do
+    execute func
+    if test equals two
+        println test
+    fi
+
     variable test is test plus one
 end
+println trash
 
 print test
 

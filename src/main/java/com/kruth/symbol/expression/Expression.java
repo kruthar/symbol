@@ -1,5 +1,6 @@
 package com.kruth.symbol.expression;
 
+import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.dots.Dot;
 import com.kruth.symbol.dots.DotParser;
 import com.kruth.symbol.InstructionState;

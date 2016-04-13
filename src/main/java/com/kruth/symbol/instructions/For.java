@@ -1,5 +1,6 @@
 package com.kruth.symbol.instructions;
 
+import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
@@ -52,6 +53,7 @@ public class For {
                             // increment variable
                             instructionState.routeInstruction(incrementInstruction, execute);
                         }
+                        ErrorState.incrementLine();
                     }
                 } else {
                     System.out.println("ERROR: Expecting a variable declaration as the final part of the for loop");
