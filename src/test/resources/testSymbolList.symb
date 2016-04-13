@@ -7,3 +7,5 @@ println first
 println first dot size sep
 execute first dot remove one sep sep
 println first
+execute first dot remove zero sep sep
+println first

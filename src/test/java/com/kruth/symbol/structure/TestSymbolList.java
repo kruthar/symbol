@@ -38,7 +38,7 @@ public class TestSymbolList {
     @Test
     public void testSymbolListExpressions() throws VariableDoesNotExistsException {
         Symbol.executeFile("testSymbolList.symb");
-        assertEquals("SymbolList expressions", "[1, 2, 3]\n[4, 1, 2, 3]\n[4, 1, 2, 3, 5]\n5\n[4, 2, 3, 5]\n", outStream.toString());
+        assertEquals("SymbolList expressions", "[1, 2, 3]\n[4, 1, 2, 3]\n[4, 1, 2, 3, 5]\n5\n[4, 2, 3, 5]\n[2, 3, 5]\n", outStream.toString());
         outStream.reset();
     }
 

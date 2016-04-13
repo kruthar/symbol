@@ -121,6 +121,6 @@ public class SymbolList extends Structure {
     }
 
     public void remove(SymbolNumber index) {
-        value.remove(index);
+        value.remove(((BigInteger) index.getValue()).intValue());
     }
 }
