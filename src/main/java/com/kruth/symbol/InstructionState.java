@@ -128,16 +128,27 @@ public class InstructionState {
     }
 
     public SymbolObject parseFunctionCall(InstructionState instructionState, SpaceLexer lexer) throws VariableDoesNotExistsException {
-        String name = lexer.next();
-        Function function = functionMap.get(name);
+        String name = lexer.peek();
+        if (functionMap.containsKey(name)) {
+            lexer.next();
+            Function function = functionMap.get(name);
 
-        Map<String, Expression> parameterExpressionMap = new HashMap<>();
+            Map<String, Expression> parameterExpressionMap = new HashMap<>();
 
-        for(String parameter: function.getParameters()) {
-            parameterExpressionMap.put(parameter, new Expression(instructionState, lexer));
+            for(String parameter: function.getParameters()) {
+                parameterExpressionMap.put(parameter, new Expression(instructionState, lexer));
+            }
+
+            return function.execute(instructionState, parameterExpressionMap);
+        } else if (parentState != null && parentState.hasFunction(name)) {
+            return parentState.parseFunctionCall(parentState, lexer);
+        } else {
+            System.out.println("ERROR: Function is not defined: " + name);
+            System.exit(1);
         }
 
-        return function.execute(instructionState, parameterExpressionMap);
+        return new SymbolNull();
+
     }
 
     public void routeNextInstruction(Boolean execute) throws VariableDoesNotExistsException {
