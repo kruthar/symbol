@@ -1,11 +1,11 @@
 variable first is list one sep two sep three sep list
 println first
-execute first dot put zero sep four sep sep
+execute first dot put zero sep four tod
 println first
-execute first dot put five sep sep
+execute first dot put five tod
 println first
-println first dot size sep
-execute first dot remove one sep sep
+println first dot size tod
+execute first dot remove one tod
 println first
-execute first dot remove zero sep sep
+execute first dot remove zero tod
 println first

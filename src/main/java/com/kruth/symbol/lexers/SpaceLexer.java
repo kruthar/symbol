@@ -19,7 +19,11 @@ public class SpaceLexer implements Iterator<String> {
     public SpaceLexer(String line) {
         original = line;
         nextIndex = 0;
-        words = Arrays.asList(line.split(" "));
+        if (line.isEmpty()) {
+            words = new ArrayList<>();
+        } else {
+            words = Arrays.asList(line.split(" "));
+        }
     }
 
     public boolean hasNext() {
@@ -67,6 +71,30 @@ public class SpaceLexer implements Iterator<String> {
 
             if (next.equals(stop)) {
                 break;
+            }
+
+            result += next() + " ";
+        }
+
+        return result.trim();
+    }
+
+    public String advancedToScoped(String start, String stop) {
+        String result = "";
+        int scope = 0;
+
+        while (hasNext()) {
+            String next = peek();
+
+            if (next.equals(start)) {
+                scope++;
+            } else if (next.equals(stop)) {
+                if (scope == 0) {
+                    next();
+                    break;
+                } else {
+                    scope--;
+                }
             }
 
             result += next() + " ";

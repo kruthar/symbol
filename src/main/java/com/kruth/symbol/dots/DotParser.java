@@ -29,14 +29,14 @@ public class DotParser {
         lexer.next();
 
         String name = lexer.next();
+        String parameterString = lexer.advancedToScoped("dot", "tod");
+        SpaceLexer parameterLexer = new SpaceLexer(parameterString);
+
         List<SymbolObject> parameters = new ArrayList<>();
 
-        while (!lexer.peek().equals("sep")) {
-            parameters.add(new Expression(instructionState, lexer).evaluate());
+        while (parameterLexer.hasNext()) {
+            parameters.add(new Expression(instructionState, parameterLexer).evaluate());
         }
-
-        // Lex out the 'sep'
-        lexer.next();
 
         return new Dot(name, parameters);
     }

@@ -281,26 +281,9 @@ Functions are here! There are two main types:
     3
     ```
 
-### Dot Methods
-SymbolObjects will have various 'dot' methods that perform actions on that object. The syntax is a little wierd but it makes sense with how the `sep` keyword works. You'll get used to it.
-
-```
-> variable mylist is list one sep two sep three sep list
-> println mylist dot size sep
-3
-> execute mylist dot remove zero sep sep
-> println mylist
-[2, 3]
-```
-
-A few things to notice:
-* the `dot` keyword after a SymbolObject (or an expression that reduces to a SymbolObject) invokes the following method name with the following list of parameters
-* similar to how functions work, you have to use the `execute` instruction if you are invoking a dot method that has no return value
-* the `dot` invokation has to be ended by `sep` even if it does not have any parameters.
-
 Functions can be defined with any number parameters, after the method name use the keyword `accepts` then a list of parameter names.
 
-When calling a function that accepts parameters you must end each parameter with the `sep` keyword for "seperate". This keyword let's you seperate expressions when you are listing expressions.
+When calling a function that accepts parameters you must end each parameter with the `sep` keyword for "seperate". This keyword let's you separate expressions when you are listing expressions.
 Here is an advanced example of the `sep` keyword:
 
 ```
@@ -312,6 +295,23 @@ Here is an advanced example of the `sep` keyword:
 
 The above function call to `add` has another call to `add` as one of it's parameters. This is perfectly acceptible. Function parameters are expressions, and function calls reduce to expressions, so function calls can be used as parameters to other functions.
 The main thing to note here is the double `sep`, that's wierd, but necessary when you think about it. The first `sep` is to end the second parameter expression to the inner call to `add`. The second `sep` is to seperate the entire expression of the inner add call as the first parameter expression to the outer call to `add`. Clear as mud?
+
+### Dot Methods
+SymbolObjects will have various 'dot' methods that perform actions on that object. Because methods can have multiple parameter signatures, it is necessary to know exactly when parameter lists stop, so you end dot methods with `tod`.
+
+```
+> variable mylist is list one sep two sep three sep list
+> println mylist dot size tod
+3
+> execute mylist dot remove zero tod
+> println mylist
+[2, 3]
+```
+
+A few things to notice:
+* the `dot` keyword after a SymbolObject (or an expression that reduces to a SymbolObject) invokes the following method name with the following list of parameters
+* similar to how functions work, you have to use the `execute` instruction if you are invoking a dot method that has no return value
+* the `dot` invocation has to be ended by `dot` even if it does not have any parameters.
 
 ## Testing Against Project Euler
 Spoiler Alert! One of the test files is testing against Project Euler problems, don't peak if you haven't solved them yet!
