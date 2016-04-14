@@ -38,4 +38,10 @@ public class TestFunction {
         Symbol.executeFile("testFunctionReturns.symb");
         assertEquals("Test function calls returns as expressions", "2\n6\n3\ntest\nnull\n", outStream.toString());
     }
+
+    @Test
+    public void testFunctionRecursion() throws VariableDoesNotExistsException {
+        Symbol.executeFile("testFunctionRecursion.symb");
+        assertEquals("Test function calls with recursion", "120\n", outStream.toString());
+    }
 }

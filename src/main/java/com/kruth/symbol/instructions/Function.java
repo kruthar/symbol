@@ -82,6 +82,7 @@ public class Function {
     public SymbolObject execute(InstructionState instructionState, Map<String, Expression> parameterExpressionMap) throws VariableDoesNotExistsException {
         InstructionState functionState = new InstructionState();
         functionState.setLineLexerList(instructions);
+        functionState.setFunctionMap(instructionState.getFunctionMap());
 
         int previousLine = ErrorState.getLine();
         ErrorState.setLine(startLine);

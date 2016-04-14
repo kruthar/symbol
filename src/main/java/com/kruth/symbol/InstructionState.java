@@ -252,4 +252,12 @@ public class InstructionState {
         ErrorState.decrementLine(lines.size() + 1);
         return lines;
     }
+
+    public Map<String, Function> getFunctionMap() {
+        return functionMap;
+    }
+
+    public void setFunctionMap(Map<String, Function> map) {
+        functionMap = new HashMap<>(map);
+    }
 }
