@@ -1,9 +1,9 @@
-function factorial accepts num
-    variable result is one
-    if num greaterthan one
-        variable result is num times factorial num minus one
-    fi
-    return result
+function testwhile accepts doit
+    while doit
+        return zero
+    done
+    return one
 end
 
-println factorial five
+println testwhile true sep
+println testwhile false sep

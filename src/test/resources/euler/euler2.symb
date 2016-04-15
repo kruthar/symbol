@@ -23,6 +23,6 @@ while fib2 lessthan limit do
     variable swap is fib1 plus fib2
     variable fib1 is fib2
     variable fib2 is swap
-end
+done
 
 print total

@@ -18,7 +18,7 @@ import java.util.*;
 public class InstructionState {
     private LineLexer lineLexer = null;
     private InstructionState parentState = null;
-    private SymbolObject returnValue = new SymbolNull();
+    private SymbolObject returnValue = null;
     private Boolean continueBlockComment = false;
 
     private Stack<Integer> loopStack = new Stack<>();
@@ -201,8 +201,10 @@ public class InstructionState {
                 break;
             case "return":
                 Expression returnExpression = new Expression(this, instructionSplit[1]);
-                this.setReturnValue(returnExpression.evaluate());
-                this.endInstructions();
+                if (execute) {
+                    this.setReturnValue(returnExpression.evaluate());
+                    this.endInstructions();
+                }
                 break;
             case "variable":
                 Variable.parse(this, instructionSplit[1], execute);
@@ -215,6 +217,11 @@ public class InstructionState {
                 break;
             default:
                 System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
+        }
+
+        // If we have a return value then ensure we end here
+        if (returnValue != null) {
+            endInstructions();
         }
     }
 
@@ -244,6 +251,30 @@ public class InstructionState {
 
             if (nextSplit[0].equals(stop)) {
                 break;
+            }
+
+            lines.add(next);
+        }
+
+        ErrorState.decrementLine(lines.size() + 1);
+        return lines;
+    }
+
+    public List<String> advanceToScoped(List<String> starts, String stop) {
+        List<String> lines = new ArrayList<>();
+        while (hasNextLine()) {
+            String next = nextLine();
+            String[] nextSplit = next.trim().split(" ", 2);
+            int scope = 0;
+
+            if (starts.contains(nextSplit[0])) {
+                scope++;
+            } if (nextSplit[0].equals(stop)) {
+                if (scope == 0) {
+                    break;
+                } else {
+                    scope--;
+                }
             }
 
             lines.add(next);

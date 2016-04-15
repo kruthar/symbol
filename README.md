@@ -216,7 +216,7 @@ Order of operations and parenthesis
 > while counter lessthan three
 >   println counter
 >   variable counter is counter plus one
-> end
+> done
 0
 1
 2

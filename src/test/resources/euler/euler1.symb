@@ -17,6 +17,6 @@ while counter lessthan limit do
         variable total is total plus counter
     fi
     variable counter is counter plus one
-end
+done
 
 print total

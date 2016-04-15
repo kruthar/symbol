@@ -6,6 +6,7 @@ import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
+import com.kruth.symbol.literals.SymbolNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,8 @@ public class If {
                     }
                 }
                 ErrorState.incrementLine();
+
+                parentState.setReturnValue(instructionState.getReturnValue());
             }
         } else {
             System.out.println("ERROR: If statement expects a boolean expression");

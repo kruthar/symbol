@@ -2,6 +2,6 @@ variable test is one
 
 while test lessthan two do
     variable test is test plus one
-end
+done
 
 print test

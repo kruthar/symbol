@@ -11,6 +11,7 @@ import com.kruth.symbol.literals.SymbolBoolean;
 
 import java.rmi.UnexpectedException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -22,7 +23,7 @@ public class While {
 
         if (lexer.hasNext()) {
             String conditionString = lexer.advancedTo("do");
-            List<String> lines = parentState.advanceTo("end");
+            List<String> lines = parentState.advanceToScoped(Arrays.asList("while"), "done");
 
             if (execute) {
                 InstructionState instructionState = new InstructionState();
@@ -32,7 +33,7 @@ public class While {
 
                 Expression conditionExpression = new Expression(instructionState, conditionString);
 
-                while ((Boolean) conditionExpression.evaluate().getValue()) {
+                while ((Boolean) conditionExpression.evaluate().getValue() && instructionState.getReturnValue() == null) {
                     instructionState.resetToCurrentLoopMarker();
 
                     while (instructionState.hasNextLine()) {
@@ -40,6 +41,7 @@ public class While {
                     }
                 }
                 ErrorState.incrementLine();
+                parentState.setReturnValue(instructionState.getReturnValue());
             }
         } else {
             System.out.println("ERROR: expecting a conditional expression after while");

@@ -3,5 +3,5 @@ variable counter is zero
 while counter lessthan three do
     println counter
     variable counter is counter plus one
-end
+done
 println string done string

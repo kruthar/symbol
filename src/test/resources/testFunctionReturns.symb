@@ -11,8 +11,22 @@ println add one sep one plus four
 comment 3
 println add add one sep one sep sep one
 
-function printer
-    println string test string
+function testif accepts doit
+    if doit
+        return zero
+    fi
+    return one
 end
 
-println printer
+println testif true sep
+println testif false sep
+
+function testwhile accepts doit
+    while doit do
+        return zero
+    done
+    return one
+end
+
+println testwhile true sep
+println testwhile false sep

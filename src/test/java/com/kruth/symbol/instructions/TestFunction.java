@@ -36,7 +36,7 @@ public class TestFunction {
     @Test
     public void testFunctionReturns() throws VariableDoesNotExistsException {
         Symbol.executeFile("testFunctionReturns.symb");
-        assertEquals("Test function calls returns as expressions", "2\n6\n3\ntest\nnull\n", outStream.toString());
+        assertEquals("Test function calls returns as expressions", "2\n6\n3\n0\n1\n0\n1\n", outStream.toString());
     }
 
     @Test
