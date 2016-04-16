@@ -1,9 +1,9 @@
-function testwhile accepts doit
-    while doit
+function testforeach accepts doit
+    foreach item in doit do
         return zero
     done
     return one
 end
 
-println testwhile true sep
-println testwhile false sep
+println testforeach list one sep list sep
+println testforeach list sep list sep

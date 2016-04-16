@@ -23,7 +23,7 @@ public class While {
 
         if (lexer.hasNext()) {
             String conditionString = lexer.advancedTo("do");
-            List<String> lines = parentState.advanceToScoped(Arrays.asList("while"), "done");
+            List<String> lines = parentState.advanceToLoopScoped();
 
             if (execute) {
                 InstructionState instructionState = new InstructionState();

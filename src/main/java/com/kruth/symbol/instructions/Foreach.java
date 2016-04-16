@@ -9,6 +9,7 @@ import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.structures.Structure;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Foreach {
             if (lexer.hasNext() && lexer.next().equals("in")) {
                 if (lexer.hasNext()) {
                     SymbolObject list = new Expression(parentState, lexer.advancedTo("do")).evaluate();
-                    List<String> lines = parentState.advanceTo("end");
+                    List<String> lines = parentState.advanceToLoopScoped();
 
                     if (execute) {
                         if (list instanceof Structure) {
@@ -42,6 +43,7 @@ public class Foreach {
                                     instructionState.routeNextInstruction(execute);
                                 }
                             }
+                            parentState.setReturnValue(instructionState.getReturnValue());
                         } else {
                             System.out.println("ERROR: Foreach loop expects input of type Structure");
                         }

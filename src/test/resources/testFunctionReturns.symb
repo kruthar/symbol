@@ -30,3 +30,12 @@ end
 
 println testwhile true sep
 println testwhile false sep
+
+function testforeach accepts doit
+    foreach item in doit do
+        return zero
+    done
+    return one
+end
+
+println testforeach list one sep list sep

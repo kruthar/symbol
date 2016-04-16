@@ -260,7 +260,9 @@ public class InstructionState {
         return lines;
     }
 
-    public List<String> advanceToScoped(List<String> starts, String stop) {
+    public List<String> advanceToLoopScoped() {
+        List<String> starts = Arrays.asList("while", "foreach");
+        String stop = "done";
         List<String> lines = new ArrayList<>();
         while (hasNextLine()) {
             String next = nextLine();

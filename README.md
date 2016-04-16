@@ -247,14 +247,14 @@ For loops have the same three parts you would expect in plain java for loops.
 ```
 > foreach item in list one sep string two string sep false sep list do
 >    println item
-> end
+> done
 1
 two
 false
 ```
 
 Foreach loops similar to those in python. They have a variable name and a Structure to iterate over.
-Foreach loops use the keywords `foreach`, `in`, `do`, and `end`.
+Foreach loops use the keywords `foreach`, `in`, `do`, and `done`.
 
 `item` - The name of the variable that will hold the current iterator value
 
