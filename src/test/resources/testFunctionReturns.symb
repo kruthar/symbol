@@ -39,3 +39,13 @@ function testforeach accepts doit
 end
 
 println testforeach list one sep list sep
+
+function testfor accepts doit
+    for variable x is zero while x lessthan doit with variable x is x plus one do
+        return one
+    done
+    return zero
+end
+
+println testfor zero
+println testfor one

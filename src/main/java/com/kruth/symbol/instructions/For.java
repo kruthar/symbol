@@ -31,7 +31,7 @@ public class For {
                     // lex out 'with'
                     lexer.next();
                     String incrementInstruction = lexer.advancedTo("do");
-                    List<String> lines = parentState.advanceTo("end");
+                    List<String> lines = parentState.advanceToLoopScoped();
 
                     instructionState.setLineLexerList(lines);
 
@@ -53,6 +53,7 @@ public class For {
                             // increment variable
                             instructionState.routeInstruction(incrementInstruction, execute);
                         }
+                        parentState.setReturnValue(instructionState.getReturnValue());
                         ErrorState.incrementLine();
                     }
                 } else {

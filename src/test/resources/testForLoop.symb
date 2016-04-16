@@ -1,9 +1,9 @@
 for variable x is zero while x lessthan ten with variable x is x plus one do
     print x
-end
+done
 
 if false
     for variable x is zero while x lessthan ten with variable x is x plus one do
         print x
-    end
+    done
 fi

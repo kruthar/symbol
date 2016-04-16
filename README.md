@@ -227,14 +227,14 @@ Order of operations and parenthesis
 ```
 > for variable x is zero while x lessthan three with variable x is x plus one do
 >    println x
-> end
+> done
 0
 1
 2
 ```
 
 For loops have the same three parts you would expect in plain java for loops.
-`for`, `while`, `with`, `do`, and `end` ar the keywords that surround the three main expressions of a for loop.
+`for`, `while`, `with`, `do`, and `done` ar the keywords that surround the three main expressions of a for loop.
 
 `variable x is zero` - This is the initial variable declaration
 

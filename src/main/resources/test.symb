@@ -1,9 +1,9 @@
-function testforeach accepts doit
-    foreach item in doit do
-        return zero
+function testfor accepts doit
+    for variable x is zero while x lessthan doit with variable x is x plus one do
+        return one
     done
-    return one
+    return zero
 end
 
-println testforeach list one sep list sep
-println testforeach list sep list sep
+println testfor zero
+println testfor one

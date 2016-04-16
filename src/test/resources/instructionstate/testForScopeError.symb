@@ -1,6 +1,6 @@
 for variable x is zero while x is lessthan one with variable x is x plus one do
     variable inside is one
-end
+done
 
 print inside
 
