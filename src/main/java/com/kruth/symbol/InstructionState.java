@@ -181,10 +181,10 @@ public class InstructionState {
                 Comment.parse(instruction, execute);
                 break;
             case "print":
-                Print.parse(this, instructionSplit[1], execute);
+                Print.parse(this, instruction, execute);
                 break;
             case "println":
-                Println.parse(this, instructionSplit[1], execute);
+                Println.parse(this, instruction, execute);
                 break;
             case "if":
                 If.parse(this, instructionSplit[1], execute);
