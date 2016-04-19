@@ -1,9 +1,2 @@
-foreach item in list open one sep string two string sep false close do
-    println item
-done
-
-if false
-    foreach item in list open one sep string two string sep false close do
-        println item
-    done
-fi
+variable 2d is list open list open string inside string close close
+println 2d dot get zero tod dot get zero tod

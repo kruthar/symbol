@@ -154,14 +154,17 @@ public class Expression implements ExpressionComponent {
         // Apply dot methods
         while (reducedComponents.size() > 1) {
             boolean foundOperation = false;
+            int i = 1;
 
-            for (int i = 1; i < reducedComponents.size(); i++) {
+            while (i < reducedComponents.size()) {
                 // Essentially noop for now
                 if (reducedComponents.get(i) instanceof Dot) {
                     SymbolObject newObject = invokeMethod((SymbolObject) reducedComponents.get(i - 1), (Dot) reducedComponents.get(i));
                     reducedComponents.remove(i - 1);
                     reducedComponents.remove(i - 1);
                     reducedComponents.add(i - 1, newObject);
+                } else {
+                    i++;
                 }
             }
 

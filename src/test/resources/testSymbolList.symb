@@ -9,3 +9,6 @@ execute first dot remove one tod
 println first
 execute first dot remove zero tod
 println first
+
+variable 2d is list open list open string inside string close close
+println 2d dot get zero tod dot get zero tod
