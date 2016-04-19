@@ -2,6 +2,7 @@ package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -11,7 +12,7 @@ import com.kruth.symbol.literals.Literal;
  * Created by kruthar on 2/23/16.
  */
 public class Println {
-   public static void parse(InstructionState instructionState, String line, Boolean execute) throws VariableDoesNotExistsException {
+   public static void parse(InstructionState instructionState, String line, Boolean execute) throws SymbolException {
        if (execute) {
            SpaceLexer printlnLexer = new SpaceLexer(line.trim());
 

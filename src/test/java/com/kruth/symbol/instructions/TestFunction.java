@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.Symbol;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
@@ -28,19 +29,19 @@ public class TestFunction {
     }
 
     @Test
-    public void testFunctionExecute() throws VariableDoesNotExistsException {
+    public void testFunctionExecute() throws SymbolException {
         Symbol.executeFile("testFunctionExecute.symb");
         assertEquals("Test function calls from execute instruction", "2\n", outStream.toString());
     }
 
     @Test
-    public void testFunctionReturns() throws VariableDoesNotExistsException {
+    public void testFunctionReturns() throws SymbolException {
         Symbol.executeFile("testFunctionReturns.symb");
         assertEquals("Test function calls returns as expressions", "2\n6\n3\n0\n1\n0\n1\n0\n0\n1\n", outStream.toString());
     }
 
     @Test
-    public void testFunctionRecursion() throws VariableDoesNotExistsException {
+    public void testFunctionRecursion() throws SymbolException {
         Symbol.executeFile("testFunctionRecursion.symb");
         assertEquals("Test function calls with recursion", "120\n", outStream.toString());
     }

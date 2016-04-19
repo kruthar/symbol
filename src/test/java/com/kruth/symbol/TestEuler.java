@@ -1,5 +1,6 @@
 package com.kruth.symbol;
 
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
@@ -27,7 +28,7 @@ public class TestEuler {
     }
 
     @Test
-    public void testEuler() throws VariableDoesNotExistsException {
+    public void testEuler() throws SymbolException {
         Symbol.executeFile("euler/euler1.symb");
         assertEquals("Euler #1", "233168", outStream.toString());
         outStream.reset();

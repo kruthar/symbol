@@ -38,7 +38,7 @@ function testforeach accepts doit
     return one
 end
 
-println testforeach list one sep list sep
+println testforeach list open one close sep
 
 function testfor accepts doit
     for variable x is zero while x lessthan doit with variable x is x plus one do

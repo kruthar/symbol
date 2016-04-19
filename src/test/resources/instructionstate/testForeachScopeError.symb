@@ -1,4 +1,4 @@
-foreach item in list one sep list do
+foreach item in list open one close do
     variable inside is one
 done
 

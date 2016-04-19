@@ -6,6 +6,8 @@ import com.kruth.symbol.dots.DotParser;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.comparators.*;
+import com.kruth.symbol.exceptions.SymbolException;
+import com.kruth.symbol.exceptions.UnexpectedKeywordException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.instructions.BlockComment;
 import com.kruth.symbol.instructions.Variable;
@@ -37,32 +39,52 @@ public class Expression implements ExpressionComponent {
     private InstructionState instructionState;
     private List<ExpressionComponent> components = new ArrayList<>();
 
-    public Expression(InstructionState instructionState, String expressionString) throws VariableDoesNotExistsException {
+    // This is a signal that we opened this expression with the 'opened' keyword
+    private Boolean opened = false;
+
+    public Expression(InstructionState instructionState, String expressionString) throws SymbolException {
         this(instructionState, new SpaceLexer(expressionString));
     }
 
-    public Expression(InstructionState instructionState, SpaceLexer lexer) throws VariableDoesNotExistsException {
+    public Expression(InstructionState instructionState, SpaceLexer lexer, Boolean opened) throws SymbolException{
+        this.opened = opened;
+        parse(instructionState, lexer);
+    }
+
+    public Expression(InstructionState instructionState, SpaceLexer lexer) throws SymbolException {
+        parse(instructionState, lexer);
+    }
+
+    public void parse(InstructionState instructionState, SpaceLexer lexer) throws SymbolException {
         this.instructionState = instructionState;
         components = new ArrayList<>();
 
         while (lexer.hasNext()) {
             if (Expression.hasKeyword(lexer.peek().toLowerCase())) {
-                String keyword = lexer.next();
+                String keyword = lexer.peek();
                 // If we are opening an expression then close the current expression,
                 // then pass the lexer to in inner expression
                 if (keyword.equals("open")) {
-                    addComponent(new Expression(instructionState, lexer));
+                    lexer.next();
+                    addComponent(new Expression(instructionState, lexer, true));
                 } else if (keyword.equals("close")) {
+                    if (opened) {
+                        lexer.next();
+                    }
                     // If we are closing an expression, then end the loop here and allow the Expression to finish
                     // and the lexer to continue in the upper level of the stack
                     break;
                 } else if (keyword.equals("sep")) {
+                    lexer.next();
                     break;
                 } else if (keyword.equals("blockcomment")) {
+                    lexer.next();
                     BlockComment.midParse(instructionState, lexer);
                 } else if (keyword.equals("comment")) {
+                    lexer.next();
                     break;
                 } else {
+                    lexer.next();
                     System.out.println("Unrecognized Expression keyword: " + keyword);
                     System.exit(1);
                 }

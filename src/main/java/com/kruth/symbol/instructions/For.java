@@ -2,6 +2,8 @@ package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.exceptions.SymbolException;
+import com.kruth.symbol.exceptions.UnexpectedKeywordException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -14,7 +16,7 @@ import java.util.List;
  * Created by kruthar on 4/8/16.
  */
 public class For {
-    public static void parse(InstructionState parentState, String instruction, Boolean execute) throws VariableDoesNotExistsException {
+    public static void parse(InstructionState parentState, String instruction, Boolean execute) throws SymbolException {
         InstructionState instructionState = new InstructionState();
         instructionState.setParentState(parentState);
         SpaceLexer lexer = new SpaceLexer(instruction);

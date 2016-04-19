@@ -2,6 +2,7 @@ package com.kruth.symbol.dots;
 
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.expression.ExpressionComponent;
@@ -24,7 +25,7 @@ public class DotParser {
         return KEYWORDS.containsKey(keyword);
     }
 
-    public static ExpressionComponent parse(InstructionState instructionState, SpaceLexer lexer) throws VariableDoesNotExistsException {
+    public static ExpressionComponent parse(InstructionState instructionState, SpaceLexer lexer) throws SymbolException {
         // Lex out the "dot"
         lexer.next();
 

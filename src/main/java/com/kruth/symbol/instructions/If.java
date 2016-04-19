@@ -3,6 +3,7 @@ package com.kruth.symbol.instructions;
 import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -15,7 +16,7 @@ import java.util.List;
  * Created by kruthar on 3/31/16.
  */
 public class If {
-    public static void parse(InstructionState parentState, String line, Boolean execute) throws VariableDoesNotExistsException {
+    public static void parse(InstructionState parentState, String line, Boolean execute) throws SymbolException {
         SpaceLexer lexer = new SpaceLexer(line);
 
         if (lexer.hasNext()) {

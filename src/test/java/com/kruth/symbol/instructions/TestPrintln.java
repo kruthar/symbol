@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.Symbol;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +29,7 @@ public class TestPrintln {
     }
 
     @Test
-    public void TestPrintln() throws VariableDoesNotExistsException {
+    public void TestPrintln() throws SymbolException {
         Symbol.executeLine("println one two three");
         assertEquals("Simple println test", "123\n", outStream.toString());
     }

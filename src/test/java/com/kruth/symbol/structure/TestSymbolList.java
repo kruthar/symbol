@@ -3,6 +3,7 @@ package com.kruth.symbol.structure;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.Symbol;
 import com.kruth.symbol.SymbolObject;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
@@ -36,18 +37,18 @@ public class TestSymbolList {
     }
 
     @Test
-    public void testSymbolListExpressions() throws VariableDoesNotExistsException {
+    public void testSymbolListExpressions() throws SymbolException {
         Symbol.executeFile("testSymbolList.symb");
         assertEquals("SymbolList expressions", "[1, 2, 3]\n[4, 1, 2, 3]\n[4, 1, 2, 3, 5]\n5\n[4, 2, 3, 5]\n[2, 3, 5]\n", outStream.toString());
         outStream.reset();
     }
 
     @Test
-    public void testConstructors() throws VariableDoesNotExistsException {
+    public void testConstructors() throws SymbolException {
         SymbolList objectConstructor = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1), new SymbolNumber(2)));
         assertEquals("Test list constructor", new ArrayList<SymbolObject>(Arrays.asList((Literal) new SymbolNumber(1), new SymbolNumber(2))), objectConstructor.getValue());
 
-        SymbolList stringConstructor = new SymbolList(new InstructionState(), new SpaceLexer("list one sep two sep list"));
+        SymbolList stringConstructor = new SymbolList(new InstructionState(), new SpaceLexer("list open one sep two close"));
         assertEquals("Test list constructor", new ArrayList<SymbolObject>(Arrays.asList((Literal) new SymbolNumber(1), new SymbolNumber(2))), stringConstructor.getValue());
     }
 

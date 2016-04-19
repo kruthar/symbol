@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.Symbol;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +29,7 @@ public class TestForeach {
     }
 
     @Test
-    public void testSimpleForeachLoops() throws VariableDoesNotExistsException {
+    public void testSimpleForeachLoops() throws SymbolException {
         Symbol.executeFile("testForeachLoop.symb");
         assertEquals("Test Simple Foreach loops", "1\ntwo\nfalse\n", outStream.toString());
     }

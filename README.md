@@ -123,8 +123,8 @@ Values are considered Literals, here are the types of Literals available so far:
 * SymbolList - simple list, don't have much functionality yes except for defining and printing, and adding together
 
     ```
-    > variable list1 is list one sep two sep list
-    > variable list2 is list three sep four sep list
+    > variable list1 is list open one sep two close
+    > variable list2 is list open three sep four close
     > println list1
     > println list1 plus list2
     [1, 2]
@@ -245,7 +245,7 @@ For loops have the same three parts you would expect in plain java for loops.
 * foreach loops
 
 ```
-> foreach item in list one sep string two string sep false sep list do
+> foreach item in list open one sep string two string sep false close do
 >    println item
 > done
 1
@@ -258,7 +258,7 @@ Foreach loops use the keywords `foreach`, `in`, `do`, and `done`.
 
 `item` - The name of the variable that will hold the current iterator value
 
-`list one sep string two string sep false sep list` - A structure to iterate over, this could also be a variable pointint to a Structure
+`list open one sep string two string sep false close` - A structure to iterate over, this could also be a variable pointint to a Structure
 
 ### Functions
 Functions are here! There are two main types:
@@ -300,7 +300,7 @@ The main thing to note here is the double `sep`, that's wierd, but necessary whe
 SymbolObjects will have various 'dot' methods that perform actions on that object. Because methods can have multiple parameter signatures, it is necessary to know exactly when parameter lists stop, so you end dot methods with `tod`.
 
 ```
-> variable mylist is list one sep two sep three sep list
+> variable mylist is list open one sep two sep threeclose
 > println mylist dot size tod
 3
 > execute mylist dot remove zero tod

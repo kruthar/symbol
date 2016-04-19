@@ -1,6 +1,7 @@
 package com.kruth.symbol.expression;
 
 import com.kruth.symbol.Symbol;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +29,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testSimpleExpressions() throws VariableDoesNotExistsException {
+    public void testSimpleExpressions() throws SymbolException {
         Symbol.executeLine("print string Hello World! string");
         assertEquals("Simple String expression", "Hello World!", outStream.toString());
         outStream.reset();
@@ -40,7 +41,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testBooleanOperators() throws VariableDoesNotExistsException {
+    public void testBooleanOperators() throws SymbolException {
         Symbol.executeLine("print true or true");
         assertEquals("true || true == true", "true", outStream.toString());
         outStream.reset();
@@ -63,7 +64,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testSimpleMathExpressions() throws VariableDoesNotExistsException {
+    public void testSimpleMathExpressions() throws SymbolException {
         // Numbers
         Symbol.executeLine("print one plus one");
         assertEquals("Simple addition test", "2", outStream.toString());
@@ -95,7 +96,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testOrderOfOperations() throws VariableDoesNotExistsException {
+    public void testOrderOfOperations() throws SymbolException {
         Symbol.executeLine("print one plus one times two");
         assertEquals("Multiplication before Addition", "3", outStream.toString());
         outStream.reset();
@@ -117,7 +118,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testParenthesisOperations() throws VariableDoesNotExistsException {
+    public void testParenthesisOperations() throws SymbolException {
         Symbol.executeLine("print open one plus one close times two");
         assertEquals("Parenthesis Multiplication before Addition", "4", outStream.toString());
         outStream.reset();
@@ -139,7 +140,7 @@ public class TestBasicExpressions {
     }
 
     @Test
-    public void testComparators() throws VariableDoesNotExistsException {
+    public void testComparators() throws SymbolException {
         Symbol.executeLine("print one equals one");
         assertEquals("Equality positive test", "true", outStream.toString());
         outStream.reset();

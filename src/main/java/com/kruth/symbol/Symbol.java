@@ -1,5 +1,6 @@
 package com.kruth.symbol;
 
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 
 import java.io.File;
@@ -15,25 +16,25 @@ public class Symbol {
 
         try {
             Symbol.executeFile(args[0]);
-        } catch (VariableDoesNotExistsException e) {
+        } catch (SymbolException e) {
             e.printStackTrace();
         }
     }
 
-    public static void executeFile(String filename) throws VariableDoesNotExistsException {
+    public static void executeFile(String filename) throws SymbolException {
         InstructionState instructionState = new InstructionState();
         instructionState.setLineLexerFile(filename);
         ErrorState.setFile(filename);
         execute(instructionState);
     }
 
-    public static void executeLine(String line) throws VariableDoesNotExistsException {
+    public static void executeLine(String line) throws SymbolException {
         InstructionState instructionState = new InstructionState();
         instructionState.setLineLexerString(line);
         execute(instructionState);
     }
 
-    public static void execute(InstructionState instructionState) throws VariableDoesNotExistsException {
+    public static void execute(InstructionState instructionState) throws SymbolException {
         while (instructionState.hasNextLine()) {
             instructionState.routeNextInstruction(true);
         }

@@ -2,6 +2,8 @@ package com.kruth.symbol.structures;
 
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
+import com.kruth.symbol.exceptions.SymbolException;
+import com.kruth.symbol.exceptions.UnexpectedKeywordException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -29,14 +31,24 @@ public class SymbolList extends Structure {
         value = new ArrayList<>(list);
     }
 
-    public SymbolList(InstructionState instructionState, SpaceLexer lexer) throws VariableDoesNotExistsException {
+    public SymbolList(InstructionState instructionState, SpaceLexer lexer) throws SymbolException {
         value = new ArrayList<>();
+
         // Lex out the starting 'list' keyword
         lexer.next();
-        while (!lexer.peek().toLowerCase().equals("list")) {
+
+        if (!lexer.peek().equals("open")) {
+            throw new UnexpectedKeywordException("Expecting 'open' keyword, found '" + lexer.next() + "'.");
+        } else {
+            // lex out the 'open' keyword
+            lexer.next();
+        }
+
+        while (!lexer.peek().toLowerCase().equals("close")) {
             value.add(new Expression(instructionState, lexer).evaluate());
         }
-        // Lex out the ending 'list' keyword
+
+        // Lex out the ending 'close' keyword
         lexer.next();
     }
 

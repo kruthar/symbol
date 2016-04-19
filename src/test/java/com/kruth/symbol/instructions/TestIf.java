@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.Symbol;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +29,7 @@ public class TestIf {
     }
 
     @Test
-    public void testIf() throws VariableDoesNotExistsException {
+    public void testIf() throws SymbolException {
         Symbol.executeFile("testIf.symb");
         assertEquals("Simple if tests", "1\n2\n3\n5\n6\n7\n9\n12\n15\n", outStream.toString());
     }

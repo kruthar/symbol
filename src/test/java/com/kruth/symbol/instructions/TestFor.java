@@ -1,6 +1,7 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.Symbol;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
@@ -28,7 +29,7 @@ public class TestFor {
     }
 
     @Test
-    public void testSimpleForLoops() throws VariableDoesNotExistsException {
+    public void testSimpleForLoops() throws SymbolException {
         Symbol.executeFile("testForLoop.symb");
         assertEquals("Test Simple For loops", "0123456789", outStream.toString());
     }

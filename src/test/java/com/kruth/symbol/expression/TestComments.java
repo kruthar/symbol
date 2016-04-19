@@ -1,6 +1,7 @@
 package com.kruth.symbol.expression;
 
 import com.kruth.symbol.Symbol;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import org.junit.After;
 import org.junit.Before;
@@ -28,14 +29,14 @@ public class TestComments {
     }
 
     @Test
-    public void testComment() throws VariableDoesNotExistsException {
+    public void testComment() throws SymbolException {
         Symbol.executeFile("testComment.symb");
         assertEquals("Single line comment test", "World", outStream.toString());
         outStream.reset();
     }
 
     @Test
-    public void testBlockComment() throws VariableDoesNotExistsException {
+    public void testBlockComment() throws SymbolException {
         Symbol.executeFile("testBlockComment.symb");
         assertEquals("Block comment test", "After\n1001000\n1000000000\nafter\n123\n", outStream.toString());
         outStream.reset();
