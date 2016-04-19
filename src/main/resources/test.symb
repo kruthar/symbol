@@ -1,2 +1,2 @@
-variable 2d is list open list open string inside string close close
-println 2d dot get zero tod dot get zero tod
+variable mylist is list open close
+println mylist

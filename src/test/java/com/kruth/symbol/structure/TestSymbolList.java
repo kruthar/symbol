@@ -4,7 +4,8 @@ import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.Symbol;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
-import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
+import com.kruth.symbol.exceptions.SymbolListIndexOutOfBoundsException;
+import com.kruth.symbol.exceptions.UnexpectedKeywordException;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolNumber;
@@ -52,8 +53,18 @@ public class TestSymbolList {
         assertEquals("Test list constructor", new ArrayList<SymbolObject>(Arrays.asList((Literal) new SymbolNumber(1), new SymbolNumber(2))), stringConstructor.getValue());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void testGet() {
+    @Test(expected = UnexpectedKeywordException.class)
+    public void testOpenError() throws SymbolException {
+        SymbolList list0 = new SymbolList(new InstructionState(), new SpaceLexer("list one sep two close"));
+    }
+
+    @Test(expected = UnexpectedKeywordException.class)
+    public void testCloseError() throws SymbolException {
+        SymbolList list0 = new SymbolList(new InstructionState(), new SpaceLexer("list open one sep two sep"));
+    }
+
+    @Test(expected = SymbolListIndexOutOfBoundsException.class)
+    public void testGet() throws SymbolException {
         SymbolList list0 = new SymbolList(new ArrayList<SymbolObject>());
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));
 
@@ -63,8 +74,8 @@ public class TestSymbolList {
         list0.get(new SymbolNumber(1));
     }
 
-    @Test
-    public void testPut() {
+    @Test(expected = SymbolListIndexOutOfBoundsException.class)
+    public void testPut() throws SymbolException {
         SymbolList list0 = new SymbolList(new ArrayList<SymbolObject>());
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));
         SymbolList list2 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(2), new SymbolNumber(1)));
@@ -74,21 +85,27 @@ public class TestSymbolList {
 
         list0.put(new SymbolNumber(0), new SymbolNumber(2));
         assertEquals("put at 0", list2, list0);
+
+        list2.put(new SymbolNumber(5), new SymbolNumber(0));
     }
 
     @Test
-    public void testSize() {
+    public void testSize() throws SymbolException {
+        SymbolList list0 = new SymbolList(new InstructionState(), new SpaceLexer("list open close"));
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));
 
+        assertEquals("Empty size test", new SymbolNumber(0), list0.size());
         assertEquals("Simple size test", new SymbolNumber(1), list1.size());
     }
 
-    @Test
-    public void testRemove() {
+    @Test(expected = SymbolListIndexOutOfBoundsException.class)
+    public void testRemove() throws SymbolException {
         SymbolList list0 = new SymbolList(new ArrayList<SymbolObject>());
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));
 
         list1.remove(new SymbolNumber(0));
         assertEquals("Simple remove test", list0, list1);
+
+        list1.remove(new SymbolNumber(0));
     }
 }

@@ -138,7 +138,7 @@ public class Expression implements ExpressionComponent {
         return result;
     }
 
-    public SymbolObject evaluate() {
+    public SymbolObject evaluate() throws SymbolException {
         List<ExpressionComponent> reducedComponents = new ArrayList<>();
         // Run through the component list and evaluate any sub expressions, and retrieve variable values first
         for (ExpressionComponent component: components) {
@@ -324,7 +324,7 @@ public class Expression implements ExpressionComponent {
         list.add(index - 1, newLiteral);
     }
 
-    private SymbolObject invokeMethod(SymbolObject obj, Dot dot) {
+    private SymbolObject invokeMethod(SymbolObject obj, Dot dot) throws SymbolException {
         for (Method method: obj.getClass().getDeclaredMethods()) {
             if (method.getName().equals(dot.getName())) {
                 Class<?>[] types = method.getParameterTypes();
@@ -343,9 +343,10 @@ public class Expression implements ExpressionComponent {
                 try {
                     return (SymbolObject) method.invoke(obj, parameters.toArray());
                 } catch (IllegalAccessException e) {
+                    // Don't forget to do something ehere
                     e.printStackTrace();
                 } catch (InvocationTargetException e) {
-                    e.printStackTrace();
+                    throw (SymbolException) e.getCause();
                 }
             }
         }

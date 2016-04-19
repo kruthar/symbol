@@ -3,6 +3,7 @@ package com.kruth.symbol.structures;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
+import com.kruth.symbol.exceptions.SymbolListIndexOutOfBoundsException;
 import com.kruth.symbol.exceptions.UnexpectedKeywordException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
@@ -38,14 +39,18 @@ public class SymbolList extends Structure {
         lexer.next();
 
         if (!lexer.peek().equals("open")) {
-            throw new UnexpectedKeywordException("Expecting 'open' keyword, found '" + lexer.next() + "'.");
+            throw new UnexpectedKeywordException("Expecting 'open' keyword to start SymbolList, found '" + lexer.next() + "'.");
         } else {
             // lex out the 'open' keyword
             lexer.next();
         }
 
-        while (!lexer.peek().toLowerCase().equals("close")) {
-            value.add(new Expression(instructionState, lexer).evaluate());
+        try {
+            while (!lexer.peek().toLowerCase().equals("close")) {
+                value.add(new Expression(instructionState, lexer).evaluate());
+            }
+        } catch (NullPointerException e) {
+            throw new UnexpectedKeywordException("Reached end of Expression, but expecting the 'close' keyword to end SymbolList.", e);
         }
 
         // Lex out the ending 'close' keyword
@@ -120,19 +125,31 @@ public class SymbolList extends Structure {
         value.add(obj);
     }
 
-    public void put(SymbolNumber index, SymbolObject obj) {
-        value.add(((BigInteger) index.getValue()).intValue(), obj);
+    public void put(SymbolNumber index, SymbolObject obj) throws SymbolException {
+        try {
+            value.add(((BigInteger) index.getValue()).intValue(), obj);
+        } catch (IndexOutOfBoundsException e) {
+            throw new SymbolListIndexOutOfBoundsException("Attempting to insert at index " + index + ", but list size is only " + value.size() + ".", e);
+        }
     }
 
-    public SymbolObject get(SymbolNumber index) {
-        return value.get(((BigInteger) index.getValue()).intValue());
+    public SymbolObject get(SymbolNumber index) throws SymbolException{
+        try {
+            return value.get(((BigInteger) index.getValue()).intValue());
+        } catch (IndexOutOfBoundsException e) {
+            throw new SymbolListIndexOutOfBoundsException("Attempting to get index " + index + ", but list size is only " + value.size() + ".", e);
+        }
     }
 
     public SymbolNumber size() {
         return new SymbolNumber(value.size());
     }
 
-    public void remove(SymbolNumber index) {
-        value.remove(((BigInteger) index.getValue()).intValue());
+    public void remove(SymbolNumber index) throws SymbolException {
+        try {
+            value.remove(((BigInteger) index.getValue()).intValue());
+        } catch (IndexOutOfBoundsException e) {
+            throw new SymbolListIndexOutOfBoundsException("Attempting to remove index " + index + ", but list size is only " + value.size() + ".", e);
+        }
     }
 }
