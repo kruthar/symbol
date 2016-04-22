@@ -17,6 +17,7 @@ import com.kruth.symbol.structures.SymbolList;
 import javax.naming.OperationNotSupportedException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.rmi.UnexpectedException;
 import java.util.*;
 
 /**
@@ -83,8 +84,7 @@ public class Expression implements ExpressionComponent {
                     break;
                 } else {
                     lexer.next();
-                    System.out.println("Unrecognized Expression keyword: " + keyword);
-                    System.exit(1);
+                    throw new UnexpectedKeywordException("Unrecognized Expression keyword: " + keyword);
                 }
             } else if (SymbolNumber.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(new SymbolNumber(lexer));
@@ -305,9 +305,9 @@ public class Expression implements ExpressionComponent {
         }
 
         if (reducedComponents.size() > 1) {
-            System.out.println("ERROR: Did not fully reduce operation");
-            System.out.println();
+            throw new InvalidExpressionException("Expression failed to completely reduce expression, remaining expression is: " + reducedComponents);
         }
+        
         return (SymbolObject) reducedComponents.get(0);
     }
 
