@@ -1,2 +1,9 @@
-variable mylist is list open close
-println mylist
+function factorial accepts num
+    if num lessthanequals one
+        return one
+    fi
+
+    return num times factorial num minus one
+end
+
+print factorial five

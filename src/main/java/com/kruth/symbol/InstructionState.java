@@ -1,14 +1,11 @@
 package com.kruth.symbol;
 
-import com.kruth.symbol.exceptions.SymbolException;
-import com.kruth.symbol.exceptions.UnexpectedKeywordException;
-import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
+import com.kruth.symbol.exceptions.*;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.instructions.*;
 import com.kruth.symbol.lexers.LineLexer;
 import com.kruth.symbol.lexers.SpaceLexer;
-import com.kruth.symbol.literals.SymbolNull;
 
 import java.io.File;
 import java.net.URL;
@@ -37,11 +34,13 @@ public class InstructionState {
         }
     }
 
-    public SymbolObject getVariable(String name) {
+    public SymbolObject getVariable(String name) throws SymbolException{
         if (variableMap.containsKey(name)) {
             return variableMap.get(name);
-        } else {
+        } else if (parentState.hasVariable(name)){
             return parentState.getVariable(name);
+        } else {
+            throw new VariableDoesNotExistsException("Variable '" + name + "' is not defined.");
         }
     }
 
@@ -109,17 +108,16 @@ public class InstructionState {
         }
     }
 
-    public void addFunction(Function func) {
+    public void addFunction(Function func) throws SymbolException{
         if (functionMap.containsKey(func.getKey())) {
-            System.out.println("This function signature already exists, should this be an error?");
-            System.exit(1);
+            throw new FunctionAlreadyDefinedException("Function '" + func.getKey() + "' is already defined.");
         }
 
         functionMap.put(func.getKey(), func);
     }
 
     public Boolean hasFunction(String name) {
-        Boolean hasLocal = functionMap.containsKey(name);
+        Boolean hasLocal = functionMap.containsKey(name) && functionMap.get(name) != null;
         Boolean hasParent = false;
 
         if (parentState != null) {
@@ -145,12 +143,8 @@ public class InstructionState {
         } else if (parentState != null && parentState.hasFunction(name)) {
             return parentState.parseFunctionCall(parentState, lexer);
         } else {
-            System.out.println("ERROR: Function is not defined: " + name);
-            System.exit(1);
+            throw new FunctionNotDefinedException("Function '" + name + "' is not defined.");
         }
-
-        return new SymbolNull();
-
     }
 
     public void routeNextInstruction(Boolean execute) throws SymbolException {
@@ -218,7 +212,7 @@ public class InstructionState {
                 Foreach.parse(this, instructionSplit[1], execute);
                 break;
             default:
-                System.out.println("Unknown instruction '" + instructionSplit[0] + "'");
+                throw new UnknownInstructionException("Unknown instruction '" + instructionSplit[0] + "'");
         }
 
         // If we have a return value then ensure we end here

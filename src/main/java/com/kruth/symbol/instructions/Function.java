@@ -29,7 +29,7 @@ public class Function {
         this.startLine = startLine;
     }
 
-    public static void parse(InstructionState instructionState, String line) {
+    public static void parse(InstructionState instructionState, String line) throws SymbolException{
         int startLine = ErrorState.getLine();
         String[] lineSplit = line.split(" ");
 

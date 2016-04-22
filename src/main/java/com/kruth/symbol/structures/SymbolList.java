@@ -5,13 +5,10 @@ import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.SymbolListIndexOutOfBoundsException;
 import com.kruth.symbol.exceptions.UnexpectedKeywordException;
-import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
-import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolNumber;
 
-import javax.naming.OperationNotSupportedException;
 import java.math.BigInteger;
 import java.util.*;
 
