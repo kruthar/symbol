@@ -6,9 +6,7 @@ import com.kruth.symbol.dots.DotParser;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.comparators.*;
-import com.kruth.symbol.exceptions.SymbolException;
-import com.kruth.symbol.exceptions.UnexpectedKeywordException;
-import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
+import com.kruth.symbol.exceptions.*;
 import com.kruth.symbol.instructions.BlockComment;
 import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -343,15 +341,13 @@ public class Expression implements ExpressionComponent {
                 try {
                     return (SymbolObject) method.invoke(obj, parameters.toArray());
                 } catch (IllegalAccessException e) {
-                    // Don't forget to do something ehere
-                    e.printStackTrace();
+                    throw new CatastrophicFailureException("IllegalAccessException thrown trying to invoke " + dot.getName() + " with parameters: " + dot.getParameters());
                 } catch (InvocationTargetException e) {
                     throw (SymbolException) e.getCause();
                 }
             }
         }
 
-        System.out.println("Failed to invoke " + dot + " on <" + obj.getClass() + "> " + obj);
-        return new SymbolNull();
+        throw new DotMethodNotDefinedException("Failed to invoke " + dot + " on <" + obj.getClass() + "> " + obj);
     }
 }
