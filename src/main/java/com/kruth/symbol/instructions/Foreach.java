@@ -4,6 +4,8 @@ import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
+import com.kruth.symbol.exceptions.UnexpectedKeywordException;
+import com.kruth.symbol.exceptions.UnexpectedStateException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -24,7 +26,8 @@ public class Foreach {
         if (lexer.hasNext()) {
             String var = lexer.next();
 
-            if (lexer.hasNext() && lexer.next().equals("in")) {
+            if (lexer.hasNext() && lexer.peek().equals("in")) {
+                lexer.next();
                 if (lexer.hasNext()) {
                     SymbolObject list = new Expression(parentState, lexer.advancedTo("do")).evaluate();
                     List<String> lines = parentState.advanceToLoopScoped();
@@ -46,18 +49,18 @@ public class Foreach {
                             }
                             parentState.setReturnValue(instructionState.getReturnValue());
                         } else {
-                            System.out.println("ERROR: Foreach loop expects input of type Structure");
+                            throw new UnexpectedStateException("Foreach loop expects a structure as input.");
                         }
                         ErrorState.incrementLine();
                     }
                 } else {
-                    System.out.println("ERROR: Expecting some type of Structure as input for foreach loop");
+                    throw new UnexpectedKeywordException("Expecting structure for loop, found end of instruction.");
                 }
             } else {
-                System.out.println("ERROR: Expeing the keyword 'in' in foreach loop");
+                throw new UnexpectedKeywordException("Expecting the keyword 'in', found: " + lexer.peek());
             }
         } else {
-            System.out.println("ERROR: Expecting the rest of a foreach expression");
+            throw new UnexpectedKeywordException("Expecting variable name, found end of instruction.");
         }
     }
 }

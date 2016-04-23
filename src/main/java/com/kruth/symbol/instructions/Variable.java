@@ -2,6 +2,7 @@ package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.exceptions.SymbolException;
+import com.kruth.symbol.exceptions.UnexpectedStateException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.expression.ExpressionComponent;
@@ -32,7 +33,7 @@ public class Variable implements ExpressionComponent {
                 instructionState.setVariable(variableSplit[0], new Expression(instructionState, variableSplit[2]).evaluate());
             }
         } else {
-            System.out.println("Error in variable assignment: 'variable " + line + "'");
+            throw new UnexpectedStateException("Expecting the keyword 'is', found: " + variableSplit[1]);
         }
     }
 }

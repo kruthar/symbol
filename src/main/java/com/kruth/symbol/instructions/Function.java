@@ -4,6 +4,8 @@ import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
+import com.kruth.symbol.exceptions.UnexpectedKeywordException;
+import com.kruth.symbol.exceptions.UnexpectedStateException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.literals.Literal;
@@ -34,8 +36,7 @@ public class Function {
         String[] lineSplit = line.split(" ");
 
         if (lineSplit.length < 1) {
-            System.out.println("Functions require a name");
-            System.exit(1);
+            throw new UnexpectedStateException("Function definition requires a name.");
         }
 
         String name = lineSplit[0];
@@ -45,19 +46,20 @@ public class Function {
         if (lineSplit.length > 1) {
             // Then the function must be atleast 'function name accepts param1'
             if (lineSplit.length < 3) {
-                System.out.println("No parameters specified for function: " + name);
-                System.exit(1);
+                if (lineSplit[1].equals("accepts")) {
+                    throw new UnexpectedKeywordException("Function definition is missing parameter list.");
+                }
+                throw new UnexpectedKeywordException("Expecting the keyword 'accepts' followed by parameter list, found: " + lineSplit[1]);
             }
 
             if (!lineSplit[1].equals("accepts")) {
-                System.out.println("Expecting keyword 'accepts' found: " + lineSplit[1]);
-                System.exit(1);
+                throw new UnexpectedKeywordException("Expecting the keyword 'accepts', found: " + lineSplit[1]);
             }
 
             parameters = Arrays.copyOfRange(lineSplit, 2, lineSplit.length);
         }
 
-        List<String> instructions = new ArrayList<String>();
+        List<String> instructions = new ArrayList<>();
 
         String nextInstruction = instructionState.nextLine();
         String[] instructionSplit = nextInstruction.trim().split(" ");

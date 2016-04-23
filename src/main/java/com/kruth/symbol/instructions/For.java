@@ -59,13 +59,13 @@ public class For {
                         ErrorState.incrementLine();
                     }
                 } else {
-                    System.out.println("ERROR: Expecting a variable declaration as the final part of the for loop");
+                    throw new UnexpectedKeywordException("Expecting the keyword 'with', found: " + lexer.peek());
                 }
             } else {
-                System.out.println("ERROR: Expecting while boolean expression as second part of for loop");
+                throw new UnexpectedKeywordException("Expecting the keyword 'while', found: " + lexer.peek());
             }
         } else {
-            System.out.println("ERROR: Expecting variable declaration as first part of 'for' loop");
+            throw new UnexpectedKeywordException("Expecting the keyword 'variable', found: " + lexer.peek());
         }
     }
 }

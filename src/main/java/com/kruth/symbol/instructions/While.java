@@ -4,6 +4,7 @@ import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
+import com.kruth.symbol.exceptions.UnexpectedStateException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -45,7 +46,7 @@ public class While {
                 parentState.setReturnValue(instructionState.getReturnValue());
             }
         } else {
-            System.out.println("ERROR: expecting a conditional expression after while");
+            throw new UnexpectedStateException("While statement expects a boolean condition, found end of instruction");
         }
     }
 }

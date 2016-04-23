@@ -307,7 +307,7 @@ public class Expression implements ExpressionComponent {
         if (reducedComponents.size() > 1) {
             throw new InvalidExpressionException("Expression failed to completely reduce expression, remaining expression is: " + reducedComponents);
         }
-        
+
         return (SymbolObject) reducedComponents.get(0);
     }
 

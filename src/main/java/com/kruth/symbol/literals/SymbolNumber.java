@@ -1,6 +1,8 @@
 package com.kruth.symbol.literals;
 
 import com.kruth.symbol.SymbolObject;
+import com.kruth.symbol.exceptions.InvalidSymbolNumberException;
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.lexers.SpaceLexer;
 
 import javax.naming.OperationNotSupportedException;
@@ -78,7 +80,7 @@ public class SymbolNumber extends Literal {
         value = num;
     }
 
-    public SymbolNumber(SpaceLexer lexer) {
+    public SymbolNumber(SpaceLexer lexer) throws SymbolException {
         String string_num = "";
         BigInteger total = BigInteger.valueOf(0);
         Boolean digits = false;
@@ -117,7 +119,7 @@ public class SymbolNumber extends Literal {
                             sectionValue = sectionValue.add(tensMap.get(next).add(singleMap.get(lexer.next())));
                             string_num = String.valueOf(sectionValue);
                         } else if (tensMap.containsKey(lexer.peek())) {
-                            System.out.println("ERROR: Invalid SymbolNumber, two tens digits in a row is not allowed");
+                            throw new InvalidSymbolNumberException("Two tens digits in a row is not valid");
                         } else if (lexer.peek() == null || lexer.peek().equals("sep") || lexer.peek().equals("hundred") || prefixMap.containsKey(lexer.peek())) {
                             string_num = String.valueOf(tensMap.get(next));
                         }
@@ -128,7 +130,7 @@ public class SymbolNumber extends Literal {
                     }
                 } else if (prefixMap.containsKey(next)) {
                     if (string_num.equals("")) {
-                        System.out.println("ERROR: Invalid SymbolNumber, specify how many " + next + "s");
+                        throw new InvalidSymbolNumberException("Unspecified number of" + next + "s");
                     }
 
                     total = total.add(new BigInteger(string_num).multiply(prefixMap.get(next)));

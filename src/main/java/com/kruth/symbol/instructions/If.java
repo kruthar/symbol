@@ -4,6 +4,7 @@ import com.kruth.symbol.ErrorState;
 import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
+import com.kruth.symbol.exceptions.UnexpectedStateException;
 import com.kruth.symbol.exceptions.VariableDoesNotExistsException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
@@ -44,7 +45,7 @@ public class If {
                         }
 
                         if (nextSplit.length == 2) {
-                            System.out.println("ERROR: else if needs a condition expression");
+                            throw new UnexpectedStateException("Else if statement expects a boolean condition, found end of instruction.");
                         } else if (nextSplit.length == 3 && nextSplit[1].equals("if")) {
                             executeBlock = (Boolean) new Expression(parentState, nextSplit[2]).evaluate().getValue();
                         } else {
@@ -60,7 +61,7 @@ public class If {
                 parentState.setReturnValue(instructionState.getReturnValue());
             }
         } else {
-            System.out.println("ERROR: If statement expects a boolean expression");
+            throw new UnexpectedStateException("If statement expects a boolean condition, found end of instruction.");
         }
     }
 }
