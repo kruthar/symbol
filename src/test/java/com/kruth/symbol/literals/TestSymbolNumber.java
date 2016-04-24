@@ -1,5 +1,6 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.lexers.SpaceLexer;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class TestSymbolNumber {
     @Test
-    public void testConstructors() {
+    public void testConstructors() throws SymbolException {
         SymbolNumber five = new SymbolNumber(5);
         assertEquals("Test SymbolNumber integer constructor", BigInteger.valueOf(5), five.getValue());
 
@@ -73,7 +74,7 @@ public class TestSymbolNumber {
     }
 
     @Test
-    public void testComplexNumbers() {
+    public void testComplexNumbers() throws SymbolException {
         assertEquals("test 10", BigInteger.valueOf(10), new SymbolNumber(new SpaceLexer("ten")).getValue());
         assertEquals("test 11", BigInteger.valueOf(11), new SymbolNumber(new SpaceLexer("eleven")).getValue());
         assertEquals("test 12", BigInteger.valueOf(12), new SymbolNumber(new SpaceLexer("twelve")).getValue());
