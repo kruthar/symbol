@@ -1,9 +1,3 @@
-function factorial accepts num
-    if num lessthanequals one
-        return one
-    fi
+module math.symb as math
 
-    return num times factorial num minus one
-end
-
-print factorial five
+println string hello modules string

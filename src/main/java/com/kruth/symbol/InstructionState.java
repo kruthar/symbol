@@ -23,6 +23,7 @@ public class InstructionState {
     private Stack<Integer> loopStack = new Stack<>();
     private Map<String, SymbolObject> variableMap = new HashMap<>();
     private Map<String, Function> functionMap = new HashMap<>();
+    private Map<String, Module> moduleMap = new HashMap<>();
 
     public InstructionState() {}
 
@@ -191,6 +192,9 @@ public class InstructionState {
             case "function":
                 Function.parse(this, instructionSplit[1]);
                 break;
+            case "module":
+                Module.parse(this, instructionSplit[1]);
+                break;
             case "execute":
                 Expression execExpression = new Expression(this, instructionSplit[1]);
                 execExpression.evaluate();
@@ -288,5 +292,9 @@ public class InstructionState {
 
     public void setFunctionMap(Map<String, Function> map) {
         functionMap = new HashMap<>(map);
+    }
+
+    public void addModule(Module module) {
+        moduleMap.put(module.getName(), module);
     }
 }

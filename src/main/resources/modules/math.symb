@@ -1,0 +1,10 @@
+variable pi is three
+
+function pow accepts base power
+    variable total is one
+    while power greaterthan zero do
+        variable total is total times base
+        variable power is power minus one
+    done
+    return total
+end
