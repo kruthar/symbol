@@ -1,0 +1,4 @@
+module math.symb as math
+
+println math dot pi tod
+println math dot pow two sep three tod
