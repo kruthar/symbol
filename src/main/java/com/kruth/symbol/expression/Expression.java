@@ -8,6 +8,7 @@ import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.comparators.*;
 import com.kruth.symbol.exceptions.*;
 import com.kruth.symbol.instructions.BlockComment;
+import com.kruth.symbol.instructions.Module;
 import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.*;
@@ -52,6 +53,10 @@ public class Expression implements ExpressionComponent {
 
     public Expression(InstructionState instructionState, SpaceLexer lexer) throws SymbolException {
         parse(instructionState, lexer);
+    }
+
+    public Expression(SymbolObject obj) {
+        components.add(obj);
     }
 
     public void parse(InstructionState instructionState, SpaceLexer lexer) throws SymbolException {
@@ -100,6 +105,10 @@ public class Expression implements ExpressionComponent {
                 addComponent(ComparatorParser.parse(lexer));
             } else if (DotParser.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(DotParser.parse(instructionState, lexer));
+            } else if (instructionState.hasModule(lexer.peek().toLowerCase()) &&
+                    instructionState.hasModule(lexer.peek().toLowerCase())) {
+                addComponent(instructionState.getModule(lexer.next().toLowerCase()));
+                //addComponent(instructionState.parseModuleCall(instructionState, lexer));
             } else if (instructionState.hasFunction(lexer.peek().toLowerCase())) {
                 addComponent(instructionState.parseFunctionCall(instructionState, lexer));
             } else {
@@ -157,7 +166,17 @@ public class Expression implements ExpressionComponent {
             while (i < reducedComponents.size()) {
                 // Essentially noop for now
                 if (reducedComponents.get(i) instanceof Dot) {
-                    SymbolObject newObject = invokeMethod((SymbolObject) reducedComponents.get(i - 1), (Dot) reducedComponents.get(i));
+                    SymbolObject newObject;
+                    if (reducedComponents.get(i - 1) instanceof Module) {
+                        // If you can figure out how to get the module methods and variables into the Module object itself, then we could just do the typical invokation.
+                        // Possible ways to do this:
+                        // 1. Some sor tof code generation, 'add' methods to an existing object (I think I read this is not possible)
+                        // 2. Intercept invokations and reroute to dynamic methods (I think this is possible but not simple)
+                        // 3. Make Modules just POJO's. (But that's no fun, let's eat our own dog food and make Modules coded in Symbol)
+                        newObject = ((Module) reducedComponents.get(i - 1)).invoke((Dot) reducedComponents.get(i));
+                    } else {
+                        newObject = invokeMethod((SymbolObject) reducedComponents.get(i - 1), (Dot) reducedComponents.get(i));
+                    }
                     reducedComponents.remove(i - 1);
                     reducedComponents.remove(i - 1);
                     reducedComponents.add(i - 1, newObject);

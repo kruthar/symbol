@@ -1,22 +1,25 @@
 package com.kruth.symbol.instructions;
 
 import com.kruth.symbol.InstructionState;
-import com.kruth.symbol.exceptions.FailedToParseModuleException;
-import com.kruth.symbol.exceptions.SymbolException;
-import com.kruth.symbol.exceptions.UnexpectedKeywordException;
-import com.kruth.symbol.exceptions.UnexpectedStateException;
-import com.kruth.symbol.lexers.LineLexer;
+import com.kruth.symbol.SymbolObject;
+import com.kruth.symbol.dots.Dot;
+import com.kruth.symbol.exceptions.*;
+import com.kruth.symbol.expression.Expression;
+import com.kruth.symbol.expression.ExpressionComponent;
 import com.kruth.symbol.lexers.SpaceLexer;
+import com.kruth.symbol.literals.SymbolNull;
 
 import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by kruthar on 4/23/16.
  */
-public class Module {
+public class Module implements ExpressionComponent {
     private String name;
     private InstructionState state;
 
@@ -105,5 +108,28 @@ public class Module {
 
     public String getName() {
         return name;
+    }
+
+    public InstructionState getState() {
+        return state;
+    }
+
+    public SymbolObject invoke(Dot dot) throws SymbolException{
+        if (dot.getParameters().size() == 0 && state.hasVariable(dot.getName())) {
+            return state.getVariable(dot.getName());
+        } else if (state.hasFunction(dot.getName())) {
+            Function func = state.getFunctionMap().get(dot.getName());
+            return func.execute(state, getFunctionParameterMap(func.getParameters(), dot.getParameters()));
+        } else {
+            throw new FunctionNotDefinedException("Variable or Function not defined for: " + dot.getName());
+        }
+    }
+
+    public Map<String, Expression> getFunctionParameterMap(String[] keys, List<SymbolObject> values) {
+        Map<String, Expression> result = new HashMap<>();
+        for (int i = 0; i < keys.length; i++) {
+            result.put(keys[i], new Expression(values.get(i)));
+        }
+        return result;
     }
 }

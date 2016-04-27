@@ -1,7 +1,9 @@
 package com.kruth.symbol;
 
+import com.kruth.symbol.dots.DotParser;
 import com.kruth.symbol.exceptions.*;
 import com.kruth.symbol.expression.Expression;
+import com.kruth.symbol.expression.ExpressionComponent;
 import com.kruth.symbol.instructions.Variable;
 import com.kruth.symbol.instructions.*;
 import com.kruth.symbol.lexers.LineLexer;
@@ -128,7 +130,7 @@ public class InstructionState {
         return hasLocal || hasParent;
     }
 
-    public SymbolObject parseFunctionCall(InstructionState instructionState, SpaceLexer lexer) throws SymbolException {
+    public ExpressionComponent parseFunctionCall(InstructionState instructionState, SpaceLexer lexer) throws SymbolException {
         String name = lexer.peek();
         if (functionMap.containsKey(name)) {
             lexer.next();
@@ -296,5 +298,20 @@ public class InstructionState {
 
     public void addModule(Module module) {
         moduleMap.put(module.getName(), module);
+    }
+
+    public Boolean hasModule(String name) {
+        Boolean hasLocal = moduleMap.containsKey(name) && moduleMap.get(name) != null;
+        Boolean hasParent = false;
+
+        if (parentState != null) {
+            hasParent = parentState.hasModule(name);
+        }
+
+        return hasLocal || hasParent;
+    }
+
+    public Module getModule(String name) {
+        return moduleMap.get(name);
     }
 }
