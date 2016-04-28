@@ -23,6 +23,13 @@ public class TestSymbolString {
     }
 
     @Test
+    public void testLength() {
+        String testString = "helloworld";
+        SymbolString string1 = new SymbolString(testString);
+        assertEquals("Test string length", new SymbolNumber(10), string1.length());
+    }
+
+    @Test
     public void testPlus() {
         String testString1 = "hello";
         String testString2 = "world";

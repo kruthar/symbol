@@ -2,6 +2,7 @@ package com.kruth.symbol.literals;
 
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.lexers.SpaceLexer;
+import com.kruth.symbol.structures.SymbolList;
 
 import javax.naming.OperationNotSupportedException;
 import java.util.Collections;
@@ -94,4 +95,7 @@ public class SymbolString extends Literal {
         return KEYWORDS.containsKey(keyword);
     }
 
+    public SymbolNumber length() {
+        return new SymbolNumber(value.length());
+    }
 }

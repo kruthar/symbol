@@ -3,3 +3,4 @@ variable numstring is num dot tostring
 
 println num
 println numstring
+println numstring dot length
