@@ -108,7 +108,6 @@ public class Expression implements ExpressionComponent {
             } else if (instructionState.hasModule(lexer.peek().toLowerCase()) &&
                     instructionState.hasModule(lexer.peek().toLowerCase())) {
                 addComponent(instructionState.getModule(lexer.next().toLowerCase()));
-                //addComponent(instructionState.parseModuleCall(instructionState, lexer));
             } else if (instructionState.hasFunction(lexer.peek().toLowerCase())) {
                 addComponent(instructionState.parseFunctionCall(instructionState, lexer));
             } else {

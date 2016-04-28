@@ -86,6 +86,7 @@ public class Function {
         InstructionState functionState = new InstructionState();
         functionState.setLineLexerList(instructions);
         functionState.setFunctionMap(instructionState.getFunctionMap());
+        functionState.setModuleMap(instructionState.getModuleMap());
 
         int previousLine = ErrorState.getLine();
         ErrorState.setLine(startLine);

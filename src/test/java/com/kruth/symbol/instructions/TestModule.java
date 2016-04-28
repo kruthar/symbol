@@ -30,6 +30,6 @@ public class TestModule {
     @Test
     public void testSimpleForLoops() throws SymbolException {
         Symbol.executeFile("testModule.symb");
-        assertEquals("Test Simple Math Module", "3\n8\n", outStream.toString());
+        assertEquals("Test Simple Math Module", "3\n8\n3\n8\n", outStream.toString());
     }
 }

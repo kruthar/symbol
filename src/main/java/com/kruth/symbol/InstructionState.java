@@ -314,4 +314,12 @@ public class InstructionState {
     public Module getModule(String name) {
         return moduleMap.get(name);
     }
+
+    public void setModuleMap(Map<String, Module> map) {
+        moduleMap = new HashMap<>(map);
+    }
+
+    public Map<String, Module> getModuleMap() {
+        return moduleMap;
+    }
 }
