@@ -9,7 +9,7 @@ import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.SymbolNumber;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.*;
 
 /**
@@ -124,7 +124,7 @@ public class SymbolList extends Structure {
 
     public void put(SymbolNumber index, SymbolObject obj) throws SymbolException {
         try {
-            value.add(((BigInteger) index.getValue()).intValue(), obj);
+            value.add(((BigDecimal) index.getValue()).intValue(), obj);
         } catch (IndexOutOfBoundsException e) {
             throw new SymbolListIndexOutOfBoundsException("Attempting to insert at index " + index + ", but list size is only " + value.size() + ".", e);
         }
@@ -132,7 +132,7 @@ public class SymbolList extends Structure {
 
     public SymbolObject get(SymbolNumber index) throws SymbolException{
         try {
-            return value.get(((BigInteger) index.getValue()).intValue());
+            return value.get(((BigDecimal) index.getValue()).intValue());
         } catch (IndexOutOfBoundsException e) {
             throw new SymbolListIndexOutOfBoundsException("Attempting to get index " + index + ", but list size is only " + value.size() + ".", e);
         }
@@ -144,7 +144,7 @@ public class SymbolList extends Structure {
 
     public void remove(SymbolNumber index) throws SymbolException {
         try {
-            value.remove(((BigInteger) index.getValue()).intValue());
+            value.remove(((BigDecimal) index.getValue()).intValue());
         } catch (IndexOutOfBoundsException e) {
             throw new SymbolListIndexOutOfBoundsException("Attempting to remove index " + index + ", but list size is only " + value.size() + ".", e);
         }

@@ -102,13 +102,16 @@ Values are considered Literals, here are the types of Literals available so far:
     > print string Hello World! string
     Hello World!
     ```
-* SymbolNumber - Currently these are strictly ints, but I plan for these to be unencombered numbers similar to numbers in Python. SymbolNumbers are not delimited you just type out the digits.
+* SymbolNumber - Now accepting decimals! Use the 'dec' (decimal) keyword. SymbolNumbers are not delimited you just type out the digits, you can also use colloquial number strings (without any connecting words like 'and').
 
     ```
     > print one two three
     123
+    > print one two dec three
+    12.3
+    > print one billion three hundred fourteen million three hundred eighteen thousand two hundred eight
+    1314318208
     ```
-    Some day it would be really interesting to also be able to parse vocalized numbers such as one million, etc.
 
 * SymbolBoolean - Typical booleans
 
