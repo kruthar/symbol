@@ -238,4 +238,8 @@ public class SymbolNumber extends Literal {
     public static boolean hasKeyword(String keyword) {
         return KEYWORDS.containsKey(keyword);
     }
+
+    public SymbolString tostring() {
+        return new SymbolString(value.toString());
+    }
 }

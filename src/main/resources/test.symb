@@ -1,8 +1,5 @@
-module math.symb as math
+variable num is one two three
+variable numstring is num dot tostring
 
-function test
-    println math dot pi
-    println math dot pow two sep three tod
-end
-
-execute test
+println num
+println numstring

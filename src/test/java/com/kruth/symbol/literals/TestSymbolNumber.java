@@ -33,6 +33,13 @@ public class TestSymbolNumber {
     }
 
     @Test
+    public void testToString() {
+        SymbolNumber one = new SymbolNumber(123);
+
+        assertEquals("Test tostring of 123", new SymbolString("123"), one.tostring());
+    }
+
+    @Test
     public void testPlus() {
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
