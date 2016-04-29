@@ -1,5 +1,6 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.LanguageObject;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.InvalidSymbolNumberException;
 import com.kruth.symbol.exceptions.SymbolException;
@@ -170,6 +171,7 @@ public class SymbolNumber extends Literal {
         return total;
     }
 
+    @Override
     public String toString() {
         return String.valueOf(value);
     }
@@ -177,6 +179,11 @@ public class SymbolNumber extends Literal {
     @Override
     public Object getValue() {
         return value;
+    }
+
+    @Override
+    public LanguageObject getLanguageObject() {
+        return new LanguageNumber(this);
     }
 
     @Override
@@ -227,6 +234,7 @@ public class SymbolNumber extends Literal {
         throw new OperationNotSupportedException("Minus not supported between SymbolNumber and " + other.getClass());
     }
 
+    @Override
     public int compareTo(SymbolObject other) {
         if (other instanceof SymbolNumber) {
             return value.compareTo((BigDecimal) other.getValue());
@@ -237,9 +245,5 @@ public class SymbolNumber extends Literal {
 
     public static boolean hasKeyword(String keyword) {
         return KEYWORDS.containsKey(keyword);
-    }
-
-    public SymbolString tostring() {
-        return new SymbolString(value.toString());
     }
 }

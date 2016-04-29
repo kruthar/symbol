@@ -1,5 +1,6 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.LanguageObject;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.structures.SymbolList;
@@ -45,10 +46,7 @@ public class SymbolString extends Literal {
         }
     }
 
-    public void append(String a) {
-        value += a;
-    }
-
+    @Override
     public String toString() {
         return value;
     }
@@ -56,6 +54,11 @@ public class SymbolString extends Literal {
     @Override
     public Object getValue() {
         return value;
+    }
+
+    @Override
+    public LanguageObject getLanguageObject() {
+        return new LanguageString(this);
     }
 
     @Override
@@ -83,6 +86,7 @@ public class SymbolString extends Literal {
         throw new OperationNotSupportedException("SymbolString does not support the minus operation.");
     }
 
+    @Override
     public int compareTo(SymbolObject other) {
         if (other instanceof SymbolString) {
             return this.value.compareTo((String) other.getValue());
@@ -93,9 +97,5 @@ public class SymbolString extends Literal {
 
     public static boolean hasKeyword(String keyword) {
         return KEYWORDS.containsKey(keyword);
-    }
-
-    public SymbolNumber length() {
-        return new SymbolNumber(value.length());
     }
 }

@@ -1,6 +1,7 @@
 package com.kruth.symbol.literals;
 
 import com.kruth.symbol.lexers.SpaceLexer;
+import com.kruth.symbol.structures.LanguageList;
 import org.junit.Test;
 
 import javax.naming.OperationNotSupportedException;
@@ -26,7 +27,7 @@ public class TestSymbolString {
     public void testLength() {
         String testString = "helloworld";
         SymbolString string1 = new SymbolString(testString);
-        assertEquals("Test string length", new SymbolNumber(10), string1.length());
+        assertEquals("Test string length", new SymbolNumber(10), ((LanguageString) string1.getLanguageObject()).length());
     }
 
     @Test

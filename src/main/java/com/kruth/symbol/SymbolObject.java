@@ -7,4 +7,6 @@ import com.kruth.symbol.expression.ExpressionComponent;
  */
 public interface SymbolObject extends ExpressionComponent, Comparable<SymbolObject> {
     Object getValue();
+
+    LanguageObject getLanguageObject();
 }

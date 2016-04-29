@@ -1,5 +1,6 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.LanguageObject;
 import com.kruth.symbol.SymbolObject;
 
 import javax.naming.OperationNotSupportedException;
@@ -40,6 +41,11 @@ public class SymbolNull extends Literal {
     @Override
     public Object getValue() {
         return null;
+    }
+
+    @Override
+    public LanguageObject getLanguageObject() {
+        return new LanguageNull();
     }
 
     @Override

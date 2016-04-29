@@ -1,5 +1,6 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.LanguageObject;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.lexers.SpaceLexer;
 
@@ -41,6 +42,12 @@ public class SymbolBoolean extends Literal {
         return value;
     }
 
+    @Override
+    public LanguageObject getLanguageObject() {
+        return new LanguageBoolean();
+    }
+
+    @Override
     public String toString() {
         if (value) {
             return "true";

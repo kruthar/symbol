@@ -9,6 +9,7 @@ import com.kruth.symbol.exceptions.UnexpectedKeywordException;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
 import com.kruth.symbol.literals.SymbolNumber;
+import com.kruth.symbol.structures.LanguageList;
 import com.kruth.symbol.structures.SymbolList;
 import org.junit.After;
 import org.junit.Before;
@@ -68,10 +69,10 @@ public class TestSymbolList {
         SymbolList list0 = new SymbolList(new ArrayList<SymbolObject>());
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));
 
-        assertEquals("Test get", new SymbolNumber(1), list1.get(new SymbolNumber(0)));
+        assertEquals("Test get", new SymbolNumber(1), ((LanguageList) list1.getLanguageObject()).get(new SymbolNumber(0)));
 
         // This should throw an exception
-        list0.get(new SymbolNumber(1));
+        ((LanguageList) list0.getLanguageObject()).get(new SymbolNumber(1));
     }
 
     @Test(expected = SymbolListIndexOutOfBoundsException.class)
@@ -80,13 +81,13 @@ public class TestSymbolList {
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));
         SymbolList list2 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(2), new SymbolNumber(1)));
 
-        list0.put(new SymbolNumber(1));
+        ((LanguageList) list0.getLanguageObject()).put(new SymbolNumber(1));
         assertEquals("Simple put, no index", list1, list0);
 
-        list0.put(new SymbolNumber(0), new SymbolNumber(2));
+        ((LanguageList) list0.getLanguageObject()).put(new SymbolNumber(0), new SymbolNumber(2));
         assertEquals("put at 0", list2, list0);
 
-        list2.put(new SymbolNumber(5), new SymbolNumber(0));
+        ((LanguageList) list2.getLanguageObject()).put(new SymbolNumber(5), new SymbolNumber(0));
     }
 
     @Test
@@ -94,8 +95,8 @@ public class TestSymbolList {
         SymbolList list0 = new SymbolList(new InstructionState(), new SpaceLexer("list open close"));
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));
 
-        assertEquals("Empty size test", new SymbolNumber(0), list0.size());
-        assertEquals("Simple size test", new SymbolNumber(1), list1.size());
+        assertEquals("Empty size test", new SymbolNumber(0), ((LanguageList) list0.getLanguageObject()).size());
+        assertEquals("Simple size test", new SymbolNumber(1), ((LanguageList) list1.getLanguageObject()).size());
     }
 
     @Test(expected = SymbolListIndexOutOfBoundsException.class)
@@ -103,9 +104,9 @@ public class TestSymbolList {
         SymbolList list0 = new SymbolList(new ArrayList<SymbolObject>());
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));
 
-        list1.remove(new SymbolNumber(0));
+        ((LanguageList) list1.getLanguageObject()).remove(new SymbolNumber(0));
         assertEquals("Simple remove test", list0, list1);
 
-        list1.remove(new SymbolNumber(0));
+        ((LanguageList) list1.getLanguageObject()).remove(new SymbolNumber(0));
     }
 }

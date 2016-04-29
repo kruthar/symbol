@@ -1,6 +1,7 @@
 package com.kruth.symbol.structures;
 
 import com.kruth.symbol.InstructionState;
+import com.kruth.symbol.LanguageObject;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.exceptions.SymbolListIndexOutOfBoundsException;
@@ -54,6 +55,7 @@ public class SymbolList extends Structure {
         lexer.next();
     }
 
+    @Override
     public String toString() {
         String result = "[";
         for (int i = 0; i < value.size(); i++) {
@@ -69,6 +71,11 @@ public class SymbolList extends Structure {
     @Override
     public Object getValue() {
         return value;
+    }
+
+    @Override
+    public LanguageObject getLanguageObject() {
+        return new LanguageList(this);
     }
 
     public List<SymbolObject> getList() {
@@ -116,37 +123,5 @@ public class SymbolList extends Structure {
         }
 
         return true;
-    }
-
-    public void put(SymbolObject obj) {
-        value.add(obj);
-    }
-
-    public void put(SymbolNumber index, SymbolObject obj) throws SymbolException {
-        try {
-            value.add(((BigDecimal) index.getValue()).intValue(), obj);
-        } catch (IndexOutOfBoundsException e) {
-            throw new SymbolListIndexOutOfBoundsException("Attempting to insert at index " + index + ", but list size is only " + value.size() + ".", e);
-        }
-    }
-
-    public SymbolObject get(SymbolNumber index) throws SymbolException{
-        try {
-            return value.get(((BigDecimal) index.getValue()).intValue());
-        } catch (IndexOutOfBoundsException e) {
-            throw new SymbolListIndexOutOfBoundsException("Attempting to get index " + index + ", but list size is only " + value.size() + ".", e);
-        }
-    }
-
-    public SymbolNumber size() {
-        return new SymbolNumber(value.size());
-    }
-
-    public void remove(SymbolNumber index) throws SymbolException {
-        try {
-            value.remove(((BigDecimal) index.getValue()).intValue());
-        } catch (IndexOutOfBoundsException e) {
-            throw new SymbolListIndexOutOfBoundsException("Attempting to remove index " + index + ", but list size is only " + value.size() + ".", e);
-        }
     }
 }

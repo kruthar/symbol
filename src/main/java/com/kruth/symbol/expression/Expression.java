@@ -1,6 +1,7 @@
 package com.kruth.symbol.expression;
 
 import com.kruth.symbol.ErrorState;
+import com.kruth.symbol.LanguageObject;
 import com.kruth.symbol.dots.Dot;
 import com.kruth.symbol.dots.DotParser;
 import com.kruth.symbol.InstructionState;
@@ -340,7 +341,8 @@ public class Expression implements ExpressionComponent {
         list.add(index - 1, newLiteral);
     }
 
-    private SymbolObject invokeMethod(SymbolObject obj, Dot dot) throws SymbolException {
+    private SymbolObject invokeMethod(SymbolObject parent, Dot dot) throws SymbolException {
+        LanguageObject obj = parent.getLanguageObject();
         for (Method method: obj.getClass().getDeclaredMethods()) {
             if (method.getName().equals(dot.getName())) {
                 Class<?>[] types = method.getParameterTypes();
