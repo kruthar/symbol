@@ -5,8 +5,12 @@ function sqrt accepts num
         variable stringnum is zero plus stringnum
     fi
 
+    variable remainder is zero
+
     while stringnum dot length tod greaterthan zero do
-        println stringnum dot substring zero sep two tod
+        println stringnum dot substring zero sep two tod dot tonumber tod
+        comment variable remainder is remainder times one hundred plus stringnum dot substring zero sep two tod dot tonumber tod
+        comment println remainder
         variable stringnum is stringnum dot substring two tod
     done
 

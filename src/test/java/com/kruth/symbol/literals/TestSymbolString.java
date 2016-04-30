@@ -1,5 +1,6 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.structures.LanguageList;
 import org.junit.Test;
@@ -36,6 +37,17 @@ public class TestSymbolString {
         SymbolString string1 = new SymbolString(testString);
         assertEquals("Test substring with start", new SymbolString("loworld"), ((LanguageString) string1.getLanguageObject()).substring(new SymbolNumber(3)));
         assertEquals("Test substring with start and end", new SymbolString("lowo"), ((LanguageString) string1.getLanguageObject()).substring(new SymbolNumber(3), new SymbolNumber(7)));
+    }
+
+    @Test
+    public void testTonumber() throws SymbolException {
+        String testString = "one two three four";
+        SymbolString string1 = new SymbolString(testString);
+        assertEquals("Test string tonumber", new SymbolNumber(1234), ((LanguageString) string1.getLanguageObject()).tonumber());
+
+        String frontstring = "01";
+        SymbolString string2 = new SymbolString(frontstring);
+        assertEquals("Test string tonumber frontloaded", new SymbolNumber(1), ((LanguageString) string2.getLanguageObject()).tonumber());
     }
 
     @Test

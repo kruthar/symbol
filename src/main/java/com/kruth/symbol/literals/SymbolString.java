@@ -56,6 +56,8 @@ public class SymbolString extends Literal {
         return value;
     }
 
+
+
     @Override
     public LanguageObject getLanguageObject() {
         return new LanguageString(this);
