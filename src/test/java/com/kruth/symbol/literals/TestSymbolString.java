@@ -51,6 +51,20 @@ public class TestSymbolString {
     }
 
     @Test
+    public void testIndexof() {
+        String testString = "helloworld";
+        SymbolString string1 = new SymbolString(testString);
+        assertEquals("Test string index of 'o'", new SymbolNumber(4), ((LanguageString) string1.getLanguageObject()).indexof(new SymbolString("o")));
+    }
+
+    @Test
+    public void testReplace() {
+        String testString = "helloworld";
+        SymbolString string1 = new SymbolString(testString);
+        assertEquals("Test string replace 'llo' ''", new SymbolString("heworld"), ((LanguageString) string1.getLanguageObject()).replace(new SymbolString("llo"), new SymbolString("")));
+    }
+
+    @Test
     public void testPlus() {
         String testString1 = "hello";
         String testString2 = "world";

@@ -1,20 +1,23 @@
 function sqrt accepts num
-    comment Get a string representation of the number, then front pad with a zero to get an even length
+    comment Get a string representation of the number, drop the decimal point if present,
+    comment then front pad with a zero to get an even length
     variable stringnum is num dot tostring
+    variable place is stringnum dot indexof string . string tod
+    variable stringnum is stringnum dot replace string . string sep string string tod
+
     if stringnum dot length tod modulo two notequals zero
         variable stringnum is zero plus stringnum
     fi
-
+    println stringnum
     variable remainder is zero
 
     while stringnum dot length tod greaterthan zero do
-        println stringnum dot substring zero sep two tod dot tonumber tod
-        comment variable remainder is remainder times one hundred plus stringnum dot substring zero sep two tod dot tonumber tod
-        comment println remainder
+        variable remainder is remainder times one hundred plus stringnum dot substring zero sep two tod dot tonumber tod
+        println remainder
         variable stringnum is stringnum dot substring two tod
     done
 
     return null
 end
 
-println sqrt one four four
+println sqrt one five two dec two seven five six

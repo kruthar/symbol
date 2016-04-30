@@ -35,12 +35,17 @@ public class SymbolString extends Literal {
         if (!lexer.hasNext()) {
             value = "";
         } else {
-            String result = lexer.next();
+            String result = "";
 
             while (lexer.hasNext() && !lexer.peek().toLowerCase().equals("string")) {
-                result += " " + lexer.next();
+                result += lexer.next() + " ";
             }
             lexer.next();
+
+            // Drop the last space
+            if (!result.isEmpty()) {
+                result = result.substring(0, result.length() - 1);
+            }
 
             value = result;
         }

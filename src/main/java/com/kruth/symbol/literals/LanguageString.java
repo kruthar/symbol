@@ -38,4 +38,12 @@ public class LanguageString implements LanguageObject {
         }
         return num;
     }
+
+    public SymbolNumber indexof(SymbolString needle) {
+        return new SymbolNumber(((String) parent.getValue()).indexOf((String) needle.getValue()));
+    }
+
+    public SymbolString replace(SymbolString find, SymbolString replace) {
+        return new SymbolString(((String) parent.getValue()).replace((String) find.getValue(), (String) replace.getValue()));
+    }
 }
