@@ -1,23 +1,4 @@
-function sqrt accepts num
-    comment Get a string representation of the number, drop the decimal point if present,
-    comment then front pad with a zero to get an even length
-    variable stringnum is num dot tostring
-    variable place is stringnum dot indexof string . string tod
-    variable stringnum is stringnum dot replace string . string sep string string tod
+module math.symb as math
 
-    if stringnum dot length tod modulo two notequals zero
-        variable stringnum is zero plus stringnum
-    fi
-    println stringnum
-    variable remainder is zero
-
-    while stringnum dot length tod greaterthan zero do
-        variable remainder is remainder times one hundred plus stringnum dot substring zero sep two tod dot tonumber tod
-        println remainder
-        variable stringnum is stringnum dot substring two tod
-    done
-
-    return null
-end
-
-println sqrt one five two dec two seven five six
+println math dot sqrt two tod
+println math dot sqrt one five two dec two seven five six tod

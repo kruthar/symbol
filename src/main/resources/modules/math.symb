@@ -1,4 +1,4 @@
-variable pi is three
+variable pi is three dec one four
 
 function pow accepts base power
     variable total is one
@@ -7,4 +7,59 @@ function pow accepts base power
         variable power is power minus one
     done
     return total
+end
+
+function sqrtprecision accepts num precision
+    comment Get a string representation of the number, drop the decimal point if present,
+    comment then front pad with a zero to get an even length
+    variable stringnum is num dot tostring
+    variable place is stringnum dot length tod
+    if stringnum dot indexof string . string tod greaterthan zero
+        variable place is stringnum dot indexof string . string tod dividedby two
+        variable place is place dot ceil
+    fi
+    variable stringnum is stringnum dot replace string . string sep string string tod
+    variable precision is precision plus place
+
+    if stringnum dot length tod modulo two notequals zero
+        variable stringnum is zero plus stringnum
+    fi
+
+    variable c is zero
+    variable p is zero
+
+    while precision greaterthan zero and open stringnum dot length tod greaterthan zero or c greaterthan zero close do
+        variable c is c times one hundred
+        if stringnum dot length tod greaterthan zero
+            variable c is c plus stringnum dot substring zero sep two tod dot tonumber tod
+        fi
+
+        variable x is zero
+
+        while x times open twenty times p plus x close lessthanequals c do
+            variable x is x plus one
+        done
+
+        variable x is x minus one
+        variable c is c minus x times open twenty times p plus x close
+        variable p is p times ten plus x
+        if stringnum dot length tod greaterthan two
+            variable stringnum is stringnum dot substring two tod
+        else
+            variable stringnum is string string
+        fi
+
+        variable precision is precision minus one
+    done
+
+    variable shifts is p dot tostring tod dot length tod minus place
+    for variable a is zero while a lessthan shifts with variable a is a plus one do
+        variable p is p dividedby ten
+    done
+
+    return p
+end
+
+function sqrt accepts num
+    return sqrtprecision num sep five
 end

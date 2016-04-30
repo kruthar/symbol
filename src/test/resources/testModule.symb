@@ -9,3 +9,6 @@ function test
 end
 
 execute test
+
+println math dot sqrtprecision two sep two tod
+println math dot sqrt one five two dec two seven five six tod
