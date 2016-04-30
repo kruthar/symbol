@@ -92,6 +92,8 @@ public class Expression implements ExpressionComponent {
                     lexer.next();
                     throw new UnexpectedKeywordException("Unrecognized Expression keyword: " + keyword);
                 }
+            } else if (SymbolNull.hasKeyword(lexer.peek().toLowerCase())) {
+                addComponent(new SymbolNull(lexer));
             } else if (SymbolNumber.hasKeyword(lexer.peek().toLowerCase())) {
                 addComponent(new SymbolNumber(lexer));
             } else if (SymbolString.hasKeyword(lexer.peek().toLowerCase())) {
