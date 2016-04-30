@@ -1,6 +1,7 @@
 package com.kruth.symbol.literals;
 
 import com.kruth.symbol.LanguageObject;
+import com.kruth.symbol.exceptions.IndexOutOfBoundsException;
 import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.lexers.SpaceLexer;
 
@@ -20,11 +21,22 @@ public class LanguageString implements LanguageObject {
         return new SymbolNumber(((String) parent.getValue()).length());
     }
 
-    public SymbolString substring(SymbolNumber start) {
-        return new SymbolString(((String) parent.getValue()).substring(((BigDecimal) start.getValue()).intValue()));
+    public SymbolString substring(SymbolNumber start) throws SymbolException{
+        String numstring = (String) parent.getValue();
+
+        if (numstring.length() <= ((BigDecimal) start.getValue()).intValue()) {
+            throw new IndexOutOfBoundsException("Start index: " + start.getValue() + " out of bounds of string length: " + numstring.length());
+        }
+        return new SymbolString(numstring.substring(((BigDecimal) start.getValue()).intValue()));
     }
 
-    public SymbolString substring(SymbolNumber start, SymbolNumber end) {
+    public SymbolString substring(SymbolNumber start, SymbolNumber end) throws SymbolException{
+        String numstring = (String) parent.getValue();
+
+        if (numstring.length() <= ((BigDecimal) start.getValue()).intValue()) {
+            throw new IndexOutOfBoundsException("Start index: " + start.getValue() + " out of bounds of string length: " + numstring.length());
+        }
+
         return new SymbolString(((String) parent.getValue()).substring(((BigDecimal) start.getValue()).intValue(), ((BigDecimal) end.getValue()).intValue()));
     }
 

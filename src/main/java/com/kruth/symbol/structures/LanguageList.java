@@ -3,7 +3,7 @@ package com.kruth.symbol.structures;
 import com.kruth.symbol.LanguageObject;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
-import com.kruth.symbol.exceptions.SymbolListIndexOutOfBoundsException;
+import com.kruth.symbol.exceptions.IndexOutOfBoundsException;
 import com.kruth.symbol.literals.SymbolNumber;
 
 import java.math.BigDecimal;
@@ -28,8 +28,8 @@ public class LanguageList implements LanguageObject {
         List<SymbolObject> value = ((List<SymbolObject>) parent.getValue());
         try {
             value.add(((BigDecimal) index.getValue()).intValue(), obj);
-        } catch (IndexOutOfBoundsException e) {
-            throw new SymbolListIndexOutOfBoundsException("Attempting to insert at index " + index + ", but list size is only " + value.size() + ".", e);
+        } catch (java.lang.IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Attempting to insert at index " + index + ", but list size is only " + value.size() + ".", e);
         }
     }
 
@@ -37,8 +37,8 @@ public class LanguageList implements LanguageObject {
         List<SymbolObject> value = ((List<SymbolObject>) parent.getValue());
         try {
             return value.get(((BigDecimal) index.getValue()).intValue());
-        } catch (IndexOutOfBoundsException e) {
-            throw new SymbolListIndexOutOfBoundsException("Attempting to get index " + index + ", but list size is only " + value.size() + ".", e);
+        } catch (java.lang.IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Attempting to get index " + index + ", but list size is only " + value.size() + ".", e);
         }
     }
 
@@ -51,8 +51,8 @@ public class LanguageList implements LanguageObject {
         List<SymbolObject> value = ((List<SymbolObject>) parent.getValue());
         try {
             value.remove(((BigDecimal) index.getValue()).intValue());
-        } catch (IndexOutOfBoundsException e) {
-            throw new SymbolListIndexOutOfBoundsException("Attempting to remove index " + index + ", but list size is only " + value.size() + ".", e);
+        } catch (java.lang.IndexOutOfBoundsException e) {
+            throw new IndexOutOfBoundsException("Attempting to remove index " + index + ", but list size is only " + value.size() + ".", e);
         }
     }
 }

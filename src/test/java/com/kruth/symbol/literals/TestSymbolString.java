@@ -1,5 +1,6 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.exceptions.IndexOutOfBoundsException;
 import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.structures.LanguageList;
@@ -31,12 +32,14 @@ public class TestSymbolString {
         assertEquals("Test string length", new SymbolNumber(10), ((LanguageString) string1.getLanguageObject()).length());
     }
 
-    @Test
-    public void testSubstring() {
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void testSubstring() throws SymbolException{
         String testString = "helloworld";
         SymbolString string1 = new SymbolString(testString);
         assertEquals("Test substring with start", new SymbolString("loworld"), ((LanguageString) string1.getLanguageObject()).substring(new SymbolNumber(3)));
         assertEquals("Test substring with start and end", new SymbolString("lowo"), ((LanguageString) string1.getLanguageObject()).substring(new SymbolNumber(3), new SymbolNumber(7)));
+
+        ((LanguageString) string1.getLanguageObject()).substring(new SymbolNumber(15));
     }
 
     @Test

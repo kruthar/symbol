@@ -4,7 +4,7 @@ import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.Symbol;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
-import com.kruth.symbol.exceptions.SymbolListIndexOutOfBoundsException;
+import com.kruth.symbol.exceptions.IndexOutOfBoundsException;
 import com.kruth.symbol.exceptions.UnexpectedKeywordException;
 import com.kruth.symbol.lexers.SpaceLexer;
 import com.kruth.symbol.literals.Literal;
@@ -64,7 +64,7 @@ public class TestSymbolList {
         SymbolList list0 = new SymbolList(new InstructionState(), new SpaceLexer("list open one sep two sep"));
     }
 
-    @Test(expected = SymbolListIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testGet() throws SymbolException {
         SymbolList list0 = new SymbolList(new ArrayList<SymbolObject>());
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));
@@ -75,7 +75,7 @@ public class TestSymbolList {
         ((LanguageList) list0.getLanguageObject()).get(new SymbolNumber(1));
     }
 
-    @Test(expected = SymbolListIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testPut() throws SymbolException {
         SymbolList list0 = new SymbolList(new ArrayList<SymbolObject>());
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));
@@ -99,7 +99,7 @@ public class TestSymbolList {
         assertEquals("Simple size test", new SymbolNumber(1), ((LanguageList) list1.getLanguageObject()).size());
     }
 
-    @Test(expected = SymbolListIndexOutOfBoundsException.class)
+    @Test(expected = IndexOutOfBoundsException.class)
     public void testRemove() throws SymbolException {
         SymbolList list0 = new SymbolList(new ArrayList<SymbolObject>());
         SymbolList list1 = new SymbolList(Arrays.asList((SymbolObject) new SymbolNumber(1)));

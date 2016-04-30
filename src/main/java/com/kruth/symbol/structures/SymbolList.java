@@ -4,13 +4,10 @@ import com.kruth.symbol.InstructionState;
 import com.kruth.symbol.LanguageObject;
 import com.kruth.symbol.SymbolObject;
 import com.kruth.symbol.exceptions.SymbolException;
-import com.kruth.symbol.exceptions.SymbolListIndexOutOfBoundsException;
 import com.kruth.symbol.exceptions.UnexpectedKeywordException;
 import com.kruth.symbol.expression.Expression;
 import com.kruth.symbol.lexers.SpaceLexer;
-import com.kruth.symbol.literals.SymbolNumber;
 
-import java.math.BigDecimal;
 import java.util.*;
 
 /**
