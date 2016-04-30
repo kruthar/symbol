@@ -5,3 +5,14 @@ while counter lessthan three do
     variable counter is counter plus one
 done
 println string done string
+
+variable x is zero
+
+while x lessthan three do
+    variable y is zero
+    while y lessthan three do
+        println x plus string , string plus y
+        variable y is y plus one
+    done
+    variable x is x plus one
+done

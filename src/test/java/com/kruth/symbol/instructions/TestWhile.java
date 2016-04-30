@@ -31,6 +31,6 @@ public class TestWhile {
     @Test
     public void testWhile() throws SymbolException {
         Symbol.executeFile("testWhile.symb");
-        assertEquals("Simple while test", "once\n0\n1\n2\ndone\n", outStream.toString());
+        assertEquals("Simple while test", "once\n0\n1\n2\ndone\n0,0\n0,1\n0,2\n1,0\n1,1\n1,2\n2,0\n2,1\n2,2\n", outStream.toString());
     }
 }

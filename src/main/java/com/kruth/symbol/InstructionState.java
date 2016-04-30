@@ -266,14 +266,15 @@ public class InstructionState {
         List<String> starts = Arrays.asList("while", "foreach");
         String stop = "done";
         List<String> lines = new ArrayList<>();
+        int scope = 0;
+
         while (hasNextLine()) {
             String next = nextLine();
             String[] nextSplit = next.trim().split(" ", 2);
-            int scope = 0;
 
             if (starts.contains(nextSplit[0])) {
                 scope++;
-            } if (nextSplit[0].equals(stop)) {
+            } else if (nextSplit[0].equals(stop)) {
                 if (scope == 0) {
                     break;
                 } else {
