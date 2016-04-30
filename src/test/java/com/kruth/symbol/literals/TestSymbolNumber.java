@@ -1,11 +1,16 @@
 package com.kruth.symbol.literals;
 
+import com.kruth.symbol.Symbol;
 import com.kruth.symbol.exceptions.SymbolException;
 import com.kruth.symbol.lexers.SpaceLexer;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 import javax.naming.OperationNotSupportedException;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 
 import static org.junit.Assert.assertEquals;
@@ -14,6 +19,18 @@ import static org.junit.Assert.assertEquals;
  * Created by kruthar on 3/28/16.
  */
 public class TestSymbolNumber {
+    private final ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+
+    @Before
+    public void setupStreams() {
+        System.setOut(new PrintStream(outStream));
+    }
+
+    @After
+    public void cleanupStreams() {
+        System.setOut(null);
+    }
+
     @Test
     public void testConstructors() throws SymbolException {
         SymbolNumber five = new SymbolNumber(5);
@@ -40,7 +57,7 @@ public class TestSymbolNumber {
     }
 
     @Test
-    public void testPlus() {
+    public void testPlus() throws SymbolException{
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
 
@@ -50,10 +67,13 @@ public class TestSymbolNumber {
         SymbolNumber twodotthree = new SymbolNumber(2.3);
 
         assertEquals("Simple addition, .1 + 2.3 = 2.4", BigDecimal.valueOf(2.4), dotone.plus(twodotthree).getValue());
+
+        Symbol.executeLine("print twenty plus one");
+        assertEquals("Simple plus spoken test", "21", outStream.toString());
     }
 
     @Test
-    public void testMinus() throws OperationNotSupportedException {
+    public void testMinus() throws OperationNotSupportedException, SymbolException {
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
 
@@ -63,10 +83,13 @@ public class TestSymbolNumber {
         SymbolNumber twodotthree = new SymbolNumber(2.3);
 
         assertEquals("Simple addition, .1 - 2.3 = -2.2", BigDecimal.valueOf(-2.2), dotone.minus(twodotthree).getValue());
+
+        Symbol.executeLine("print twenty minus one");
+        assertEquals("Simple minus spoken test", "19", outStream.toString());
     }
 
     @Test
-    public void testTimes() throws OperationNotSupportedException {
+    public void testTimes() throws OperationNotSupportedException, SymbolException {
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
 
@@ -76,10 +99,13 @@ public class TestSymbolNumber {
         SymbolNumber twodotthree = new SymbolNumber(2.3);
 
         assertEquals("Simple addition, .1 * 2.3 = .23", BigDecimal.valueOf(.23), dotone.times(twodotthree).getValue());
+
+        Symbol.executeLine("print twenty times one");
+        assertEquals("Simple times spoken test", "20", outStream.toString());
     }
 
     @Test
-    public void testDividedBy() throws OperationNotSupportedException {
+    public void testDividedBy() throws OperationNotSupportedException, SymbolException {
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
 
@@ -89,10 +115,13 @@ public class TestSymbolNumber {
         SymbolNumber twodotthree = new SymbolNumber(2.3);
 
         assertEquals("Simple addition, 2.3 / .1 = 23", BigDecimal.valueOf(23), twodotthree.dividedby(dotone).getValue());
+
+        Symbol.executeLine("print twenty dividedby one");
+        assertEquals("Simple dividedby spoken test", "20", outStream.toString());
     }
 
     @Test
-    public void testModulo() throws OperationNotSupportedException {
+    public void testModulo() throws OperationNotSupportedException, SymbolException {
         SymbolNumber five = new SymbolNumber(5);
         SymbolNumber three = new SymbolNumber(3);
 
@@ -102,6 +131,9 @@ public class TestSymbolNumber {
         SymbolNumber twodotthree = new SymbolNumber(2.3);
 
         assertEquals("Simple addition, 2.3 % .2 = .1", BigDecimal.valueOf(.1), twodotthree.modulo(dottwo).getValue());
+
+        Symbol.executeLine("print twenty modulo one");
+        assertEquals("Simple modulo spoken test", "0", outStream.toString());
     }
 
     @Test

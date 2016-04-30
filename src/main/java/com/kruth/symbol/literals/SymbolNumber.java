@@ -145,7 +145,7 @@ public class SymbolNumber extends Literal {
                             string_num = String.valueOf(sectionValue);
                         } else if (tensMap.containsKey(lexer.peek())) {
                             throw new InvalidSymbolNumberException("Two tens digits in a row is not valid");
-                        } else if (lexer.peek() == null || lexer.peek().equals("sep") || lexer.peek().equals(hundred) || prefixMap.containsKey(lexer.peek())) {
+                        } else {
                             string_num = String.valueOf(tensMap.get(next));
                         }
                     }
