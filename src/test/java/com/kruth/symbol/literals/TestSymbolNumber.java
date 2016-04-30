@@ -57,6 +57,20 @@ public class TestSymbolNumber {
     }
 
     @Test
+    public void testCeil() {
+        SymbolNumber one = new SymbolNumber(10.2);
+
+        assertEquals("Test ceil of 10.2", new SymbolNumber(11), ((LanguageNumber) one.getLanguageObject()).ceil());
+    }
+
+    @Test
+    public void testFloor() {
+        SymbolNumber one = new SymbolNumber(10.2);
+
+        assertEquals("Test floor of 10.2", new SymbolNumber(10), ((LanguageNumber) one.getLanguageObject()).floor());
+    }
+
+    @Test
     public void testPlus() throws SymbolException{
         SymbolNumber one = new SymbolNumber(1);
         SymbolNumber two = new SymbolNumber(2);
