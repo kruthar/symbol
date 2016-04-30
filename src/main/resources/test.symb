@@ -1,6 +1,16 @@
-variable num is one two three
-variable numstring is num dot tostring
+function sqrt accepts num
+    comment Get a string representation of the number, then front pad with a zero to get an even length
+    variable stringnum is num dot tostring
+    if stringnum dot length tod modulo two notequals zero
+        variable stringnum is zero plus stringnum
+    fi
 
-println num
-println numstring
-println numstring dot length
+    while stringnum dot length tod greaterthan zero do
+        println stringnum dot substring zero sep two tod
+        variable stringnum is stringnum dot substring two tod
+    done
+
+    return null
+end
+
+println sqrt one four four

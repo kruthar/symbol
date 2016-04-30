@@ -31,6 +31,14 @@ public class TestSymbolString {
     }
 
     @Test
+    public void testSubstring() {
+        String testString = "helloworld";
+        SymbolString string1 = new SymbolString(testString);
+        assertEquals("Test substring with start", new SymbolString("loworld"), ((LanguageString) string1.getLanguageObject()).substring(new SymbolNumber(3)));
+        assertEquals("Test substring with start and end", new SymbolString("lowo"), ((LanguageString) string1.getLanguageObject()).substring(new SymbolNumber(3), new SymbolNumber(7)));
+    }
+
+    @Test
     public void testPlus() {
         String testString1 = "hello";
         String testString2 = "world";
