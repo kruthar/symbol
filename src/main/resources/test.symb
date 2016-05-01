@@ -1,4 +1,3 @@
 module math.symb as math
 
-println math dot sqrt two tod
-println math dot sqrt one five two dec two seven five six tod
+println math dot isprime eight tod

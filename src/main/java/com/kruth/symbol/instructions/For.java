@@ -51,7 +51,16 @@ public class For {
                             instructionState.resetToCurrentLoopMarker();
                             while (instructionState.hasNextLine()) {
                                 instructionState.routeNextInstruction(execute);
+
+                                if (instructionState.getReturnValue() != null) {
+                                    break;
+                                }
                             }
+
+                            if (instructionState.getReturnValue() != null) {
+                                break;
+                            }
+
                             // increment variable
                             instructionState.routeInstruction(incrementInstruction, execute);
                         }

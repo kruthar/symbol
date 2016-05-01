@@ -12,3 +12,11 @@ execute test
 
 println math dot sqrtprecision two sep two tod
 println math dot sqrt one five two dec two seven five six tod
+
+println math dot isprime two tod
+println math dot isprime three tod
+println math dot isprime four tod
+println math dot isprime five tod
+println math dot isprime six tod
+println math dot isprime seven tod
+println math dot isprime eight tod

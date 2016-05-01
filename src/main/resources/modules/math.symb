@@ -9,6 +9,7 @@ function pow accepts base power
     return total
 end
 
+comment Uses the Decimal (base 10) method from: https://en.wikipedia.org/wiki/Methods_of_computing_square_roots
 function sqrtprecision accepts num precision
     comment Get a string representation of the number, drop the decimal point if present,
     comment then front pad with a zero to get an even length
@@ -62,4 +63,20 @@ end
 
 function sqrt accepts num
     return sqrtprecision num sep five
+end
+
+comment Can optimize this method by only checking against other primes
+function isprime accepts num
+    if num equals two
+        return true
+    fi
+
+    variable limit is sqrt num sep dot ceil tod
+
+    for variable x is two while x lessthanequals limit with variable x is x plus one do
+        if num modulo x equals zero
+            return false
+        fi
+    done
+    return true
 end
